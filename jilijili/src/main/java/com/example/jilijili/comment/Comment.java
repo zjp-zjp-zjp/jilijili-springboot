@@ -14,7 +14,7 @@ public class Comment {
     private Long id;
     private Long authorId;
     private String content;
-    @JsonFormat(pattern="yyyy-M-d")
+    @JsonFormat(pattern="yyyy-M-d HH:mm:ss")
     private LocalDate releaseTime;
     private Long supportNum;
     private Long targetVideo;
@@ -25,10 +25,8 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(Long authorId, String content, LocalDate releaseTime, Long supportNum, Long targetVideo, Long targetComment) {
-        this.authorId = authorId;
+    public Comment(String content,Long supportNum, Long targetVideo, Long targetComment) {
         this.content = content;
-        this.releaseTime = releaseTime;
         this.supportNum = supportNum;
         this.targetVideo = targetVideo;
         this.targetComment = targetComment;

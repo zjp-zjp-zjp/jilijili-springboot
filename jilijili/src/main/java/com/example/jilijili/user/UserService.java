@@ -37,6 +37,20 @@ public class UserService {
         }
         return false;
     }
+    public Long getIdByNickname(String nickname){
+        Optional<User> thisUser=userRepository.findUserByNickname(nickname);
+        if(!thisUser.isPresent()){
+            throw new IllegalStateException("no user named "+nickname);
+        }
+        return thisUser.get().getId();
+    }
+    public User getUserById(Long id){
+        Optional<User> thisUser= userRepository.findById(id);
+        if(!thisUser.isPresent()){
+            throw new IllegalStateException("no user with id "+id);
+        }
+        return thisUser.get();
+    }
     public List<User> getAllUser(){
         return userRepository.findAll();
     }

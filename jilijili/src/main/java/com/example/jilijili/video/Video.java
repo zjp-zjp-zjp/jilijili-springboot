@@ -18,8 +18,7 @@ public class Video {
     public Video() {
     }
 
-    public Video(Long authorId, String name, String description, String path, Long supportNum) {
-        this.authorId = authorId;
+    public Video(String name, String description, String path, Long supportNum) {
         this.name = name;
         this.description = description;
         this.path = path;
