@@ -1,6 +1,7 @@
 package com.example.jilijili.video;
 
 import com.example.jilijili.comment.Comment;
+import com.example.jilijili.user.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -12,10 +13,14 @@ import java.util.Optional;
 public class VideoController {
     @Resource
     private final VideoService videoService;
+    @Resource
+    private final UserService userService;
 
-    public VideoController(VideoService videoService) {
+    public VideoController(VideoService videoService, UserService userService) {
         this.videoService = videoService;
+        this.userService = userService;
     }
+
     @PostMapping(path = "uploadVideo")
     public void addVideo(@RequestBody Video video, HttpServletRequest request){
         if(request.getSession().getAttribute("userId")==null){
@@ -37,7 +42,11 @@ public class VideoController {
     }
     @PostMapping(path = "{videoId}")
     public void addOneComment(@RequestBody Comment comment, HttpServletRequest request, @PathVariable String videoId){
+        if(request.getSession().getAttribute("userId")==null){
+            throw new IllegalStateException("please log in before commenting");
+        }
         comment.setAuthorId((Long) request.getSession().getAttribute("userId"));
+        comment.setAuthorNickname(userService.getUserById((Long) request.getSession().getAttribute("userId")).getNickname());
         videoService.addaComment(comment);
     }
 }

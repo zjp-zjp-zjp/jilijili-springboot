@@ -14,6 +14,7 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Long authorId;
+    private String authorNickname;
     private String content;
     @JsonFormat(pattern="yyyy-M-d HH:mm:ss")
     private LocalDateTime releaseTime;
@@ -24,6 +25,7 @@ public class Comment {
     private Optional<Comment> itComment;
 
     public Comment() {
+        releaseTime= LocalDateTime.now();
     }
 
     public Comment(String content,Long supportNum, Long targetVideo, Long targetComment) {
@@ -32,6 +34,14 @@ public class Comment {
         this.targetVideo = targetVideo;
         this.targetComment = targetComment;
         releaseTime= LocalDateTime.now();
+    }
+
+    public String getAuthorNickname() {
+        return authorNickname;
+    }
+
+    public void setAuthorNickname(String authorNickname) {
+        this.authorNickname = authorNickname;
     }
 
     public Long getId() {
