@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Entity
@@ -15,7 +16,7 @@ public class Comment {
     private Long authorId;
     private String content;
     @JsonFormat(pattern="yyyy-M-d HH:mm:ss")
-    private LocalDate releaseTime;
+    private LocalDateTime releaseTime;
     private Long supportNum;
     private Long targetVideo;
     private Long targetComment;
@@ -30,6 +31,7 @@ public class Comment {
         this.supportNum = supportNum;
         this.targetVideo = targetVideo;
         this.targetComment = targetComment;
+        releaseTime= LocalDateTime.now();
     }
 
     public Long getId() {
@@ -56,11 +58,11 @@ public class Comment {
         this.content = content;
     }
 
-    public LocalDate getReleaseTime() {
+    public LocalDateTime getReleaseTime() {
         return releaseTime;
     }
 
-    public void setReleaseTime(LocalDate releaseTime) {
+    public void setReleaseTime(LocalDateTime releaseTime) {
         this.releaseTime = releaseTime;
     }
 

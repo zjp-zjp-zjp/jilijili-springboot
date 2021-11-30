@@ -1,5 +1,6 @@
 package com.example.jilijili.video;
 
+import com.example.jilijili.comment.Comment;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -31,7 +32,12 @@ public class VideoController {
         return videoService.getVideoByAuthorId((Long) request.getSession().getAttribute("userId"));
     }
     @GetMapping(path = "{videoId}")
-    public Optional<Video> getTheVideo(@PathVariable("videoId")Long videoId){
-        return videoService.getVideoById(videoId);
+    public Video_CommentReturn getTheVideo(@PathVariable("videoId")Long videoId){
+        return videoService.getVideoAndCommentById(videoId);
+    }
+    @PostMapping(path = "{videoId}")
+    public void addOneComment(@RequestBody Comment comment, HttpServletRequest request, @PathVariable String videoId){
+        comment.setAuthorId((Long) request.getSession().getAttribute("userId"));
+        videoService.addaComment(comment);
     }
 }
