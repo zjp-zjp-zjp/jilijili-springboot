@@ -5,6 +5,7 @@ import com.example.jilijili.comment.CommentService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,9 +30,9 @@ public class VideoService {
         }
         return videoList;
     }
-    public Optional<Video> getVideoByAuthorId(Long authorId){
-        Optional<Video> videoList=videoRepository.findVideoByAuthorId(authorId);
-        if(!videoList.isPresent()){
+    public List<Video> getVideoByAuthorId(Long authorId){
+        List<Video> videoList=videoRepository.findVideoByAuthorId(authorId);
+        if(videoList==null){
             throw new IllegalStateException("no video uploaded by user with id "+authorId);
         }
         return videoList;

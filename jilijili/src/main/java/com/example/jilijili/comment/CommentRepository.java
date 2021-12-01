@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface CommentRepository extends JpaRepository<Comment,Long>{
     List<Comment> findAllByTargetVideo(Long videoId);
-    Optional<Comment> findAllByTargetComment(Long commentId);
+    List<Comment> findAllByTargetComment(Long commentId);
 }

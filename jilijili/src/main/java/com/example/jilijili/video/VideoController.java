@@ -29,13 +29,6 @@ public class VideoController {
         video.setAuthorId((Long) request.getSession().getAttribute("userId"));
         videoService.uploadVideo(video);
     }
-    @GetMapping(path = "/account/videoList")
-    public Optional<Video> getThisUsersVideo(HttpServletRequest request){
-        if(request.getSession().getAttribute("userId")==null){
-            throw new IllegalStateException("please log in before updating");
-        }
-        return videoService.getVideoByAuthorId((Long) request.getSession().getAttribute("userId"));
-    }
     @GetMapping(path = "{videoId}")
     public Video_CommentReturn getTheVideo(@PathVariable("videoId")Long videoId){
         return videoService.getVideoAndCommentById(videoId);

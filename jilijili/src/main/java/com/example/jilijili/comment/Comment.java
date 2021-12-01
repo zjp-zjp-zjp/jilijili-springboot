@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Entity
@@ -22,7 +23,7 @@ public class Comment {
     private Long targetVideo;
     private Long targetComment;
     @Transient
-    private Optional<Comment> itComment;
+    private List<Comment> itComment;
 
     public Comment() {
         releaseTime= LocalDateTime.now();
@@ -100,11 +101,11 @@ public class Comment {
         this.targetComment = targetComment;
     }
 
-    public Optional<Comment> getItComment() {
+    public List<Comment> getItComment() {
         return itComment;
     }
 
-    public void setItComment(Optional<Comment> itComment) {
+    public void setItComment(List<Comment> itComment) {
         this.itComment = itComment;
     }
 
