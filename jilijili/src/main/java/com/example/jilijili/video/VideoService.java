@@ -45,4 +45,23 @@ public class VideoService {
     public void addaComment(Comment comment){
         commentService.releaseComment(comment);
     }
+    public void addSupport(SupportContainer supportContainer){
+        if(supportContainer.getTypeOfSupport()==0){
+            Optional<Video> temp=videoRepository.findById(supportContainer.getTargetId());
+            if(!temp.isPresent()){
+                throw new IllegalStateException("no video with id "+supportContainer.getTargetId());
+            }
+            else{
+                Video video=temp.get();
+                video.setSupportNum(video.getSupportNum()+1);
+                videoRepository.save(video);
+            }
+        }
+        else if(supportContainer.getTypeOfSupport()==1){
+            Comment temp=commentService.getCommentById(supportContainer.getTargetId());
+            temp.setSupportNum(temp.getSupportNum()+1);
+            commentService.releaseComment(temp);
+        }
+        else throw new IllegalStateException("invalid request");
+    }
 }

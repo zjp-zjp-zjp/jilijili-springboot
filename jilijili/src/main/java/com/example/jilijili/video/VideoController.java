@@ -49,4 +49,11 @@ public class VideoController {
         comment.setAuthorNickname(userService.getUserById((Long) request.getSession().getAttribute("userId")).getNickname());
         videoService.addaComment(comment);
     }
+    @PutMapping(path = "{videoId}")
+    public void giveSupport(@RequestBody SupportContainer supportContainer,HttpServletRequest request){
+        if(request.getSession().getAttribute("userId")==null){
+            throw new IllegalStateException("please log in before supporting");
+        }
+        videoService.addSupport(supportContainer);
+    }
 }
