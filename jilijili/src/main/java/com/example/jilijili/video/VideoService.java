@@ -5,6 +5,7 @@ import com.example.jilijili.comment.CommentService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,9 +30,9 @@ public class VideoService {
         }
         return videoList;
     }
-    public Optional<Video> getVideoByAuthorId(Long authorId){
-        Optional<Video> videoList=videoRepository.findVideoByAuthorId(authorId);
-        if(!videoList.isPresent()){
+    public List<Video> getVideoByAuthorId(Long authorId){
+        List<Video> videoList=videoRepository.findVideoByAuthorId(authorId);
+        if(videoList==null){
             throw new IllegalStateException("no video uploaded by user with id "+authorId);
         }
         return videoList;
@@ -44,5 +45,24 @@ public class VideoService {
     }
     public void addaComment(Comment comment){
         commentService.releaseComment(comment);
+    }
+    public void addSupport(SupportContainer supportContainer){
+        if(supportContainer.getTypeOfSupport()==0){
+            Optional<Video> temp=videoRepository.findById(supportContainer.getTargetId());
+            if(!temp.isPresent()){
+                throw new IllegalStateException("no video with id "+supportContainer.getTargetId());
+            }
+            else{
+                Video video=temp.get();
+                video.setSupportNum(video.getSupportNum()+1);
+                videoRepository.save(video);
+            }
+        }
+        else if(supportContainer.getTypeOfSupport()==1){
+            Comment temp=commentService.getCommentById(supportContainer.getTargetId());
+            temp.setSupportNum(temp.getSupportNum()+1);
+            commentService.releaseComment(temp);
+        }
+        else throw new IllegalStateException("invalid request");
     }
 }

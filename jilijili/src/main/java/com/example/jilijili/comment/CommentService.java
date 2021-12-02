@@ -27,4 +27,10 @@ public class CommentService {
         }
         return commentList;
     }
+    public Comment getCommentById(Long commentId){
+        if(!commentRepository.findById(commentId).isPresent()){
+            throw new IllegalStateException("no comment with id "+commentId);
+        }
+        return commentRepository.findById(commentId).get();
+    }
 }
