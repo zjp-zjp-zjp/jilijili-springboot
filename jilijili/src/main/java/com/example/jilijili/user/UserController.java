@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
@@ -84,5 +85,13 @@ public class UserController {
             throw new IllegalStateException("please log in before deleting");
         }
         videoService.deleteVideoWithId(videoId);
+    }
+    //登出
+    @DeleteMapping(path = "accountInfo")
+    public void account_accountInfo_delete(HttpServletRequest request){
+        if(request.getSession().getAttribute("userId")==null){
+            throw new IllegalStateException("you aren't login");
+        }
+        request.getSession().removeAttribute("userId");
     }
 }
