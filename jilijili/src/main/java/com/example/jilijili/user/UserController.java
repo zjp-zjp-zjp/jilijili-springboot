@@ -23,10 +23,12 @@ public class UserController {
         this.videoService = videoService;
     }
 
+//    注册模块
     @PostMapping(path = "register")
     public void registerUser(@RequestBody User user){
         userService.addUser(user);
     }
+    //登录模块
     @PostMapping(path = "login")
     public boolean userLogin(@RequestParam String nickname, @RequestParam String password, HttpServletRequest request){
         if(userService.userLogin(nickname,password)){
@@ -34,6 +36,7 @@ public class UserController {
         }
         return userService.userLogin(nickname,password);
     }
+    //查看当前用户信息
     @GetMapping(path = "accountInfo")
     public User getUser( HttpServletRequest request){
         if(request.getSession().getAttribute("userId")==null){
@@ -41,6 +44,7 @@ public class UserController {
         }
         return userService.getUserById((Long) request.getSession().getAttribute("userId"));
     }
+    //查看当前用户vieolist
     @GetMapping(path = "videoList")
     public List<Video> getThisUsersVideo(HttpServletRequest request){
         if(request.getSession().getAttribute("userId")==null){
@@ -48,6 +52,7 @@ public class UserController {
         }
         return videoService.getVideoByAuthorId((Long) request.getSession().getAttribute("userId"));
     }
+    //查看某个用户信息
     @GetMapping(path = "accountInfo/{hisId}")
     public User getHisUser(HttpServletRequest request,@PathVariable("hisId") Long hisId){
         if(request.getSession().getAttribute("userId")==null){
@@ -55,6 +60,7 @@ public class UserController {
         }
         return userService.getUserById(hisId);
     }
+//    查看某个用户videolist
     @GetMapping(path = "videoList/{hisId}")
     public List<Video> getHisVideo(HttpServletRequest request,@PathVariable("hisId") Long hisId){
         if(request.getSession().getAttribute("userId")==null){
@@ -62,4 +68,14 @@ public class UserController {
         }
         return videoService.getVideoByAuthorId(hisId);
     }
+    //删除用户的某个video
+    @DeleteMapping(path = "videoList")
+    public void account_videoList_delete(@RequestParam("videoId") Long videoId,HttpServletRequest request){
+        if(request.getSession().getAttribute("userId")==null){
+            throw new IllegalStateException("please log in before deleting");
+        }
+        videoService.deleteVideoWithId(videoId);
+    }
+    @PutMapping(path = "accountInfo")
+    
 }

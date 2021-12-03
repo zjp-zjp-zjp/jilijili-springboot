@@ -5,10 +5,12 @@ import com.example.jilijili.comment.CommentService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+
 public class VideoService {
     @Resource
     private final VideoRepository videoRepository;
@@ -64,5 +66,10 @@ public class VideoService {
             commentService.releaseComment(temp);
         }
         else throw new IllegalStateException("invalid request");
+    }
+    @Transactional
+    public void deleteVideoWithId(Long videoId){
+        commentService.removeCommentsOfVideo(videoId);
+        videoRepository.deleteVideoById(videoId);
     }
 }

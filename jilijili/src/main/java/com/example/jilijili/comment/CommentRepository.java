@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface CommentRepository extends JpaRepository<Comment,Long>{
     List<Comment> findAllByTargetVideo(Long videoId);
     List<Comment> findAllByTargetComment(Long commentId);
+    void deleteCommentById(Long commentId);
+    void deleteCommentsByTargetComment(Long commentId);
 }

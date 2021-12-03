@@ -20,7 +20,7 @@ public class CommentService {
     public List<Comment> getVideoComment(Long videoId){
         List<Comment> commentList= commentRepository.findAllByTargetVideo(videoId);
         if(commentList==null){
-            throw new IllegalStateException("no comment for this video");
+            return null;
         }
         for (Comment item:commentList) {
             item.setItComment(commentRepository.findAllByTargetComment(item.getId()));
@@ -32,5 +32,14 @@ public class CommentService {
             throw new IllegalStateException("no comment with id "+commentId);
         }
         return commentRepository.findById(commentId).get();
+    }
+    public void removeCommentsOfVideo(Long videoId){
+        List<Comment> commentList= commentRepository.findAllByTargetVideo(videoId);
+        if(commentList!=null){
+            for(Comment item:commentList){
+                commentRepository.deleteCommentsByTargetComment(item.getId());
+                commentRepository.deleteCommentById(item.getId());
+            }
+        }
     }
 }
