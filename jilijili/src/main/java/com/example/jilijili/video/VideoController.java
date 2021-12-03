@@ -21,20 +21,23 @@ public class VideoController {
         this.userService = userService;
     }
 
+    //上传视频
     @PostMapping(path = "uploadVideo")
-    public void addVideo(@RequestBody Video video, HttpServletRequest request){
+    public void video_uploadVideo_post(@RequestBody Video video, HttpServletRequest request){
         if(request.getSession().getAttribute("userId")==null){
             throw new IllegalStateException("please log in before updating");
         }
         video.setAuthorId((Long) request.getSession().getAttribute("userId"));
         videoService.uploadVideo(video);
     }
+    //查看视频
     @GetMapping(path = "{videoId}")
-    public Video_CommentReturn getTheVideo(@PathVariable("videoId")Long videoId){
+    public Video_CommentReturn video_id_page(@PathVariable("videoId")Long videoId){
         return videoService.getVideoAndCommentById(videoId);
     }
+    //评论
     @PostMapping(path = "{videoId}")
-    public void addOneComment(@RequestBody Comment comment, HttpServletRequest request, @PathVariable String videoId){
+    public void video_id_post(@RequestBody Comment comment, HttpServletRequest request, @PathVariable String videoId){
         if(request.getSession().getAttribute("userId")==null){
             throw new IllegalStateException("please log in before commenting");
         }
@@ -42,8 +45,9 @@ public class VideoController {
         comment.setAuthorNickname(userService.getUserById((Long) request.getSession().getAttribute("userId")).getNickname());
         videoService.addaComment(comment);
     }
+    //点赞
     @PutMapping(path = "{videoId}")
-    public void giveSupport(@RequestBody SupportContainer supportContainer,HttpServletRequest request){
+    public void video_id_put(@RequestBody SupportContainer supportContainer,HttpServletRequest request){
         if(request.getSession().getAttribute("userId")==null){
             throw new IllegalStateException("please log in before supporting");
         }
