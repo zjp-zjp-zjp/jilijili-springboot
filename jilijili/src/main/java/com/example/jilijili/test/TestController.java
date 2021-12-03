@@ -67,31 +67,87 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/test")
 public class TestController {
+//    @GetMapping
+//    public String edit(Model model) {
+//        return "form";
+//    }
+//
+//    @PostMapping(path="/A")
+//    public ModelAndView edit(@RequestBody Test t) {
+//        Test user = new Test();
+//        user.setId(t.getId());
+//        user.setName(t.getName());
+//        System.out.println(user.getId());
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("test2");//动态网页名称
+////        modelAndView.addObject("id", id);
+//        modelAndView.addObject("name", "msg");
+//        return modelAndView;
+//    }
+//    @GetMapping(path="1")
+//    public String edit1(Model model) {
+//        return "test1";
+//    }
+
+
+    //        return "about";
+
+//        return "contact";
+
+    //        return "genre";
+
     @GetMapping
-    public String edit(Model model) {
-        return "form";
+    public String home(Model model) {
+        return "home";
     }
 
-    @PostMapping(path="/A")
-    public ModelAndView edit(@RequestBody Test t) {
-        Test user = new Test();
-        user.setId(t.getId());
-        user.setName(t.getName());
-        System.out.println(user.getId());
+    @GetMapping(path="index")
+    public String test(Model model) {
+        return "index";
+    }
+
+    @GetMapping(path="login")
+    public String login(Model model) {
+        return "login";
+    }
+
+    @GetMapping(path="register")
+    public String register(Model model) {
+        return "register";
+    }
+
+    @GetMapping(path="lock")
+    public String lock(Model model) {
+        return "lock";
+    }
+
+    @GetMapping(path="404")
+    public String error(Model model) {
+        return "404";
+    }
+
+    @GetMapping(path="videoAndComments")
+    public ModelAndView videoAndComments() {
+        List<String> datas = new ArrayList<String>();
+        datas.add("jack");
+        datas.add("lucy");
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("test2");//动态网页名称
-//        modelAndView.addObject("id", id);
-        modelAndView.addObject("name", "msg");
+        modelAndView.setViewName("videoAndComments");//动态网页名称
+        modelAndView.addObject("datas", datas);
         return modelAndView;
-    }
-    @GetMapping(path="1")
-    public String edit1(Model model) {
-        return "test1";
+        //食品评论的点赞数、披露内容、举报？、回复、时间、头像
     }
 
+    @GetMapping(path="temp")
+    public String temp(Model model) {
+        return "temp";
+    }
 
 }
 
