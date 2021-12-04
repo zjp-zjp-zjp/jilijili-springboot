@@ -5,18 +5,18 @@ import java.util.List;
 import java.util.Optional;
 
 public class Video_CommentReturn {
-    private Optional<Video> video;
+    private Video video;
     private List<Comment> commentList;
 
     public Video_CommentReturn() {
 
     }
 
-    public Optional<Video> getVideo() {
+    public Video getVideo() {
         return video;
     }
 
-    public void setVideo(Optional<Video> video) {
+    public void setVideo(Video video) {
         this.video = video;
     }
 

@@ -41,7 +41,7 @@ public class VideoService {
     }
     public Video_CommentReturn getVideoAndCommentById(Long videoId){
         Video_CommentReturn ret=new Video_CommentReturn();
-        ret.setVideo(getVideoById(videoId));
+        ret.setVideo(getVideoById(videoId).get());
         ret.setCommentList(commentService.getVideoComment(videoId));
         return ret;
     }

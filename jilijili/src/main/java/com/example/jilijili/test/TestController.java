@@ -134,19 +134,25 @@ public class TestController {
 
     @GetMapping(path="videoAndComments")
     public ModelAndView videoAndComments() {
-        List<String> datas = new ArrayList<String>();
-        datas.add("jack");
-        datas.add("lucy");
+        Test people1=new Test("0","blue",10,2,"good!");
+        Test people2=new Test("1","start",10,2,"bad!");
+        List<Test> datas = new ArrayList<Test>();
+        datas.add(people1);
+        datas.add(people2);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("videoAndComments");//动态网页名称
+        //返回对象的属性：
+        //video :id,src...
         modelAndView.addObject("datas", datas);
         return modelAndView;
-        //食品评论的点赞数、披露内容、举报？、回复、时间、头像
+        //评论的点赞数、披露内容、举报？、回复、时间、头像
     }
 
     @GetMapping(path="temp")
-    public String temp(Model model) {
-        return "temp";
+    public ModelAndView temp(Model model) {
+        ModelAndView mmm =new ModelAndView("temp");
+        mmm.addObject("data","hello");
+        return mmm;
     }
 
 }

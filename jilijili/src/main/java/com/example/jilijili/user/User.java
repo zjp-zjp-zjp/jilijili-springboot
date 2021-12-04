@@ -22,17 +22,24 @@ public class User {
     private Integer gender;
 
     public User() {
+
     }
 
-    public User(String nickname, String password, String email, String tel, LocalDate dob, LocalDate registerDate, Integer gender) {
+    public User(String nickname, String email,String password) {
         this.nickname = nickname;
         this.password = password;
         this.email = email;
-        this.tel = tel;
-        this.dob = dob;
-        this.registerDate = registerDate;
-        this.gender = gender;
     }
+
+//    public User(String nickname, String password, String email, String tel, LocalDate dob, LocalDate registerDate, Integer gender) {
+//        this.nickname = nickname;
+//        this.password = password;
+//        this.email = email;
+//        this.tel = tel;
+//        this.dob = dob;
+//        this.registerDate = registerDate;
+//        this.gender = gender;
+//    }
 
     public Long getId() {
         return id;

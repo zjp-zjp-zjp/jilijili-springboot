@@ -3,6 +3,7 @@ package com.example.jilijili.video;
 import com.example.jilijili.comment.Comment;
 import com.example.jilijili.user.UserService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -32,8 +33,12 @@ public class VideoController {
     }
     //查看视频
     @GetMapping(path = "{videoId}")
-    public Video_CommentReturn video_id_page(@PathVariable("videoId")Long videoId){
-        return videoService.getVideoAndCommentById(videoId);
+    public ModelAndView video_id_page(@PathVariable("videoId")Long videoId){
+        System.out.println(videoService.getVideoAndCommentById(videoId));
+        ModelAndView videoAndComments=new ModelAndView("videoAndComments");
+        videoAndComments.addObject("data",videoService.getVideoAndCommentById(videoId));
+        videoAndComments.addObject("comments",videoService.getVideoAndCommentById(videoId).getCommentList());
+        return videoAndComments;
     }
     //评论
     @PostMapping(path = "{videoId}")
