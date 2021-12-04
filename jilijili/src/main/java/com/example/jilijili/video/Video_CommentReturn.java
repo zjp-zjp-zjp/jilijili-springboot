@@ -1,6 +1,8 @@
 package com.example.jilijili.video;
 
-import com.example.jilijili.comment.Comment;
+import com.example.jilijili.entity.Comment;
+import com.example.jilijili.entity.Video;
+
 import java.util.List;
 import java.util.Optional;
 

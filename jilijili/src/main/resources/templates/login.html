@@ -32,7 +32,11 @@
 
 
 
-
+<div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+  <i class="close icon"></i>
+  <div class="header">提示：</div>
+  <p th:text="${message}">操作成功！</p>
+</div>
 
 <div class="login-form-bg h-100">
   <div class="container h-100">
@@ -43,16 +47,16 @@
             <div class="card-body pt-5">
               <a class="text-center" href="index.html"> <h4>Rosella</h4></a>
 
-              <form class="mt-5 mb-5 login-input">
+              <form class="mt-5 mb-5 login-input" method="post" action="#" th:action="@{/account/login}">
                 <div class="form-group">
-                  <input type="email" class="form-control" placeholder="Email">
+                  <input type="text" class="form-control" placeholder="Nickname" name="nickname" value="zjpzyq1314">
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control" placeholder="Password">
+                  <input type="password" class="form-control" placeholder="Password" name="password" value="zjp5683zjp">
                 </div>
                 <button class="btn login-form__btn submit w-100">Sign In</button>
               </form>
-              <p class="mt-5 login-form__footer">Dont have account? <a href="#" class="text-primary">Sign Up</a> now</p>
+              <p class="mt-5 login-form__footer">Don't have account? <a href="#" th:href="@{/account/register}" class="text-primary">Sign Up</a> now</p>
             </div>
           </div>
         </div>
