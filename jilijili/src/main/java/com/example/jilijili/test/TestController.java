@@ -62,6 +62,7 @@
 
 package com.example.jilijili.test;
 
+import com.example.jilijili.comment.Comment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -73,6 +74,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/test")
@@ -157,6 +159,17 @@ public class TestController {
         ModelAndView mmm =new ModelAndView("temp");
         mmm.addObject("data","hello");
         return mmm;
+    }
+    @GetMapping(path="form")
+    public String form(Model model) {
+        return "test1";
+    }
+    @PostMapping(path="form")
+    @ResponseBody
+    public Map<String,Object> getJsonVal(@RequestBody Map<String,Object> user) {
+        System.out.println(" 1 " + user.get("content"));
+        System.out.println(" 2 " + user.get("targetVideo"));
+        return user;
     }
 
     @GetMapping(path="upload")

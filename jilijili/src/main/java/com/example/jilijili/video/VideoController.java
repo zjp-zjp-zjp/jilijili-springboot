@@ -114,6 +114,7 @@ public class VideoController {
     }
     //评论
     @PostMapping(path = "{videoId}")
+    @ResponseBody
     public void video_id_post(@RequestBody Comment comment, HttpServletRequest request, @PathVariable String videoId){
         if(request.getSession().getAttribute("userId")==null){
             throw new IllegalStateException("please log in before commenting");
@@ -122,6 +123,7 @@ public class VideoController {
         comment.setAuthorNickname(userService.getUserById((Long) request.getSession().getAttribute("userId")).getNickname());
         videoService.addaComment(comment);
     }
+
     //点赞
     @PutMapping(path = "{videoId}")
     public void video_id_put(@RequestBody SupportContainer supportContainer,HttpServletRequest request){
