@@ -2,19 +2,21 @@ package com.example.jilijili.video;
 
 import com.example.jilijili.comment.Comment;
 import com.example.jilijili.user.UserService;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
+import java.util.List;
 import java.util.Optional;
-
-@RestController
-@RequestMapping(path = "video")
+@Controller
+@RequestMapping(path = "/video")
 public class VideoController {
     @Resource
     private final VideoService videoService;
@@ -25,24 +27,26 @@ public class VideoController {
         this.videoService = videoService;
         this.userService = userService;
     }
-    @GetMapping(path="uploadVideo")
-    public ModelAndView Upload() {
-        ModelAndView M=new ModelAndView("uploadVideo");
-        return M;
+    @GetMapping(path="upload")
+    public String upload() {
+        return "uploadVideo";
     }
     //上传视频
-    @PostMapping(path = "uploadVideo")
+    @PostMapping(path = "upload")
     public String FileUpLoad(
             @RequestParam("name") String name,
             @RequestParam("description") String description,
-            @RequestParam("myfile") MultipartFile file,
+            @RequestParam("picture") MultipartFile picture,
+            @RequestParam("file") MultipartFile file,
             Model model,
             HttpServletRequest request) {
+        System.out.println(name);
+        System.out.println(description);
         if(request.getSession().getAttribute("userId")==null){
             throw new IllegalStateException("please log in before updating");
         }
         //判断文件是否为空
-        if(file.isEmpty()){
+        if(file.isEmpty()&&picture.isEmpty()){
             model.addAttribute("message", "文件为空");
             return "uploadVideo";
         }

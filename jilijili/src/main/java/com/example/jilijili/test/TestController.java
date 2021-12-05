@@ -69,6 +69,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -160,11 +161,18 @@ public class TestController {
 
     @GetMapping(path="upload")
     public String upload() {
-        return "temp";
+        return "uploadVideo";
     }
 
     @PostMapping(path="upload")
-    public String SingleFileUpLoad(@RequestParam("myfile") MultipartFile file, Model model) {
+    public String SingleFileUpLoad(
+            @RequestParam("name") String name,
+            @RequestParam("myfile") MultipartFile file,
+            Model model,
+            HttpServletRequest request
+            ) {
+        model.addAttribute("name",name);
+        System.out.println(name);
         //判断文件是否为空
         if(file.isEmpty()){
             model.addAttribute("result_singlefile", "文件为空");

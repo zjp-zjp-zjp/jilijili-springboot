@@ -123,4 +123,14 @@ public class UserController {
         }
         request.getSession().removeAttribute("userId");
     }
+    @GetMapping(path="contact")
+    public ModelAndView contact(Model model) {
+        ModelAndView tempView =new ModelAndView("contact");
+        return tempView;
+    }
+    @GetMapping(path="genre")
+    public ModelAndView genre(Model model) {
+        ModelAndView tempView =new ModelAndView("genre");
+        return tempView;
+    }
 }

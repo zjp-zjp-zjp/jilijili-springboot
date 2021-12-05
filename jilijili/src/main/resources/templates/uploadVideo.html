@@ -8,6 +8,38 @@
     <title>Hello</title>
 </head>
 <body>
+
+<!--nav-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url_for('index') }}">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ url_for('test') }}">test</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ url_for('test') }}">测试网页</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled">Disabled</a>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+<!--nav end-->
 <!--message-->
 <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${not #strings.isEmpty(message)}">
     <strong>!</strong> <a th:text="${message}"></a>
@@ -15,11 +47,12 @@
 </div>
 <!--message end-->
 <h1>upload</h1>
-<form class="form-signin" th:action="@{/video/uploadVideo}" method="post" enctype="multipart/form-data">
-    <p><input type="text" name="name"/></p>
-    <p><input type="text" name="description"/></p>
-    <p><input type="file" name="myfile"/></p>
-    <p><input type="submit" value="上传"/></p>
+<form class="form-signin" th:action="@{/video/upload}" method="post" enctype="multipart/form-data">
+            <input type="text" name="name" placeholder="视频名称"/>
+            <input type="text" name="description" placeholder="视频描述"/>
+        <input type="file" name="picture" placeholder="视频封面"/>
+            <input type="file" name="file" placeholder="视频mp4文件"/>
+            <input type="submit" value="上传"/>
 </form>
 
 
