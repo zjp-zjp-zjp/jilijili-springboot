@@ -9,13 +9,13 @@
 </head>
 <body>
 <!--message-->
-<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${not #strings.isEmpty(result_singlefile)}">
-    <strong>!</strong> <a th:text="${result_singlefile}"></a>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" th:if="${not #strings.isEmpty(result_singlefile)}"></button>
+<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${not #strings.isEmpty(message)}">
+    <strong>!</strong> <a th:text="${message}"></a>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" th:if="${not #strings.isEmpty(message)}"></button>
 </div>
 <!--message end-->
 <h1>upload</h1>
-<form class="form-signin" th:action="@{/test/upload}" method="post" enctype="multipart/form-data">
+<form class="form-signin" th:action="@{/video/uploadVideo}" method="post" enctype="multipart/form-data">
     <p><input type="text" name="name"/></p>
     <p><input type="text" name="description"/></p>
     <p><input type="file" name="myfile"/></p>
