@@ -120,14 +120,6 @@ public class User {
         this.gender = gender;
     }
 
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
     @Override
     public String toString() {
         return "User{" +
