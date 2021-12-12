@@ -76,7 +76,7 @@ public class VideoController {
             System.out.println(name);//!!!!!!!
             System.out.println(description);//!!!!!!!
             model.addAttribute("message", "上传成功");
-            videoService.uploadVideo(new Video((Long)request.getSession().getAttribute("userId"),name,description,path,0l));
+            videoService.uploadVideo(new Video((Long)request.getSession().getAttribute("userId"),name,description,path+fileName,0l));
 //            Video upVideo=new Video(name,description,, 0L);
 //            upVideo.setAuthorId((Long) request.getSession().getAttribute("userId"));
 //            videoService.uploadVideo(upVideo);
