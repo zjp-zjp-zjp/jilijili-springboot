@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zxx">
+<html lang="en">
 
 <head>
     <!-- Required meta tags -->
@@ -11,6 +11,7 @@
     <!-- Template CSS -->
     <link href="http://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap"
           rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <!-- Template CSS -->
 </head>
 
@@ -20,7 +21,8 @@
     <!--/nav-->
     <nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
         <div class="container">
-            <h1><a class="navbar-brand" href="index.html" th:href="@{/home}"><span class="fa fa-play icon-log" aria-hidden="true"></span>
+            <h1><a class="navbar-brand" href="index.html" th:href="@{/home}"><span class="fa fa-play icon-log"
+                                                                                   aria-hidden="true"></span>
                 ProShowz </a></h1>
             <!-- if logo is image enable this
                     <a class="navbar-brand" href="#index.html">
@@ -128,41 +130,46 @@
     <div class="contacts-9 py-5">
         <div class="container py-lg-4">
             <div class="headerhny-title text-center">
-                <h4 class="sub-title text-center">Contact us</h4>
-                <h3 class="hny-title mb-0">Leave a Message</h3>
-                <p class="hny-title mb-lg-5 mb-4">If you have a question regarding our services, feel free to contact us
-                    using the form below.</p>
+                <h3 class="hny-title mb-0">All Messages</h3>
+                <div>
+                    <!-- table -->
+                    <table class="ui red compact table">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Username</th>
+                            <th>Subject</th>
+                            <th>User's Email</th>
+                            <th>User's Phone Number</th>
+                            <th>Message Content</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="message, iterStat : ${page.content}">
+                            <td th:text="${iterStat.count}"></td>
+                            <td th:text="${message.name}"></td>
+                            <td th:text="${message.subject}"></td>
+                            <td th:text="${message.email}"></td>
+                            <td th:text="${message.phoneNumber}"></td>
+                            <td th:text="${message.query}"></td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th colspan="7">
+                                <div class="ui mini pagination menu right floated" th:if="${page.totalPages} > 1">
+                                    <a th:href="@{/contact/messages(page=${page.number} - 1)}" class="item"
+                                       th:unless="${page.first}">上一页</a>
+                                    <a th:href="@{/contact/messages(page=${page.number} + 1)}" class="item"
+                                       th:unless="${page.last}">下一页</a>
+                                </div>
+                            </th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
             <div class="contact-view mt-lg-5 mt-4">
-                <div class="conhny-form-section">
-                    <form action="#" th:action="@{/contact/submit}" method="post" class="formhny-sec">
-                        <div class="form-grids">
-                            <div class="form-input">
-                                <input type="text" name="name" id="w3lName" placeholder="Enter your name " required=""/>
-                            </div>
-                            <div class="form-input">
-                                <input type="text" name="subject" id="w3lSubject" placeholder="Enter subject "
-                                       required/>
-                            </div>
-                            <div class="form-input">
-                                <input type="email" name="email" id="w3lSender" placeholder="Enter your email "
-                                       required/>
-                            </div>
-                            <div class="form-input">
-                                <input type="text" name="phoneNumber" id="w3lPhone"
-                                       placeholder="Enter your Phone Number "
-                                       required/>
-                            </div>
-                        </div>
-                        <div class="form-input mt-4">
-							<textarea name="query" id="w3lMessage" placeholder="Type your query here"
-                                      required=""></textarea>
-                        </div>
-                        <div class="submithny text-right mt-4">
-                            <button class="btn read-button">Submit Message</button>
-                        </div>
-                    </form>
-                </div>
 
                 <div class="d-grid contact-addres-inf mt-5 pt-lg-4">
                     <div class="contact-info-left d-grid">
@@ -337,6 +344,7 @@
 
 </html>
 <script src="/js/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 <!-- Template JavaScript -->
 <!--/theme-change-->
 <script src="/js/theme-change.js"></script>

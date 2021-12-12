@@ -20,6 +20,7 @@ public class User {
     @JsonFormat(pattern="yyyy-M-d")
     private LocalDate registerDate;
     private Integer gender;
+    private Integer type;
 
     public User() {
 
@@ -105,6 +106,14 @@ public class User {
         this.gender = gender;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -116,6 +125,7 @@ public class User {
                 ", dob=" + dob +
                 ", registerDate=" + registerDate +
                 ", gender=" + gender +
+                ", type=" + type +
                 '}';
     }
 }

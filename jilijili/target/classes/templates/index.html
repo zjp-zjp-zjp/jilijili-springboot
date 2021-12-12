@@ -46,10 +46,10 @@
 						<a class="nav-link" href="/video/upload">上传视频</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/account/genre">精简</a>
+						<a class="nav-link" href="/genre">精简</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/account/contact">Contact</a>
+						<a class="nav-link" href="/contact" th:href="${session.userType == 1} ? @{/contact/messages} : @{/contact}">Contact</a>
 					</li>
 				</ul>
 

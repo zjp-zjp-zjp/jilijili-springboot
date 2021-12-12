@@ -31,106 +31,107 @@ public class UserController {
         this.videoService = videoService;
     }
 
-//    注册模块
+    //    注册模块
     @GetMapping(path = "register")
-    public ModelAndView account_register_page(){
+    public ModelAndView account_register_page() {
         return new ModelAndView("register");
     }
+
     @PostMapping(path = "register")
     public void account_register_post(@RequestParam String nickname,
                                       @RequestParam String email,
                                       @RequestParam String password,
-                                      HttpServletResponse response){
+                                      HttpServletResponse response) {
         System.out.println(nickname);
-        userService.addUser( new User(nickname,email,password));
+        userService.addUser(new User(nickname, email, password));
         try {
             response.sendRedirect("/account/login");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     //登录模块
     @GetMapping(path = "login")
-    public ModelAndView account_login_page(){
+    public ModelAndView account_login_page() {
         return new ModelAndView("login");
     }
+
     @PostMapping(path = "login")
-    public void account_login_post(@RequestParam String nickname, @RequestParam String password, HttpServletRequest request, HttpServletResponse response){
+    public void account_login_post(@RequestParam String nickname, @RequestParam String password, HttpServletRequest request, HttpServletResponse response) {
         System.out.println(nickname);
         System.out.println(password);
-        if(userService.userLogin(nickname,password)){
-            request.getSession().setAttribute("userId",userService.getIdByNickname(nickname));
+        if (userService.userLogin(nickname, password)) {
+            Long id = userService.getIdByNickname(nickname);
+            request.getSession().setAttribute("userId", id);
+            User user = userService.getUserById(id);
+            request.getSession().setAttribute("userType", user.getType());
             try {
                 response.sendRedirect("/home");
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        else {
+        } else {
             try {
-                String msg="password or nickname wrong";
-                response.sendRedirect("/error/"+msg);
+                String msg = "password or nickname wrong";
+                response.sendRedirect("/error/" + msg);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
+
     //查看当前用户信息
     @GetMapping(path = "accountInfo")
-    public User account_accountInfo_page( HttpServletRequest request){
-        if(request.getSession().getAttribute("userId")==null){
+    public User account_accountInfo_page(HttpServletRequest request) {
+        if (request.getSession().getAttribute("userId") == null) {
             throw new IllegalStateException("please log in before updating");
         }
         return userService.getUserById((Long) request.getSession().getAttribute("userId"));
     }
+
     //查看当前用户vieolist
     @GetMapping(path = "videoList")
-    public List<Video> account_videoList_page(HttpServletRequest request){
-        if(request.getSession().getAttribute("userId")==null){
+    public List<Video> account_videoList_page(HttpServletRequest request) {
+        if (request.getSession().getAttribute("userId") == null) {
             throw new IllegalStateException("please log in before updating");
         }
         return videoService.getVideoByAuthorId((Long) request.getSession().getAttribute("userId"));
     }
+
     //查看某个用户信息
     @GetMapping(path = "accountInfo/{hisId}")
-    public User account_accountInfo_his_page(HttpServletRequest request,@PathVariable("hisId") Long hisId){
-        if(request.getSession().getAttribute("userId")==null){
+    public User account_accountInfo_his_page(HttpServletRequest request, @PathVariable("hisId") Long hisId) {
+        if (request.getSession().getAttribute("userId") == null) {
             throw new IllegalStateException("please log in before updating");
         }
         return userService.getUserById(hisId);
     }
-//    查看某个用户videolist
+
+    //    查看某个用户videolist
     @GetMapping(path = "videoList/{hisId}")
-    public List<Video> account_videoList_his_page(HttpServletRequest request,@PathVariable("hisId") Long hisId){
-        if(request.getSession().getAttribute("userId")==null){
+    public List<Video> account_videoList_his_page(HttpServletRequest request, @PathVariable("hisId") Long hisId) {
+        if (request.getSession().getAttribute("userId") == null) {
             throw new IllegalStateException("please log in before updating");
         }
         return videoService.getVideoByAuthorId(hisId);
     }
+
     //删除用户的某个video
     @DeleteMapping(path = "videoList")
-    public void account_videoList_delete(@RequestParam("videoId") Long videoId,HttpServletRequest request){
-        if(request.getSession().getAttribute("userId")==null){
+    public void account_videoList_delete(@RequestParam("videoId") Long videoId, HttpServletRequest request) {
+        if (request.getSession().getAttribute("userId") == null) {
             throw new IllegalStateException("please log in before deleting");
         }
         videoService.deleteVideoWithId(videoId);
     }
+
     //登出
     @DeleteMapping(path = "accountInfo")
-    public void account_accountInfo_delete(HttpServletRequest request){
-        if(request.getSession().getAttribute("userId")==null){
+    public void account_accountInfo_delete(HttpServletRequest request) {
+        if (request.getSession().getAttribute("userId") == null) {
             throw new IllegalStateException("you aren't login");
         }
         request.getSession().removeAttribute("userId");
-    }
-    @GetMapping(path="contact")
-    public ModelAndView contact(Model model) {
-        ModelAndView tempView =new ModelAndView("contact");
-        return tempView;
-    }
-    @GetMapping(path="genre")
-    public ModelAndView genre(Model model) {
-        ModelAndView tempView =new ModelAndView("genre");
-        return tempView;
     }
 }
