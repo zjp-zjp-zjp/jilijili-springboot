@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-
+import java.io.File;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
@@ -53,9 +53,23 @@ public class VideoController {
         //创建输入输出流
         InputStream inputStream = null;
         OutputStream outputStream = null;
+        InputStream inputStreamP = null;
+        OutputStream outputStreamP = null;
         try {
             //指定上传的基本位置
-            String path = "e:/static/";
+            File folder = new File("E:\\static");
+            File []list = folder.listFiles();
+            int  folderCount = 0;
+            long length = 0;
+            for (File F : list){
+                if (F.isFile()){
+                    length += F.length();
+                }else {
+                    folderCount++;
+                }
+            }
+            String s=""+folderCount;
+            String path = "e:/static/"+s+"/";
             //获取文件的输入流
             inputStream = file.getInputStream();
             //获取上传时的文件名
@@ -70,16 +84,19 @@ public class VideoController {
             //获取文件的输出流
             outputStream = new FileOutputStream(targetFile);
             FileCopyUtils.copy(inputStream, outputStream);
+            //获取文件的输入流
+            inputStreamP = picture.getInputStream();
+            //获取上传时的文件名
+            String FileName = picture.getOriginalFilename();
+            //注意是路径+文件名
+            File TargetFile = new File(path + FileName);
+            //获取文件的输出流
+            outputStreamP = new FileOutputStream(TargetFile);
+            FileCopyUtils.copy(inputStreamP, outputStreamP);
             //返回上传成功的消息
-            System.out.println("!!!!!!!!!!!!!!!!");//!!!!!!!
-            System.out.println(path+fileName);//!!!!!!!
-            System.out.println(name);//!!!!!!!
-            System.out.println(description);//!!!!!!!
             model.addAttribute("message", "上传成功");
-            videoService.uploadVideo(new Video((Long)request.getSession().getAttribute("userId"),name,description,path+fileName,0l));
-//            Video upVideo=new Video(name,description,, 0L);
-//            upVideo.setAuthorId((Long) request.getSession().getAttribute("userId"));
-//            videoService.uploadVideo(upVideo);
+            String URL="https://192.168.227.1:82/"+s+"/";
+            videoService.uploadVideo(new Video((Long)request.getSession().getAttribute("userId"),name,description,URL+fileName ,URL + FileName,0l));
         } catch (IOException e) {
             e.printStackTrace();
             //返回上传失败的消息

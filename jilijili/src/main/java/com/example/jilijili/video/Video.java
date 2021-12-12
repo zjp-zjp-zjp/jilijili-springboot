@@ -13,16 +13,27 @@ public class Video {
     private String name;
     private String description;
     private String path;
+    private String picturePath;
     private Long supportNum;
 
     public Video() {
     }
 
-    public Video(Long authorId,String name, String description, String path, Long supportNum) {
-        this.authorId=authorId;
+
+    public String getPicturePath() {
+        return picturePath;
+    }
+
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
+    }
+
+    public Video(Long authorId, String name, String description, String path, String picturePath, Long supportNum) {
+        this.authorId = authorId;
         this.name = name;
         this.description = description;
         this.path = path;
+        this.picturePath = picturePath;
         this.supportNum = supportNum;
     }
 
