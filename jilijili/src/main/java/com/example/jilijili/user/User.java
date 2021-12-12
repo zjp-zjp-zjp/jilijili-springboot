@@ -1,10 +1,10 @@
 package com.example.jilijili.user;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table
@@ -29,7 +29,9 @@ public class User {
 
     public User(String nickname, String email,String password) {
         this.nickname = nickname;
-        this.password = password;
+        BCryptPasswordEncoder encoder=new BCryptPasswordEncoder(10);
+        String _password=encoder.encode(password);
+        this.password = _password;
         this.email = email;
         this.dob=LocalDate.now();
         this.tel="empty";
