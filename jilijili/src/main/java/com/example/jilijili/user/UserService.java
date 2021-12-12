@@ -22,9 +22,7 @@ public class UserService {
         if(userRepository.findUserByEmail(user.getEmail()).isPresent()){
             throw new IllegalStateException("email taken");
         }
-        if(userRepository.findUserByTel(user.getTel()).isPresent()){
-            throw new IllegalStateException("telephone number taken");
-        }
+
         userRepository.save(user);
     }
 
