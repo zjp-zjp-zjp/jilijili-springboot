@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table
@@ -20,6 +21,7 @@ public class User {
     @JsonFormat(pattern="yyyy-M-d")
     private LocalDate registerDate;
     private Integer gender;
+    private Integer type;
 
     public User() {
 
@@ -29,6 +31,11 @@ public class User {
         this.nickname = nickname;
         this.password = password;
         this.email = email;
+        this.dob=LocalDate.now();
+        this.tel="empty";
+        this.registerDate= LocalDate.now();
+        this.gender=1;
+        this.type=1;
     }
 
 //    public User(String nickname, String password, String email, String tel, LocalDate dob, LocalDate registerDate, Integer gender) {
@@ -40,6 +47,14 @@ public class User {
 //        this.registerDate = registerDate;
 //        this.gender = gender;
 //    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
 
     public Long getId() {
         return id;
