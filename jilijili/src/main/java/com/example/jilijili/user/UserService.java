@@ -1,5 +1,6 @@
 package com.example.jilijili.user;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,10 +30,11 @@ public class UserService {
 
     public boolean userLogin(String nickname, String password) {
         Optional<User> thisUser=userRepository.findUserByNickname(nickname);
+        BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
         if(!thisUser.isPresent()){
             throw new IllegalStateException("no user named "+nickname);
         }
-        if(password.equals(thisUser.get().getPassword())){
+        if(encoder.matches(password,thisUser.get().getPassword())){
             return true;
         }
         return false;
