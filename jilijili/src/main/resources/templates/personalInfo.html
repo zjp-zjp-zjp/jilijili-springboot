@@ -1,0 +1,235 @@
+
+<!doctype html>
+<html lang="zxx" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Home</title>
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/css/style-starter.css">
+    <link href="/css/style.css" rel="stylesheet">
+    <!-- Template CSS -->
+    <link href="http://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap"
+          rel="stylesheet">
+    <!-- Template CSS -->
+</head>
+
+<body>
+
+    <header id="site-header" class="w3l-header fixed-top">
+        <!--/nav-->
+        <nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
+            <div class="container">
+                <h1><a class="navbar-brand" href="index.html"><span class="fa fa-play icon-log"
+                                                                    aria-hidden="true"></span>
+                    ProShowz </a></h1>
+                <!-- if logo is image enable this
+                        <a class="navbar-brand" href="#index.html">
+                            <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+                        </a> -->
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <!-- <span class="navbar-toggler-icon"></span> -->
+                    <span class="fa icon-expand fa-bars"></span>
+                    <span class="fa icon-close fa-times"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/video/upload">上传视频</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/genre">精简</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contact" th:href="${session.userType == 1} ? @{/contact/messages} : @{/contact}">Contact</a>
+                        </li>
+                    </ul>
+
+                    <!--/search-right-->
+                    <!--/search-right-->
+                    <div class="search-right">
+                        <a href="#search" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="search">Search <span
+                                class="fa fa-search ml-3" aria-hidden="true"></span></a>
+                        <!-- search popup -->
+                        <div id="search" class="pop-overlay">
+                            <div class="popup">
+                                <form action="#" method="post" class="search-box">
+                                    <input type="search" placeholder="Search your Keyword" name="search"
+                                           required="required" autofocus="">
+                                    <button type="submit" class="btn"><span class="fa fa-search"
+                                                                            aria-hidden="true"></span></button>
+                                </form>
+                                <div class="browse-items">
+                                    <h3 class="hny-title two mt-md-5 mt-4">Browse all:</h3>
+                                    <ul class="search-items">
+                                        <li><a href="genre.html">Action</a></li>
+                                        <li><a href="genre.html">Drama</a></li>
+                                        <li><a href="genre.html">Family</a></li>
+                                        <li><a href="genre.html">Thriller</a></li>
+                                        <li><a href="genre.html">Commedy</a></li>
+                                        <li><a href="genre.html">Romantic</a></li>
+                                        <li><a href="genre.html">Tv-Series</a></li>
+                                        <li><a href="genre.html">Horror</a></li>
+                                        <li><a href="genre.html">Action</a></li>
+                                        <li><a href="genre.html">Drama</a></li>
+                                        <li><a href="genre.html">Family</a></li>
+                                        <li><a href="genre.html">Thriller</a></li>
+                                        <li><a href="genre.html">Commedy</a></li>
+                                        <li><a href="genre.html">Romantic</a></li>
+                                        <li><a href="genre.html">Tv-Series</a></li>
+                                        <li><a href="genre.html">Horror</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <a class="close" href="#close">×</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="mobile-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section class="w3l-main-slider position-relative">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4 col-xl-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="media align-items-center mb-4">
+                                <img class="mr-3" src="images/avatar/11.png" width="80" height="80" alt="">
+                                <div class="media-body">
+                                    <h3 class="mb-0">Pikamy Cha</h3>
+                                    <p class="text-muted mb-0">Canada</p>
+                                </div>
+                            </div>
+
+                            <div class="row mb-5">
+                                <div class="col">
+                                    <div class="card card-profile text-center">
+                                        <span class="mb-1 text-primary"><i class="icon-people"></i></span>
+                                        <h3 class="mb-0">263</h3>
+                                        <p class="text-muted px-4">Following</p>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card card-profile text-center">
+                                        <span class="mb-1 text-warning"><i class="icon-user-follow"></i></span>
+                                        <h3 class="mb-0">263</h3>
+                                        <p class="text-muted">Followers</p>
+                                    </div>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button class="btn btn-danger px-5">Follow Now</button>
+                                </div>
+                            </div>
+
+                            <h4>About Me</h4>
+                            <p class="text-muted">Hi, I'm Pikamy, has been the industry standard dummy text ever since the 1500s.</p>
+                            <ul class="card-profile__info">
+                                <li class="mb-1"><strong class="text-dark mr-4">Mobile</strong> <span>01793931609</span></li>
+                                <li><strong class="text-dark mr-4">Email</strong> <span>name@domain.com</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-xl-9">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="media media-reply">
+                                <img class="mr-3 circle-rounded" src="images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <div class="d-sm-flex justify-content-between mb-2">
+                                        <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
+                                        <div class="media-reply__link">
+                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
+                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
+                                            <button class="btn btn-transparent text-dark font-weight-bold p-0 ml-2">Reply</button>
+                                        </div>
+                                    </div>
+
+                                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                                    <ul>
+                                        <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/2.jpg" alt=""></li>
+                                        <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/3.jpg" alt=""></li>
+                                        <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/4.jpg" alt=""></li>
+                                        <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/1.jpg" alt=""></li>
+                                    </ul>
+                                    <!-- 一个内嵌评论 -->
+                                    <div class="media mt-3">
+                                        <img class="mr-3 circle-rounded circle-rounded" src="images/avatar/4.jpg" width="50" height="50" alt="Generic placeholder image">
+                                        <div class="media-body">
+                                            <div class="d-sm-flex justify-content-between mb-2">
+                                                <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
+                                                <div class="media-reply__link">
+                                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
+                                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
+                                                    <button class="btn btn-transparent p-0 ml-3 font-weight-bold">Reply</button>
+                                                </div>
+                                            </div>
+                                            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="media mt-3">
+                                        <img class="mr-3 circle-rounded circle-rounded" src="images/avatar/4.jpg" width="50" height="50" alt="Generic placeholder image">
+                                        <div class="media-body">
+                                            <div class="d-sm-flex justify-content-between mb-2">
+                                                <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
+                                                <div class="media-reply__link">
+                                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
+                                                    <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
+                                                    <button class="btn btn-transparent p-0 ml-3 font-weight-bold">Reply</button>
+                                                </div>
+                                            </div>
+                                            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                                        </div>
+                                    </div>
+                                    <!-- 内嵌评论结束 -->
+                                </div>
+                            </div>
+                            <!-- 一个评论card -->
+                            <div class="media media-reply">
+                                <img class="mr-3 circle-rounded" src="images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <div class="d-sm-flex justify-content-between mb-2">
+                                        <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
+                                        <div class="media-reply__link">
+                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i></button>
+                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-down"></i></button>
+                                            <button class="btn btn-transparent p-0 ml-3 font-weight-bold">Reply</button>
+                                        </div>
+                                    </div>
+
+                                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

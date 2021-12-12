@@ -1,22 +1,13 @@
 package com.example.jilijili.user;
 
-import com.example.jilijili.test.Test;
-import com.example.jilijili.video.Video;
 import com.example.jilijili.video.VideoService;
-import org.apache.coyote.Response;
-import org.springframework.data.repository.query.Param;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @RequestMapping(path = "account")
 @RestController
@@ -83,55 +74,57 @@ public class UserController {
 
     //查看当前用户信息
     @GetMapping(path = "accountInfo")
-    public User account_accountInfo_page(HttpServletRequest request) {
-        if (request.getSession().getAttribute("userId") == null) {
-            throw new IllegalStateException("please log in before updating");
-        }
-        return userService.getUserById((Long) request.getSession().getAttribute("userId"));
+    public ModelAndView account_accountInfo_page(HttpServletRequest request) {
+        ModelAndView modelAndView=new ModelAndView("personalInfo");
+        return modelAndView;
+//        if (request.getSession().getAttribute("userId") == null) {
+//            throw new IllegalStateException("please log in before updating");
+//        }
+//        return userService.getUserById((Long) request.getSession().getAttribute("userId"));
     }
 
-    //查看当前用户vieolist
-    @GetMapping(path = "videoList")
-    public List<Video> account_videoList_page(HttpServletRequest request) {
-        if (request.getSession().getAttribute("userId") == null) {
-            throw new IllegalStateException("please log in before updating");
-        }
-        return videoService.getVideoByAuthorId((Long) request.getSession().getAttribute("userId"));
-    }
-
-    //查看某个用户信息
-    @GetMapping(path = "accountInfo/{hisId}")
-    public User account_accountInfo_his_page(HttpServletRequest request, @PathVariable("hisId") Long hisId) {
-        if (request.getSession().getAttribute("userId") == null) {
-            throw new IllegalStateException("please log in before updating");
-        }
-        return userService.getUserById(hisId);
-    }
-
-    //    查看某个用户videolist
-    @GetMapping(path = "videoList/{hisId}")
-    public List<Video> account_videoList_his_page(HttpServletRequest request, @PathVariable("hisId") Long hisId) {
-        if (request.getSession().getAttribute("userId") == null) {
-            throw new IllegalStateException("please log in before updating");
-        }
-        return videoService.getVideoByAuthorId(hisId);
-    }
-
-    //删除用户的某个video
-    @DeleteMapping(path = "videoList")
-    public void account_videoList_delete(@RequestParam("videoId") Long videoId, HttpServletRequest request) {
-        if (request.getSession().getAttribute("userId") == null) {
-            throw new IllegalStateException("please log in before deleting");
-        }
-        videoService.deleteVideoWithId(videoId);
-    }
-
-    //登出
-    @DeleteMapping(path = "accountInfo")
-    public void account_accountInfo_delete(HttpServletRequest request) {
-        if (request.getSession().getAttribute("userId") == null) {
-            throw new IllegalStateException("you aren't login");
-        }
-        request.getSession().removeAttribute("userId");
-    }
+//    //查看当前用户vieolist
+//    @GetMapping(path = "videoList")
+//    public List<Video> account_videoList_page(HttpServletRequest request) {
+//        if (request.getSession().getAttribute("userId") == null) {
+//            throw new IllegalStateException("please log in before updating");
+//        }
+//        return videoService.getVideoByAuthorId((Long) request.getSession().getAttribute("userId"));
+//    }
+//
+//    //查看某个用户信息
+//    @GetMapping(path = "accountInfo/{hisId}")
+//    public User account_accountInfo_his_page(HttpServletRequest request, @PathVariable("hisId") Long hisId) {
+//        if (request.getSession().getAttribute("userId") == null) {
+//            throw new IllegalStateException("please log in before updating");
+//        }
+//        return userService.getUserById(hisId);
+//    }
+//
+//    //    查看某个用户videolist
+//    @GetMapping(path = "videoList/{hisId}")
+//    public List<Video> account_videoList_his_page(HttpServletRequest request, @PathVariable("hisId") Long hisId) {
+//        if (request.getSession().getAttribute("userId") == null) {
+//            throw new IllegalStateException("please log in before updating");
+//        }
+//        return videoService.getVideoByAuthorId(hisId);
+//    }
+//
+//    //删除用户的某个video
+//    @DeleteMapping(path = "videoList")
+//    public void account_videoList_delete(@RequestParam("videoId") Long videoId, HttpServletRequest request) {
+//        if (request.getSession().getAttribute("userId") == null) {
+//            throw new IllegalStateException("please log in before deleting");
+//        }
+//        videoService.deleteVideoWithId(videoId);
+//    }
+//
+//    //登出
+//    @DeleteMapping(path = "accountInfo")
+//    public void account_accountInfo_delete(HttpServletRequest request) {
+//        if (request.getSession().getAttribute("userId") == null) {
+//            throw new IllegalStateException("you aren't login");
+//        }
+//        request.getSession().removeAttribute("userId");
+//    }
 }
