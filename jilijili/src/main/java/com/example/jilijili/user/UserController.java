@@ -75,11 +75,13 @@ public class UserController {
     //查看当前用户信息
     @GetMapping(path = "accountInfo")
     public ModelAndView account_accountInfo_page(HttpServletRequest request) {
+        if (request.getSession().getAttribute("userId") == null) {
+            throw new IllegalStateException("please log in before checking");
+        }
         ModelAndView modelAndView=new ModelAndView("personalInfo");
+        modelAndView.addObject("userInfo",userService.getUserById((Long)request.getSession().getAttribute("userId")));
         return modelAndView;
-//        if (request.getSession().getAttribute("userId") == null) {
-//            throw new IllegalStateException("please log in before updating");
-//        }
+
 //        return userService.getUserById((Long) request.getSession().getAttribute("userId"));
     }
 
