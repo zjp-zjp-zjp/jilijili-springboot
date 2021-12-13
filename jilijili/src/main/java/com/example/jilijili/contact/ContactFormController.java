@@ -1,6 +1,5 @@
 package com.example.jilijili.contact;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;

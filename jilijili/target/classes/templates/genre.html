@@ -20,7 +20,7 @@
     <!--/nav-->
     <nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
         <div class="container">
-            <h1><a class="navbar-brand" href="index.html"><span class="fa fa-play icon-log"
+            <h1><a class="navbar-brand" href="index.html" th:href="@{/home}"><span class="fa fa-play icon-log"
                                                                 aria-hidden="true"></span>
                 ProShowz </a></h1>
             <!-- if logo is image enable this
@@ -48,7 +48,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.html" th:href="@{/contact}">Contact</a>
+                        <a class="nav-link" href="contact.html" th:href="${session.userType == 1} ? @{/contact/messages} : @{/contact}">Contact</a>
                     </li>
                 </ul>
 
@@ -69,22 +69,22 @@
                             <div class="browse-items">
                                 <h3 class="hny-title two mt-md-5 mt-4">Browse all:</h3>
                                 <ul class="search-items">
-                                    <li><a href="genre.html">Action</a></li>
-                                    <li><a href="genre.html">Drama</a></li>
-                                    <li><a href="genre.html">Family</a></li>
-                                    <li><a href="genre.html">Thriller</a></li>
-                                    <li><a href="genre.html">Commedy</a></li>
-                                    <li><a href="genre.html">Romantic</a></li>
-                                    <li><a href="genre.html">Tv-Series</a></li>
-                                    <li><a href="genre.html">Horror</a></li>
-                                    <li><a href="genre.html">Action</a></li>
-                                    <li><a href="genre.html">Drama</a></li>
-                                    <li><a href="genre.html">Family</a></li>
-                                    <li><a href="genre.html">Thriller</a></li>
-                                    <li><a href="genre.html">Commedy</a></li>
-                                    <li><a href="genre.html">Romantic</a></li>
-                                    <li><a href="genre.html">Tv-Series</a></li>
-                                    <li><a href="genre.html">Horror</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Action</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Drama</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Family</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Thriller</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Commedy</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Romantic</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Tv-Series</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Horror</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Action</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Drama</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Family</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Thriller</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Commedy</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Romantic</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Tv-Series</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Horror</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -665,19 +665,19 @@
                     <div class="right-side">
                         <div class="row footer-about">
                             <div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
-                                <a href="genre.html"><img class="img-fluid" src="/images/banner1.jpg"
+                                <a href="genre.html" th:href="@{/genre}"><img class="img-fluid" src="/images/banner1.jpg"
                                                           alt=""></a>
                             </div>
                             <div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
-                                <a href="genre.html"><img class="img-fluid" src="/images/banner2.jpg"
+                                <a href="genre.html" th:href="@{/genre}"><img class="img-fluid" src="/images/banner2.jpg"
                                                           alt=""></a>
                             </div>
                             <div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
-                                <a href="genre.html"><img class="img-fluid" src="/images/banner3.jpg"
+                                <a href="genre.html" th:href="@{/genre}"><img class="img-fluid" src="/images/banner3.jpg"
                                                           alt=""></a>
                             </div>
                             <div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
-                                <a href="genre.html"><img class="img-fluid" src="/images/banner4.jpg"
+                                <a href="genre.html" th:href="@{/genre}"><img class="img-fluid" src="/images/banner4.jpg"
                                                           alt=""></a>
                             </div>
                         </div>
@@ -692,29 +692,29 @@
                                     <li><a href="#">English Movies</a></li>
                                     <li><a href="#">Tailor</a></li>
                                     <li><a href="#">Upcoming Movies</a></li>
-                                    <li><a href="contact.html">Contact Us</a></li>
+                                    <li><a href="contact.html" th:href="@{/contact}">Contact Us</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-3 col-sm-6 sub-two-right mt-5">
                                 <h6>Information</h6>
                                 <ul>
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><a href="about.html">About</a></li>
+                                    <li><a href="index.html" th:href="@{/home}">Home</a></li>
+                                    <li><a href="about.html" th:href="@{/about}">About</a></li>
                                     <li><a href="#">Tv Series</a></li>
                                     <li><a href="#">Blogs</a></li>
                                     <li><a href="#">Login</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="contact.html" th:href="@{/contact}">Contact</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-3 col-sm-6 sub-two-right mt-5">
                                 <h6>Locations</h6>
                                 <ul>
-                                    <li><a href="genre.html">Asia</a></li>
-                                    <li><a href="genre.html">France</a></li>
-                                    <li><a href="genre.html">Taiwan</a></li>
-                                    <li><a href="genre.html">United States</a></li>
-                                    <li><a href="genre.html">Korea</a></li>
-                                    <li><a href="genre.html">United Kingdom</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Asia</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">France</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Taiwan</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">United States</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Korea</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">United Kingdom</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-3 col-sm-6 sub-two-right mt-5">
