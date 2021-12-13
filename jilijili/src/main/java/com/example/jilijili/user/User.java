@@ -2,8 +2,10 @@ package com.example.jilijili.user;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.io.*;
 import java.time.LocalDate;
 
 @Entity
@@ -22,6 +24,7 @@ public class User {
     private LocalDate registerDate;
     private Integer gender;
     private Integer type;
+    private byte[] head;
 
     public User() {
 
@@ -38,6 +41,12 @@ public class User {
         this.registerDate= LocalDate.now();
         this.gender=1;
         this.type=1;
+        File picture=new File("D:\\jilijili-springboot\\jilijili\\src\\main\\resources\\pictures\\head.png");
+        try {
+            this.head=getByte(picture);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 //    public User(String nickname, String password, String email, String tel, LocalDate dob, LocalDate registerDate, Integer gender) {
@@ -49,6 +58,15 @@ public class User {
 //        this.registerDate = registerDate;
 //        this.gender = gender;
 //    }
+
+
+    public byte[] getHead() {
+        return head;
+    }
+
+    public void setHead(byte[] head) {
+        this.head = head;
+    }
 
     public Integer getType() {
         return type;
@@ -135,5 +153,34 @@ public class User {
                 ", gender=" + gender +
                 ", type=" + type +
                 '}';
+    }
+    public static byte[] getByte(File file) throws Exception
+    {
+        byte[] bytes = null;
+        if(file!=null)
+        {
+            InputStream is = new FileInputStream(file);
+            int length = (int) file.length();
+            if(length>Integer.MAX_VALUE)   //当文件的长度超过了int的最大值
+            {
+                System.out.println("this file is max ");
+                return null;
+            }
+            bytes = new byte[length];
+            int offset = 0;
+            int numRead = 0;
+            while(offset<bytes.length&&(numRead=is.read(bytes,offset,bytes.length-offset))>=0)
+            {
+                offset+=numRead;
+            }
+            //如果得到的字节长度和file实际的长度不一致就可能出错了
+            if(offset<bytes.length)
+            {
+                System.out.println("file length is error");
+                return null;
+            }
+            is.close();
+        }
+        return bytes;
     }
 }

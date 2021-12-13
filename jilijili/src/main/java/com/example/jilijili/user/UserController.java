@@ -3,11 +3,14 @@ package com.example.jilijili.user;
 import com.example.jilijili.video.VideoService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 import javax.annotation.Resource;
+import javax.persistence.Convert;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Base64;
 
 @RequestMapping(path = "account")
 @RestController
@@ -72,6 +75,10 @@ public class UserController {
         }
     }
 
+    public static String getImageString(byte[] data) throws IOException {
+        Base64.Encoder encoder=Base64.getEncoder();
+        return data != null ? encoder.encodeToString(data) : "";
+    }
     //查看当前用户信息
     @GetMapping(path = "accountInfo")
     public ModelAndView account_accountInfo_page(HttpServletRequest request) {
@@ -80,6 +87,13 @@ public class UserController {
         }
         ModelAndView modelAndView=new ModelAndView("personalInfo");
         modelAndView.addObject("userInfo",userService.getUserById((Long)request.getSession().getAttribute("userId")));
+        try {
+            modelAndView.addObject("head",getImageString(userService.getUserById((Long)request.getSession().getAttribute("userId")).getHead()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        modelAndView.addObject("videoList",videoService.getVideoByAuthorId((Long) request.getSession().getAttribute("userId")));
+        modelAndView.addObject("listLength",videoService.getVideoByAuthorId((Long) request.getSession().getAttribute("userId")).size());
         return modelAndView;
 
 //        return userService.getUserById((Long) request.getSession().getAttribute("userId"));
