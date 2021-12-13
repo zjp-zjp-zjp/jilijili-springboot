@@ -7,14 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-import java.io.File;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
-import java.util.List;
-import java.util.Optional;
+import java.util.Base64;
 @Controller
 @RequestMapping(path = "/video")
 public class VideoController {
@@ -121,11 +119,22 @@ public class VideoController {
         //返回页面
         return "uploadVideo";
     }
+    public static String getImageString(byte[] data) throws IOException {
+        Base64.Encoder encoder=Base64.getEncoder();
+        return data != null ? encoder.encodeToString(data) : "";
+    }
     //查看视频
     @GetMapping(path = "{videoId}")
     public ModelAndView video_id_page(@PathVariable("videoId")Long videoId){
         System.out.println(videoService.getVideoAndCommentById(videoId));
         ModelAndView videoAndComments=new ModelAndView("videoAndComments");
+        Video video=videoService.getVideoAndCommentById(videoId).getVideo();
+        byte[] avator=userService.getUserById(video.getAuthorId()).getHead();
+        try {
+            videoAndComments.addObject("avator",getImageString(avator));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         videoAndComments.addObject("data",videoService.getVideoAndCommentById(videoId));
         videoAndComments.addObject("comments",videoService.getVideoAndCommentById(videoId).getCommentList());
         return videoAndComments;

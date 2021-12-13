@@ -140,7 +140,7 @@
     <div id="float-dplayer" class="float-dplayer">
     <div id="dplayer-container" class="dplayer-container"></div>
     <h3 id="close-dialog" class="close-dialog">
-           <img src="/images/1.jpg" style="width: 40px;height: 40px;float: left">
+           <img  th:src="'data:image/gif;base64,'+${avator}" style="width: 40px;height: 40px;float: left">
         <h1 th:text="${data.video.name}" style="height: 40px;float: left">
         </h1>
         <br>
@@ -291,6 +291,8 @@
     <div class="general-mask-left">
         <img src="/images/1.jpg" height="40" width="40" alt="" style="float: left;">
         <h5 style="float: left"><span>昵称:</span><div id="authorId"><td th:text="${comment.authorId}"></td></div></h5>
+<div id="commentId" hidden><td th:text="${comment.id}"></td></div>
+
 </div>
     </iv>
     <ul class="list-group list-group-flush">
@@ -345,7 +347,7 @@
         function sendComment() {
             content=document.myform1.comment.value;
             targetVideo=document.getElementById("videoId").innerHTML;
-            targetComment=document.getElementById("authorId").innerHTML;
+            targetComment=document.getElementById("commentId").innerHTML;
             alert("评论成功")
             var val = {
                 "content" : content,
