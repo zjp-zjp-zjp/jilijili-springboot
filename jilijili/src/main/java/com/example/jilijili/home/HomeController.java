@@ -2,7 +2,6 @@ package com.example.jilijili.home;
 
 import com.example.jilijili.user.User;
 import com.example.jilijili.user.UserService;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
