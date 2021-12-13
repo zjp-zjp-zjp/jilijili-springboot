@@ -132,7 +132,6 @@ public class VideoController {
     }
     //评论
     @PostMapping(path = "{videoId}")
-    @ResponseBody
     public void video_id_post(@RequestBody Comment comment, HttpServletRequest request, @PathVariable String videoId){
         if(request.getSession().getAttribute("userId")==null){
             throw new IllegalStateException("please log in before commenting");

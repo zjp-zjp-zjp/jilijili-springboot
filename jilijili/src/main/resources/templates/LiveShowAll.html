@@ -1,0 +1,287 @@
+<!-- 此页面将所有的直播显示出来-->
+<!--    <li  th:each="room:${rooms}" class="list-group-item d-flex justify-content-between align-items-center">-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>LiveVideo</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <!-- Custom Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style-starter.css">
+    <script src="/js/jquery-3.3.1.min.js"></script>
+
+</head>
+
+<body>
+
+
+<!-- header -->
+<header id="site-header" class="w3l-header fixed-top">
+    <!--/nav-->
+    <nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
+        <div class="container">
+            <h1><a class="navbar-brand" href="index.html"><span class="fa fa-play icon-log"
+                                                                aria-hidden="true"></span>
+                ProShowz </a></h1>
+            <!-- if logo is image enable this
+                    <a class="navbar-brand" href="#index.html">
+                        <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+                    </a> -->
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <!-- <span class="navbar-toggler-icon"></span> -->
+                <span class="fa icon-expand fa-bars"></span>
+                <span class="fa icon-close fa-times"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/video/upload">上传视频</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/genre">精简</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact" th:href="${session.userType == 1} ? @{/contact/messages} : @{/contact}">Contact</a>
+                    </li>
+                </ul>
+
+                <!--/search-right-->
+                <!--/search-right-->
+                <div class="search-right">
+                    <a href="#search" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="search">Search <span
+                            class="fa fa-search ml-3" aria-hidden="true"></span></a>
+                    <!-- search popup -->
+                    <div id="search" class="pop-overlay">
+                        <div class="popup">
+                            <form action="#" method="post" class="search-box">
+                                <input type="search" placeholder="Search your Keyword" name="search"
+                                       required="required" autofocus="">
+                                <button type="submit" class="btn"><span class="fa fa-search"
+                                                                        aria-hidden="true"></span></button>
+                            </form>
+                            <div class="browse-items">
+                                <h3 class="hny-title two mt-md-5 mt-4">Browse all:</h3>
+                                <ul class="search-items">
+                                    <li><a href="genre.html">Action</a></li>
+                                    <li><a href="genre.html">Drama</a></li>
+                                    <li><a href="genre.html">Family</a></li>
+                                    <li><a href="genre.html">Thriller</a></li>
+                                    <li><a href="genre.html">Commedy</a></li>
+                                    <li><a href="genre.html">Romantic</a></li>
+                                    <li><a href="genre.html">Tv-Series</a></li>
+                                    <li><a href="genre.html">Horror</a></li>
+                                    <li><a href="genre.html">Action</a></li>
+                                    <li><a href="genre.html">Drama</a></li>
+                                    <li><a href="genre.html">Family</a></li>
+                                    <li><a href="genre.html">Thriller</a></li>
+                                    <li><a href="genre.html">Commedy</a></li>
+                                    <li><a href="genre.html">Romantic</a></li>
+                                    <li><a href="genre.html">Tv-Series</a></li>
+                                    <li><a href="genre.html">Horror</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a class="close" href="#close">×</a>
+                    </div>
+                    <!-- /search popup -->
+                    <!--/search-right-->
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!--//nav-->
+</header>
+<!-- //header -->
+<br>
+<br>
+<br>
+
+<!--**********************************
+    Content body start
+***********************************-->
+
+<div class="container-fluid">
+<!--    row start-->
+    <div class="row">
+        <div class="col-12 m-b-30">
+            <h4 class="d-inline">JIliJiLI</h4>
+            <p class="text-muted">live show!</p>
+            <div class="row">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-header bg-white">
+                            <h5 class="card-title">Card title</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        </div>
+                        <img class="img-fluid" src="images/bg.jpg" alt="">
+                        <div class="card-body">
+                            <p class="card-text">
+                                描述1-11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <p class="card-text d-inline"><small class="text-muted">观看人数？</small>
+                            </p><a href="/LiveTelecast/1" class="card-link float-right"><small>点击加入</small></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Col -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-header bg-white">
+                            <h5 class="card-title">Card title</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        </div>
+                        <img class="img-fluid" src="images/bg.jpg" alt="">
+                        <div class="card-body">
+                            <p class="card-text">This is a wider card with supporting text and below as a natural lead-in to the additional content. This content is a little bit longer.</p>
+                        </div>
+                        <div class="card-footer">
+                            <p class="card-text d-inline"><small class="text-muted">Last updated 3 mins ago</small>
+                            </p><a href="#" class="card-link float-right"><small>点击加入</small></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Col -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-header bg-white">
+                            <h5 class="card-title">Card title</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        </div>
+                        <img class="img-fluid" src="images/bg.jpg" alt="">
+                        <div class="card-body">
+                            <p class="card-text">This is a wider card with supporting text and below as a natural lead-in to the additional content. This content is a little bit longer.</p>
+                        </div>
+                        <div class="card-footer">
+                            <p class="card-text d-inline"><small class="text-muted">Last updated 3 mins ago</small>
+                            </p><a href="#" class="card-link float-right"><small>点击加入</small></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Col -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-header bg-white">
+                            <h5 class="card-title">Card title</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        </div>
+                        <img class="img-fluid" src="images/bg.jpg" alt="">
+                        <div class="card-body">
+                            <p class="card-text">This is a wider card with supporting text and below as a natural lead-in to the additional content. This content is a little bit longer.</p>
+                        </div>
+                        <div class="card-footer">
+                            <p class="card-text d-inline"><small class="text-muted">Last updated 3 mins ago</small>
+                            </p><a href="#" class="card-link float-right"><small>点击加入</small></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--end row -->
+
+    <!--    row start-->
+    <div class="row">
+        <div class="col-12 m-b-30">
+            <h4 class="d-inline">JIliJiLI</h4>
+            <p class="text-muted">live show!</p>
+            <div class="row">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-header bg-white">
+                            <h5 class="card-title">Card title</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        </div>
+                        <img class="img-fluid" src="images/bg.jpg" alt="">
+                        <div class="card-body">
+                            <p class="card-text">
+                                描述1-11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <p class="card-text d-inline"><small class="text-muted">观看人数？</small>
+                            </p><a href="#" class="card-link float-right"><small>点击加入</small></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Col -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-header bg-white">
+                            <h5 class="card-title">Card title</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        </div>
+                        <img class="img-fluid" src="images/bg.jpg" alt="">
+                        <div class="card-body">
+                            <p class="card-text">This is a wider card with supporting text and below as a natural lead-in to the additional content. This content is a little bit longer.</p>
+                        </div>
+                        <div class="card-footer">
+                            <p class="card-text d-inline"><small class="text-muted">Last updated 3 mins ago</small>
+                            </p><a href="#" class="card-link float-right"><small>点击加入</small></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Col -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-header bg-white">
+                            <h5 class="card-title">Card title</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        </div>
+                        <img class="img-fluid" src="images/bg.jpg" alt="">
+                        <div class="card-body">
+                            <p class="card-text">This is a wider card with supporting text and below as a natural lead-in to the additional content. This content is a little bit longer.</p>
+                        </div>
+                        <div class="card-footer">
+                            <p class="card-text d-inline"><small class="text-muted">Last updated 3 mins ago</small>
+                            </p><a href="#" class="card-link float-right"><small>点击加入</small></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Col -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-header bg-white">
+                            <h5 class="card-title">Card title</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        </div>
+                        <img class="img-fluid" src="images/bg.jpg" alt="">
+                        <div class="card-body">
+                            <p class="card-text">This is a wider card with supporting text and below as a natural lead-in to the additional content. This content is a little bit longer.</p>
+                        </div>
+                        <div class="card-footer">
+                            <p class="card-text d-inline"><small class="text-muted">Last updated 3 mins ago</small>
+                            </p><a href="#" class="card-link float-right"><small>点击加入</small></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end row -->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <script src="plugins/common/common.min.js"></script>
+    <script src="js/custom.min.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/gleek.js"></script>
+    <script src="js/styleSwitcher.js"></script>
+
+</body>
+
+</html>
