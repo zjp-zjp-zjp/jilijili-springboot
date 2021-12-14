@@ -1,6 +1,7 @@
 package com.example.jilijili.user;
 
 import com.example.jilijili.video.VideoService;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
@@ -10,6 +11,8 @@ import javax.persistence.Convert;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 
 @RequestMapping(path = "account")
@@ -95,8 +98,33 @@ public class UserController {
         modelAndView.addObject("videoList",videoService.getVideoByAuthorId((Long) request.getSession().getAttribute("userId")));
         modelAndView.addObject("listLength",videoService.getVideoByAuthorId((Long) request.getSession().getAttribute("userId")).size());
         return modelAndView;
-
-//        return userService.getUserById((Long) request.getSession().getAttribute("userId"));
+    }
+    @PostMapping(path = "accountInfo")
+    public void account_accountInfo_put(HttpServletRequest request,
+                                        HttpServletResponse response,
+                                        @RequestParam(value = "tel",required = false) String tel,
+                                        @RequestParam(value = "email",required = false) String email,
+                                        @RequestParam(value = "dob",required = false) String dob
+                                        ){
+        Long id=(Long) request.getSession().getAttribute("userId");
+        User user=userService.getUserById(id);
+        if(tel!=null){
+            System.out.println(tel);
+            user.setTel(tel);
+        }
+        else System.out.println(0);
+        if(email!=null){
+            user.setEmail(email);
+        }
+        if(dob!=null){
+            user.setDob(LocalDate.parse(dob, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        }
+        userService.updateUser(user);
+        try {
+            response.sendRedirect("/account/accountInfo");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 //    //查看当前用户vieolist

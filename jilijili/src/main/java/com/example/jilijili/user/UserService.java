@@ -25,6 +25,9 @@ public class UserService {
 
         userRepository.save(user);
     }
+    public void updateUser(User user){
+        userRepository.save(user);
+    }
 
     public boolean userLogin(String nickname, String password) {
         Optional<User> thisUser=userRepository.findUserByNickname(nickname);

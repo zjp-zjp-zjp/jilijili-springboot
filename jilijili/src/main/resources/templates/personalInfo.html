@@ -16,7 +16,14 @@
     <!-- Template CSS -->
 </head>
 
-<body>
+<body onload="hide()">
+    <script>
+        function hide(){
+            document.getElementById("tel").style.display="none";
+            document.getElementById("email").style.display="none";
+            document.getElementById("dob").style.display="none";
+        }
+    </script>
 <!--/nav-->
     <header id="site-header" class="w3l-header fixed-top">
 
@@ -112,10 +119,40 @@
 
                             <h4>About Me</h4>
                             <ul class="card-profile__info">
-                                <li><strong class="text-dark mr-4">TEL</strong> <span th:text="${userInfo.Tel}"></span></li>
-                                <li><strong class="text-dark mr-4">Email</strong> <span th:text="${userInfo.Email}"></span></li>
-                                <li><strong class="text-dark mr-4">Birthday</strong> <span th:text="${userInfo.Dob}"></span></li>
-                                <li><strong class="text-dark mr-4">Regist Date</strong> <span th:text="${userInfo.RegisterDate}"></span></li>
+                                <li><button onclick="showTel()" class="btn btn-transparent p-0 mr-3"><i class="fa fa-user"></i></button><strong class="text-dark mr-4">TEL</strong> <span th:text="${userInfo.Tel}"></span>
+                                    <form id="tel" th:action="@{/account/accountInfo}" method="post">
+                                        <input type="text" name="tel" placeholder="your tel:">
+                                        <button class="btn btn-transparent p-0 mr-3" type="submit"><i class="fa fa-paper-plane"></i></button>
+                                    </form>
+                                </li>
+                                <li><button onclick="showEmail()" class="btn btn-transparent p-0 mr-3"><i class="fa fa-user"></i></button><strong class="text-dark mr-4">Email</strong> <span th:text="${userInfo.Email}"></span>
+                                    <form id="email" th:action="@{/account/accountInfo}" method="post">
+                                        <input type="text" name="email" placeholder="your email:">
+                                        <button class="btn btn-transparent p-0 mr-3" type="submit"><i class="fa fa-paper-plane"></i></button>
+                                    </form>
+                                </li>
+                                <li><button onclick="showBirthday()" class="btn btn-transparent p-0 mr-3"><i class="fa fa-user"></i></button><strong class="text-dark mr-4">Birthday</strong> <span th:text="${userInfo.Dob}"></span>
+                                    <form id="dob" th:action="@{/account/accountInfo}" method="post">
+                                        <input type="text" name="dob" placeholder="your dob:">
+                                        <button class="btn btn-transparent p-0 mr-3" type="submit"><i class="fa fa-paper-plane"></i></button>
+                                    </form>
+                                </li>
+                                <li><strong class="text-dark mr-4">Regist Date</strong> <span th:text="${userInfo.RegisterDate}"></span>
+                                </li>
+                                <script>
+                                    function showTel(){
+                                        var ele=document.getElementById("tel");
+                                        ele.style.display="";
+                                    }
+                                    function showEmail(){
+                                        var ele=document.getElementById("email");
+                                        ele.style.display="";
+                                    }
+                                    function showBirthday(){
+                                        var ele=document.getElementById("dob");
+                                        ele.style.display="";
+                                    }
+                                </script>
                             </ul>
                         </div>
                     </div>
@@ -135,7 +172,7 @@
 
                                     <p th:text="${video.description}"></p>
                                     <ul>
-                                        <li class="d-inline-block"><img class="rounded" width="160" height="90" th:src="${video.picturePath}" alt=""></li>
+<!--                                        <li class="d-inline-block"><img class="rounded" width="160" height="90" th:src="${video.picturePath}" alt=""></li>-->
                                     </ul>
                                 </div>
                             </div>
