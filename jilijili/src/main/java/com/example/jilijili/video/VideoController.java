@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.Base64;
 @Controller
@@ -140,13 +141,19 @@ public class VideoController {
     }
     //评论
     @PostMapping(path = "{videoId}")
-    public void video_id_post(@RequestBody Comment comment, HttpServletRequest request, @PathVariable String videoId){
+    public void video_id_post(@RequestBody Comment comment, HttpServletRequest request, @PathVariable String videoId, HttpServletResponse response){
         if(request.getSession().getAttribute("userId")==null){
             throw new IllegalStateException("please log in before commenting");
         }
+        System.out.println(comment.getContent());
         comment.setAuthorId((Long) request.getSession().getAttribute("userId"));
         comment.setAuthorNickname(userService.getUserById((Long) request.getSession().getAttribute("userId")).getNickname());
         videoService.addaComment(comment);
+        try {
+            response.sendRedirect("/video/"+videoId);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //点赞
