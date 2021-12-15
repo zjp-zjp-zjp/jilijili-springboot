@@ -40,6 +40,13 @@ public class CommentService {
                 e.printStackTrace();
             }
             item.setItComment(commentRepository.findAllByTargetComment(item.getId()));
+            for(Comment subitem:item.getItComment()){
+                try {
+                    subitem.setHead64(getImageString(userService.getUserById((subitem.getAuthorId())).getHead()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return commentList;
     }

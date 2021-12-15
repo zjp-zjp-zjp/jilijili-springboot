@@ -51,7 +51,12 @@
     </style>
     <link rel="stylesheet" href="/css/style-starter.css">
 </head>
-<body>
+<body onload="hidesubcomment()">
+<script>
+    function hidesubcomment() {
+        document.getElementById("subcomment").style.display = "none";
+    }
+</script>
 <!--nav-->
 
 <!-- header -->
@@ -297,13 +302,23 @@
     <!--    发送评论结束-->
     <br>
     <tr th:each="comment:${comments}">
+        <script>
+            function showsubcomment() {
+                if (document.getElementById("subcomment").style.display = "none") {
+                    document.getElementById("subcomment").style.display = "";
+                } else {
+                    document.getElementById("subcomment").style.display = "none";
+                }
+            }
+        </script>
         <div align="center">
             <HR align=center width=1500 color=#987cb9 SIZE=1>
 
             <div class="card border-info mb-3 w-75">
                 <div class="card-header">
                     <div class="general-mask-left">
-                        <img th:src="'data:image/gif;base64,'+${comment.head64}" height="40" width="40" alt="" style="float: left;">
+                        <img th:src="'data:image/gif;base64,'+${comment.head64}" height="40" width="40" alt=""
+                             style="float: left;">
                         <h5 style="float: left"><span>昵称:</span>
                             <div id="authorId">
                                 <td th:text="${comment.authorNickname}"></td>
@@ -330,10 +345,22 @@
                                 data-target="#exampleModal">
                             回复
                         </button>
-                        <a href="#" class="btn mb-1 btn-outline-primary btn-sm">查看回复</a>
+                        <button type="button" onclick="showsubcomment()" class="btn mb-1 btn-outline-primary btn-sm"
+                                data-toggle="modal"
+                                data-target="#exampleModal">
+                            查看回复
+                        </button>
                     </div>
                 </ul>
+                <div id="subcomment">
+                <div th:each="soncomment:${comment.itComment}">
+                    <img style="float: left;" th:src="'data:image/gif;base64,'+${soncomment.head64}" height="40"
+                         width="40">
+                    <li style="text-align: left"><span th:text="${soncomment.authorNickname}+':'"></span><span
+                            th:text="${soncomment.content}"></span></li><br>
+                </div>
             </div>
+        </div>
 </div>
 </tr>
 
@@ -370,7 +397,7 @@
 <script type="text/javascript">
     function sendComment() {
         content = document.myform1.comment.value;
-        targetVideo = document.getElementById("videoId").innerHTML;
+        targetVideo = -1;
         targetComment = document.getElementById("commentId").innerHTML;
         alert("评论成功")
         var val = {
