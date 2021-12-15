@@ -458,7 +458,6 @@
         }
         targetVideo = Number(targetvideo);
         targetComment = Number(targetcomment);
-        alert("评论成功")
         var val = {
             "content": content,
             "supportNum": 0,
@@ -472,7 +471,8 @@
             contentType: 'application/json;charset=UTF-8',
             data: JSON.stringify(val),
             success: function (msg) {
-                console.log(msg)
+                console.log(msg);
+                window.location="/video/" + targetVideo;
             }
         });
     }
