@@ -24,6 +24,9 @@ public class Comment {
     private Long targetComment;
     @Transient
     private List<Comment> itComment;
+    @Transient
+    private String head64;
+
 
     public Comment() {
         releaseTime= LocalDateTime.now();
@@ -35,6 +38,14 @@ public class Comment {
         this.targetVideo = targetVideo;
         this.targetComment = targetComment;
         releaseTime= LocalDateTime.now();
+    }
+
+    public String getHead64() {
+        return head64;
+    }
+
+    public void setHead64(String head64) {
+        this.head64 = head64;
     }
 
     public String getAuthorNickname() {

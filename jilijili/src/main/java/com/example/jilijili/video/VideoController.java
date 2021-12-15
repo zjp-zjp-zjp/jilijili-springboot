@@ -126,7 +126,6 @@ public class VideoController {
     //查看视频
     @GetMapping(path = "{videoId}")
     public ModelAndView video_id_page(@PathVariable("videoId")Long videoId){
-        System.out.println(videoService.getVideoAndCommentById(videoId));
         ModelAndView videoAndComments=new ModelAndView("videoAndComments");
         Video video=videoService.getVideoAndCommentById(videoId).getVideo();
         byte[] avator=userService.getUserById(video.getAuthorId()).getHead();

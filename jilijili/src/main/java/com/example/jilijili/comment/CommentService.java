@@ -1,8 +1,11 @@
 package com.example.jilijili.comment;
 
+import com.example.jilijili.user.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,12 +13,20 @@ import java.util.Optional;
 public class CommentService {
     @Resource
     private final CommentRepository commentRepository;
+    @Resource
+    private final UserService userService;
 
-    public CommentService(CommentRepository commentRepository) {
+    public CommentService(CommentRepository commentRepository, UserService userService) {
         this.commentRepository = commentRepository;
+        this.userService = userService;
     }
+
     public void releaseComment(Comment comment){
         commentRepository.save(comment);
+    }
+    public static String getImageString(byte[] data) throws IOException {
+        Base64.Encoder encoder=Base64.getEncoder();
+        return data != null ? encoder.encodeToString(data) : "";
     }
     public List<Comment> getVideoComment(Long videoId){
         List<Comment> commentList= commentRepository.findAllByTargetVideo(videoId);
@@ -23,6 +34,11 @@ public class CommentService {
             return null;
         }
         for (Comment item:commentList) {
+            try {
+                item.setHead64(getImageString(userService.getUserById(item.getAuthorId()).getHead()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             item.setItComment(commentRepository.findAllByTargetComment(item.getId()));
         }
         return commentList;
