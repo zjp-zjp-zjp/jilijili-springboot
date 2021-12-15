@@ -139,18 +139,52 @@
                                 </li>
                                 <li><strong class="text-dark mr-4">Regist Date</strong> <span th:text="${userInfo.RegisterDate}"></span>
                                 </li>
+                                <li>
+                                    <button onclick="logout()" class="btn btn-primary px-3 ml-4">登出</button>
+                                </li>
+                                <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
                                 <script>
                                     function showTel(){
                                         var ele=document.getElementById("tel");
-                                        ele.style.display="";
+                                        if(ele.style.display=="none") {
+                                            ele.style.display = "";
+                                        }
+                                        else{
+                                            ele.style.display="none";
+                                        }
                                     }
                                     function showEmail(){
                                         var ele=document.getElementById("email");
-                                        ele.style.display="";
+                                        if(ele.style.display=="none") {
+                                            ele.style.display = "";
+                                        }
+                                        else{
+                                            ele.style.display="none";
+                                        }
                                     }
                                     function showBirthday(){
                                         var ele=document.getElementById("dob");
-                                        ele.style.display="";
+                                        if(ele.style.display=="none") {
+                                            ele.style.display = "";
+                                        }
+                                        else{
+                                            ele.style.display="none";
+                                        }
+                                    }
+                                    function logout(){
+                                        var val = {
+                                            "op":0
+                                        };
+                                        $.ajax({
+                                            url: "/account/logout",
+                                            type: "POST",
+                                             contentType: 'application/json;charset=UTF-8',
+                                             data: JSON.stringify(val),
+                                            success: function (msg) {
+                                                console.log(msg)
+                                                window.location='/account/login'
+                                            }
+                                        });
                                     }
                                 </script>
                             </ul>

@@ -106,6 +106,9 @@ public class UserController {
                                         @RequestParam(value = "email",required = false) String email,
                                         @RequestParam(value = "dob",required = false) String dob
                                         ){
+        if (request.getSession().getAttribute("userId") == null) {
+            throw new IllegalStateException("please log in before checking");
+        }
         Long id=(Long) request.getSession().getAttribute("userId");
         User user=userService.getUserById(id);
         if(tel!=null){
@@ -117,7 +120,7 @@ public class UserController {
             user.setEmail(email);
         }
         if(dob!=null){
-            user.setDob(LocalDate.parse(dob, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            user.setDob(LocalDate.parse(dob, DateTimeFormatter.ofPattern("yyyy-M-d")));
         }
         userService.updateUser(user);
         try {
@@ -125,6 +128,17 @@ public class UserController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    @PostMapping(value="logout")
+    public void account_logout_delete(HttpServletRequest request,HttpServletResponse response){
+        request.getSession().removeAttribute("userId");
+        try {
+            response.sendRedirect("/account/login");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//        ModelAndView modelAndView=new ModelAndView("/account/login");
+//        return modelAndView;
     }
 
 //    //查看当前用户vieolist
