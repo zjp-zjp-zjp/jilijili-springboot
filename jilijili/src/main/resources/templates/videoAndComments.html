@@ -54,7 +54,9 @@
 <body onload="hidesubcomment()">
 <script>
     function hidesubcomment() {
-        document.getElementById("subcomment").style.display = "none";
+        document.getElementsByName("subcomment").forEach((item,i,obj)=>{
+            item.style.display="none";
+        })
     }
 </script>
 <!--nav-->
@@ -304,11 +306,12 @@
     <br>
     <tr th:each="comment:${comments}">
         <script>
-            function showsubcomment() {
-                if (document.getElementById("subcomment").style.display == "none") {
-                    document.getElementById("subcomment").style.display = "";
+            function showsubcomment(id) {
+                var str="commentId"+id.toString();
+                if (document.getElementById(str).style.display == "none") {
+                    document.getElementById(str).style.display = "";
                 } else {
-                    document.getElementById("subcomment").style.display = "none";
+                    document.getElementById(str).style.display = "none";
                 }
             }
         </script>
@@ -325,9 +328,6 @@
                                 <td th:text="${comment.authorNickname}"></td>
                             </div>
                         </h5>
-                        <div id="commentId" hidden>
-                            <td th:text="${comment.id}"></td>
-                        </div>
 
                     </div>
                 </div>
@@ -346,12 +346,18 @@
                                 data-target="#exampleModal">
                             回复
                         </button>
-                        <button type="button" onclick="showsubcomment()" class="btn mb-1 btn-outline-primary btn-sm">
+                        <button type="button" th:onclick="showsubcomment([[${comment.id}]])" class="btn mb-1 btn-outline-primary btn-sm">
                             查看回复
                         </button>
                     </div>
+                    <div>
+                        <form>
+                            <input type="text" th:id="'commenttocomment'+${comment.id}" class="form-control" style="padding-left: 10px;" placeholder="说点什么：">
+                            <button type="button" th:onclick="sendComment(1,'-1',[[${comment.id}]])" class="btn mb-1 btn-outline-primary btn-sm">提交</button>
+                        </form>
+                    </div>
                 </ul>
-                <div id="subcomment">
+                <div th:id="'commentId'+${comment.id}" name="subcomment">
                     <div th:each="soncomment:${comment.itComment}">
                         <img style="float: left;" th:src="'data:image/gif;base64,'+${soncomment.head64}" height="40"
                              width="40">
@@ -361,7 +367,7 @@
                 </div>
             </div>
         </div>
-</div>
+    </div>
 </tr>
 
 <!--    右下角弹窗开始-->
@@ -369,30 +375,30 @@
 
 <!--    右下角弹窗结束-->
 <!-- 回复评论弹窗 -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">回复评论</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form name="myform1">
-                    <div class="form-group">
-                        <label for="comment" class="col-form-label">Message:</label>
-                        <textarea class="form-control" id="comment" name="comment"></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                <button id="sendcommentcomment" type="button" class="btn btn-primary">发送</button>
-            </div>
-        </div>
-    </div>
-</div>
+<!--<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">回复评论</h5>-->
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                <form name="myform1">-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="comment" class="col-form-label">Message:</label>-->
+<!--                        <textarea class="form-control" id="comment" name="comment"></textarea>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--            <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>-->
+<!--                <button type="button" class="btn btn-primary">发送</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 <!--发送评论给用户-->
 <!--<script type="text/javascript">-->
 <!--    function sendComment() {-->
@@ -437,7 +443,8 @@
             content = document.myform.comment.value;
         }
         else {
-            content = document.myform1.comment.value;
+            str="#commenttocomment"+targetcomment.toString()
+            content = $(str).val();
         }
         targetVideo = Number(targetvideo);
         targetComment = Number(targetcomment);
@@ -461,9 +468,6 @@
     }
     document.getElementById("sendvideocomment").onclick=function(){
         sendComment(0,document.getElementById("videoId").innerHTML,"-1");
-    }
-    document.getElementById("sendcommentcomment").onclick=function (){
-        sendComment(1,"-1",document.getElementById("commentId").innerHTML);
     }
 </script>
 </html>
