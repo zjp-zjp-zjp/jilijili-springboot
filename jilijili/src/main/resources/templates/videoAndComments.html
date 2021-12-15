@@ -57,6 +57,9 @@
         document.getElementsByName("subcomment").forEach((item,i,obj)=>{
             item.style.display="none";
         })
+        document.getElementsByName("commentbox").forEach((item,i,obj)=>{
+            item.style.display="none";
+        })
     }
 </script>
 <!--nav-->
@@ -314,6 +317,14 @@
                     document.getElementById(str).style.display = "none";
                 }
             }
+            function showcommentbox(id){
+                var str="commentbox"+id.toString();
+                if (document.getElementById(str).style.display == "none") {
+                    document.getElementById(str).style.display = "";
+                } else {
+                    document.getElementById(str).style.display = "none";
+                }
+            }
         </script>
         <div align="center">
             <HR align=center width=1500 color=#987cb9 SIZE=1>
@@ -342,15 +353,14 @@
                         <a href="#" class="btn mb-1 btn-outline-primary btn-sm">
                             <i class="bi bi-hand-thumbs-up"></i>赞</a>
                         <a href="#" class="btn mb-1 btn-outline-primary btn-sm">踩</a>
-                        <button type="button" class="btn mb-1 btn-outline-primary btn-sm" data-toggle="modal"
-                                data-target="#exampleModal">
+                        <button type="button" th:onclick="showcommentbox([[${comment.id}]])"class="btn mb-1 btn-outline-primary btn-sm">
                             回复
                         </button>
                         <button type="button" th:onclick="showsubcomment([[${comment.id}]])" class="btn mb-1 btn-outline-primary btn-sm">
                             查看回复
                         </button>
                     </div>
-                    <div>
+                    <div th:id="'commentbox'+${comment.id}" name="commentbox">
                         <form>
                             <input type="text" th:id="'commenttocomment'+${comment.id}" class="form-control" style="padding-left: 10px;" placeholder="说点什么：">
                             <button type="button" th:onclick="sendComment(1,'-1',[[${comment.id}]])" class="btn mb-1 btn-outline-primary btn-sm">提交</button>
