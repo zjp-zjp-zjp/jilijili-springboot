@@ -130,11 +130,6 @@ public class UserController {
             user.setDob(LocalDate.parse(dob, DateTimeFormatter.ofPattern("yyyy-M-d")));
         }
         userService.updateUser(user);
-        try {
-            response.sendRedirect("/account/accountInfo");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
     @PostMapping(value="logout")
     public void account_logout_delete(HttpServletRequest request,HttpServletResponse response){
@@ -158,13 +153,19 @@ public class UserController {
 //    }
 //
 //    //查看某个用户信息
-//    @GetMapping(path = "accountInfo/{hisId}")
-//    public User account_accountInfo_his_page(HttpServletRequest request, @PathVariable("hisId") Long hisId) {
-//        if (request.getSession().getAttribute("userId") == null) {
-//            throw new IllegalStateException("please log in before updating");
-//        }
-//        return userService.getUserById(hisId);
-//    }
+    @GetMapping(path = "accountInfo/{hisId}")
+    public ModelAndView account_accountInfo_his_page(HttpServletRequest request, @PathVariable("hisId") Long hisId) {
+        ModelAndView modelAndView=new ModelAndView("personalInfoStatic");
+        modelAndView.addObject("userInfo",userService.getUserById(hisId));
+        try {
+            modelAndView.addObject("head",getImageString(userService.getUserById(hisId).getHead()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        modelAndView.addObject("videoList",videoService.getVideoByAuthorId(hisId));
+        modelAndView.addObject("listLength",videoService.getVideoByAuthorId(hisId).size());
+        return modelAndView;
+    }
 //
 //    //    查看某个用户videolist
 //    @GetMapping(path = "videoList/{hisId}")

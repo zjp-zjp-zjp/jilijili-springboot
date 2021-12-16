@@ -54,17 +54,7 @@
     <link href="http://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap"
           rel="stylesheet">
 </head>
-<body onload="hidesubcomment()">
-<script>
-    function hidesubcomment() {
-        document.getElementsByName("subcomment").forEach((item,i,obj)=>{
-            item.style.display="none";
-        })
-        document.getElementsByName("commentbox").forEach((item,i,obj)=>{
-            item.style.display="none";
-        })
-    }
-</script>
+<body onload="hide()">
 <!--nav-->
 
 <!-- header -->
@@ -160,7 +150,7 @@
     <div id="float-dplayer" class="float-dplayer">
         <div id="dplayer-container" class="dplayer-container"></div>
         <h3 id="close-dialog" class="close-dialog">
-            <img th:src="'data:image/gif;base64,'+${avator}" style="width: 40px;height: 40px;float: left">
+            <img th:onclick="jumptouser([[${data.video.authorId}]])" th:src="'data:image/gif;base64,'+${avator}" style="width: 40px;height: 40px;float: left">
             <h1 th:text="${data.video.name}" style="height: 40px;float: left">
             </h1>
             <br>
@@ -200,6 +190,11 @@
                 <h6>name</h6>
                 </p>
                 <HR align=center width=300 color=#987cb9 SIZE=1>
+            </div>
+            <div>
+                <button onclick="altcommentzone()" class="btn mb-1 btn-outline-primary btn-sm"><i class="fa fa-paper-plane"></i></button>
+                <button th:onclick="sendsupport(0,[[${data.video.id}]])"class="btn mb-1 btn-outline-primary btn-sm"><i class="fa fa-thumbs-up"></i></button>
+                <span th:text="${data.video.supportNum}"></span>
             </div>
         </div>
     </div>
@@ -245,7 +240,7 @@
     <!--视频描述 end-->
     <!--  发送评论给视频 form-->
     <br>
-    <div class="content-body">
+    <div class="content-body" id="commentZone">
 
         <div class="container-fluid">
             <div class="row">
@@ -283,45 +278,46 @@
     <script src="/js/sweetalert.min.js"></script>
     <script src="/js/sweetalert.init.js"></script>
     <script src="/js/buttonAlert.js"></script>
-<!--    <script type="text/javascript">-->
-<!--        function myFunction() {-->
-<!--            content = document.myform.comment.value;-->
-<!--            targetVideo = document.getElementById("videoId").innerHTML;-->
-<!--            var val = {-->
-<!--                "content": content,-->
-<!--                "supportNum": 0,-->
-<!--                "targetVideo": Number(targetVideo),-->
-<!--                "targetComment": -1-->
-<!--            };-->
-<!--            console.log(content);-->
-<!--            console.log(targetVideo);-->
-<!--            $.ajax({-->
-<!--                url: "/video/" + targetVideo,-->
-<!--                dataType: "JSON",-->
-<!--                type: "post",-->
-<!--                contentType: 'application/json;charset=UTF-8',-->
-<!--                data: JSON.stringify(val),-->
-<!--                success: function (msg) {-->
-<!--                    console.log(msg)-->
-<!--                }-->
-<!--            });-->
-<!--        }-->
-<!--    </script>-->
+    <!--    <script type="text/javascript">-->
+    <!--        function myFunction() {-->
+    <!--            content = document.myform.comment.value;-->
+    <!--            targetVideo = document.getElementById("videoId").innerHTML;-->
+    <!--            var val = {-->
+    <!--                "content": content,-->
+    <!--                "supportNum": 0,-->
+    <!--                "targetVideo": Number(targetVideo),-->
+    <!--                "targetComment": -1-->
+    <!--            };-->
+    <!--            console.log(content);-->
+    <!--            console.log(targetVideo);-->
+    <!--            $.ajax({-->
+    <!--                url: "/video/" + targetVideo,-->
+    <!--                dataType: "JSON",-->
+    <!--                type: "post",-->
+    <!--                contentType: 'application/json;charset=UTF-8',-->
+    <!--                data: JSON.stringify(val),-->
+    <!--                success: function (msg) {-->
+    <!--                    console.log(msg)-->
+    <!--                }-->
+    <!--            });-->
+    <!--        }-->
+    <!--    </script>-->
 
     <!--    发送评论结束-->
     <br>
     <tr th:each="comment:${comments}">
         <script>
             function showsubcomment(id) {
-                var str="commentId"+id.toString();
+                var str = "commentId" + id.toString();
                 if (document.getElementById(str).style.display == "none") {
                     document.getElementById(str).style.display = "";
                 } else {
                     document.getElementById(str).style.display = "none";
                 }
             }
-            function showcommentbox(id){
-                var str="commentbox"+id.toString();
+
+            function showcommentbox(id) {
+                var str = "commentbox" + id.toString();
                 if (document.getElementById(str).style.display == "none") {
                     document.getElementById(str).style.display = "";
                 } else {
@@ -350,22 +346,29 @@
                         <td class="div2" th:text="${comment.content}"></td>
                     </li>
                     <div class="general-button">
-                        <div style="text-align: left"><span th:text="${comment.releaseTime}" class="div2"></span><br><span class="div2">点赞数：<td class="div2" th:text="${comment.supportNum}"></td></span>
+                        <div style="text-align: left"><span th:text="${comment.releaseTime}"
+                                                            class="div2"></span><br><span class="div2">点赞数：<td
+                                class="div2" th:text="${comment.supportNum}"></td></span>
                         </div>
-                        <a href="#" class="btn mb-1 btn-outline-primary btn-sm">
-                            <i class="bi bi-hand-thumbs-up div2"></i>赞</a>
+                        <button th:onclick="sendsupport(1,[[${comment.id}]])" class="btn mb-1 btn-outline-primary btn-sm">
+                            <i class="bi bi-hand-thumbs-up"></i>赞</a></button>
                         <a href="#" class="btn mb-1 btn-outline-primary btn-sm div2">踩</a>
-                        <button type="button" th:onclick="showcommentbox([[${comment.id}]])"class="btn mb-1 btn-outline-primary btn-sm div2">
+                        <button type="button" th:onclick="showcommentbox([[${comment.id}]])"
+                                class="btn mb-1 btn-outline-primary btn-sm div2">
                             回复
                         </button>
-                        <button type="button" th:onclick="showsubcomment([[${comment.id}]])" class="btn mb-1 btn-outline-primary btn-sm div2">
+                        <button type="button" th:onclick="showsubcomment([[${comment.id}]])"
+                                class="btn mb-1 btn-outline-primary btn-sm div2">
                             查看回复
                         </button>
                     </div>
                     <div th:id="'commentbox'+${comment.id}" name="commentbox">
                         <form>
-                            <input type="text" th:id="'commenttocomment'+${comment.id}" class="form-control" style="padding-left: 10px;" placeholder="说点什么：">
-                            <button type="button" th:onclick="sendComment(1,'-1',[[${comment.id}]])" class="btn mb-1 btn-outline-primary btn-sm div2">提交</button>
+                            <input type="text" th:id="'commenttocomment'+${comment.id}" class="form-control"
+                                   style="padding-left: 10px;" placeholder="说点什么：">
+                            <button type="button" th:onclick="sendComment(1,'-1',[[${comment.id}]])"
+                                    class="btn mb-1 btn-outline-primary btn-sm div2">提交
+                            </button>
                         </form>
                     </div>
                 </ul>
@@ -373,12 +376,15 @@
                     <div th:each="soncomment:${comment.itComment}">
                         <img style="float: left;" th:src="'data:image/gif;base64,'+${soncomment.head64}" height="40"
                              width="40">
-                        <li style="text-align: left"><span class="div2" th:text="${soncomment.authorNickname}+':'"></span><span class="div2" th:text="${soncomment.content}"></span></li><br>
+                        <li style="text-align: left"><span class="div2"
+                                                           th:text="${soncomment.authorNickname}+':'"></span><span
+                                class="div2" th:text="${soncomment.content}"></span></li>
+                        <br>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+</div>
 </tr>
 
 <!--    右下角弹窗开始-->
@@ -449,12 +455,11 @@
 
 </body>
 <script type="text/javascript">
-    function sendComment(type,targetvideo,targetcomment) {
-        if(type==0) {
+    function sendComment(type, targetvideo, targetcomment) {
+        if (type == 0) {
             content = document.myform.comment.value;
-        }
-        else {
-            str="#commenttocomment"+targetcomment.toString()
+        } else {
+            str = "#commenttocomment" + targetcomment.toString()
             content = $(str).val();
         }
         targetVideo = Number(targetvideo);
@@ -473,12 +478,51 @@
             data: JSON.stringify(val),
             success: function (msg) {
                 console.log(msg);
-                window.location="/video/" + targetVideo;
+                window.location = "/video/" + targetVideo;
             }
         });
     }
-    document.getElementById("sendvideocomment").onclick=function(){
-        sendComment(0,document.getElementById("videoId").innerHTML,"-1");
+
+    document.getElementById("sendvideocomment").onclick = function () {
+        sendComment(0, document.getElementById("videoId").innerHTML, "-1");
+    }
+    function altcommentzone(){
+        if(document.getElementById("commentZone").style.display=="none"){
+            document.getElementById("commentZone").style.display="";
+        }
+        else {
+            document.getElementById("commentZone").style.display="none";
+        }
+    }
+    function hide(){
+        document.getElementsByName("subcomment").forEach((item, i, obj) => {
+            item.style.display = "none";
+        })
+        document.getElementsByName("commentbox").forEach((item, i, obj) => {
+            item.style.display = "none";
+        })
+        document.getElementById("commentZone").style.display="none";
+    }
+    function sendsupport(type,id){
+        console.log(id);
+        var val = {
+            "typeOfSupport": type,
+            "targetId": id
+        };
+        $.ajax({
+            url: "/video/" + document.getElementById("videoId").innerHTML,
+            dataType: "JSON",
+            type: "put",
+            contentType: 'application/json;charset=UTF-8',
+            data: JSON.stringify(val),
+            success: function (msg) {
+                console.log(msg);
+                window.location = "/video/" + document.getElementById("videoId").innerHTML;
+            }
+        });
+    }
+    function jumptouser(id){
+        window.location="/account/accountInfo/"+id.toString();
     }
 </script>
 </html>

@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zxx" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Home</title>
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/css/style-starter.css">
+    <link href="/css/style.css" rel="stylesheet">
+    <!-- Template CSS -->
+    <link href="http://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap"
+          rel="stylesheet">
+    <!-- Template CSS -->
+</head>
+
+<body onload="hide()">
+<!--/nav-->
+<header id="site-header" class="w3l-header fixed-top">
+
+    <nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
+        <div class="container">
+            <h1><a class="navbar-brand" href="index.html"><span class="fa fa-play icon-log"
+                                                                aria-hidden="true"></span>
+                ProShowz </a></h1>
+            <!-- if logo is image enable this
+                    <a class="navbar-brand" href="#index.html">
+                        <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+                    </a> -->
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <!-- <span class="navbar-toggler-icon"></span> -->
+                <span class="fa icon-expand fa-bars"></span>
+                <span class="fa icon-close fa-times"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/video/upload">上传视频</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/genre">精简</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact"
+                           th:href="${session.userType == 1} ? @{/contact/messages} : @{/contact}">Contact</a>
+                    </li>
+                </ul>
+
+                <!--/search-right-->
+                <!--/search-right-->
+                <div class="search-right">
+                    <a href="#search" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="search">Search <span
+                            class="fa fa-search ml-3" aria-hidden="true"></span></a>
+                    <!-- search popup -->
+                    <div id="search" class="pop-overlay">
+                        <div class="popup">
+                            <form action="#" method="post" class="search-box">
+                                <input type="search" placeholder="Search your Keyword" name="search"
+                                       required="required" autofocus="">
+                                <button type="submit" class="btn"><span class="fa fa-search"
+                                                                        aria-hidden="true"></span></button>
+                            </form>
+                            <div class="browse-items">
+                                <h3 class="hny-title two mt-md-5 mt-4">Browse all:</h3>
+                                <ul class="search-items">
+                                    <li><a href="genre.html">Action</a></li>
+                                    <li><a href="genre.html">Drama</a></li>
+                                    <li><a href="genre.html">Family</a></li>
+                                    <li><a href="genre.html">Thriller</a></li>
+                                    <li><a href="genre.html">Commedy</a></li>
+                                    <li><a href="genre.html">Romantic</a></li>
+                                    <li><a href="genre.html">Tv-Series</a></li>
+                                    <li><a href="genre.html">Horror</a></li>
+                                    <li><a href="genre.html">Action</a></li>
+                                    <li><a href="genre.html">Drama</a></li>
+                                    <li><a href="genre.html">Family</a></li>
+                                    <li><a href="genre.html">Thriller</a></li>
+                                    <li><a href="genre.html">Commedy</a></li>
+                                    <li><a href="genre.html">Romantic</a></li>
+                                    <li><a href="genre.html">Tv-Series</a></li>
+                                    <li><a href="genre.html">Horror</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a class="close" href="#close">×</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<br>
+<section class="w3l-main-slider position-relative">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="media align-items-center mb-30">
+                            <img id="head" th:src="'data:image/gif;base64,'+${head}"
+                                 class="mr-3" width="80" height="80" alt="Base64 encoded image">
+                            <div class="media-body">
+                                <h3 class="mb-0" th:text="${userInfo.Nickname}"></h3>
+                            </div>
+                        </div>
+
+                        <h4>About Me</h4>
+                        <ul class="card-profile__info">
+                            <li><strong class="text-dark mr-4">TEL</strong> <span th:text="${userInfo.Tel}"></span>
+                            </li>
+                            <li><strong class="text-dark mr-4">Email</strong> <span th:text="${userInfo.Email}"></span>
+                            </li>
+                            <li><strong class="text-dark mr-4">Birthday</strong> <span th:text="${userInfo.Dob}"></span>
+                            </li>
+                            <li><strong class="text-dark mr-4">Regist Date</strong> <span
+                                    th:text="${userInfo.RegisterDate}"></span>
+                            </li>
+                            <li>
+                                <button onclick="logout()" class="btn btn-primary px-3 ml-4">登出</button>
+                            </li>
+                            <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="col-lg-8 col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <tr th:each="video:${videoList}">
+                            <div class="media media-reply" th:onclick="jumpTo([[${video.id}]])">
+                                <div class="media-body">
+                                    <div class="d-sm-flex justify-content-between mb-30">
+                                        <h5 class="mb-sm-0" th:text="${video.Name}"></h5>
+                                        <div>
+                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i>
+                                            </button>
+                                            <span th:text="${video.supportNum}"></span>
+                                        </div>
+                                    </div>
+
+                                    <p th:text="${video.description}"></p>
+                                    <ul>
+                                        <li class="d-inline-block"><img class="rounded" width="160" height="90"
+                                                                        th:src="${video.picturePath}" alt=""></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- 一个评论card -->
+                        </tr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+<script>
+    function jumpTo(videoId) {
+        window.location = "/video/" + videoId.toString();
+    }
+</script>
+
+</html>
