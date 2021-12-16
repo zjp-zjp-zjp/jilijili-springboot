@@ -49,7 +49,10 @@
             word-wrap: break-word; /*InternetExplorer5.5+*/
         }
     </style>
+    <link href="/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/style-starter.css">
+    <link href="http://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap"
+          rel="stylesheet">
 </head>
 <body onload="hidesubcomment()">
 <script>
@@ -244,7 +247,7 @@
     <br>
     <div class="content-body">
 
-        <div class="container-fluid">
+        <div class="container-fluid"align="left">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
@@ -256,11 +259,11 @@
                             </h4>
                             <div class="card-content">
                                 <form name="myform">
-                                    <label for="content" class="form-label">分享你的想法</label>
+                                    <label for="content" class="form-label div2">分享你的想法</label>
                                     <input type="text" class="form-control" id="content" name="comment"
                                            style="width: 700px">
                                     <br>
-                                    <button id="sendvideocomment" class="btn btn-success btn-sm alert-1"
+                                    <button id="sendvideocomment" class="btn btn-success btn-sm alert-1 div2"
                                             style="padding-left: 10px;">
                                         提交评论
                                     </button>
@@ -334,9 +337,9 @@
                     <div class="general-mask-left">
                         <img th:src="'data:image/gif;base64,'+${comment.head64}" height="40" width="40" alt=""
                              style="float: left;">
-                        <h5 style="float: left"><span>昵称:</span>
+                        <h5 style="float: left">
                             <div id="authorId">
-                                <td th:text="${comment.authorNickname}"></td>
+                                <td th:text="${comment.authorNickname}" class="div2"></td>
                             </div>
                         </h5>
 
@@ -344,26 +347,25 @@
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item" style="text-align: left">
-                        <td th:text="${comment.content}"></td>
+                        <td class="div2" th:text="${comment.content}"></td>
                     </li>
                     <div class="general-button">
-                        <div style="text-align: left"><span>评论时间:...</span><span>点赞数：<td
-                                th:text="${comment.supportNum}"></td></span>
+                        <div style="text-align: left"><span th:text="${comment.releaseTime}" class="div2"></span><br><span class="div2">点赞数：<td class="div2" th:text="${comment.supportNum}"></td></span>
                         </div>
                         <a href="#" class="btn mb-1 btn-outline-primary btn-sm">
-                            <i class="bi bi-hand-thumbs-up"></i>赞</a>
-                        <a href="#" class="btn mb-1 btn-outline-primary btn-sm">踩</a>
-                        <button type="button" th:onclick="showcommentbox([[${comment.id}]])"class="btn mb-1 btn-outline-primary btn-sm">
+                            <i class="bi bi-hand-thumbs-up div2"></i>赞</a>
+                        <a href="#" class="btn mb-1 btn-outline-primary btn-sm div2">踩</a>
+                        <button type="button" th:onclick="showcommentbox([[${comment.id}]])"class="btn mb-1 btn-outline-primary btn-sm div2">
                             回复
                         </button>
-                        <button type="button" th:onclick="showsubcomment([[${comment.id}]])" class="btn mb-1 btn-outline-primary btn-sm">
+                        <button type="button" th:onclick="showsubcomment([[${comment.id}]])" class="btn mb-1 btn-outline-primary btn-sm div2">
                             查看回复
                         </button>
                     </div>
                     <div th:id="'commentbox'+${comment.id}" name="commentbox">
                         <form>
                             <input type="text" th:id="'commenttocomment'+${comment.id}" class="form-control" style="padding-left: 10px;" placeholder="说点什么：">
-                            <button type="button" th:onclick="sendComment(1,'-1',[[${comment.id}]])" class="btn mb-1 btn-outline-primary btn-sm">提交</button>
+                            <button type="button" th:onclick="sendComment(1,'-1',[[${comment.id}]])" class="btn mb-1 btn-outline-primary btn-sm div2">提交</button>
                         </form>
                     </div>
                 </ul>
@@ -371,8 +373,7 @@
                     <div th:each="soncomment:${comment.itComment}">
                         <img style="float: left;" th:src="'data:image/gif;base64,'+${soncomment.head64}" height="40"
                              width="40">
-                        <li style="text-align: left"><span th:text="${soncomment.authorNickname}+':'"></span><span
-                                th:text="${soncomment.content}"></span></li><br>
+                        <li style="text-align: left"><span class="div2" th:text="${soncomment.authorNickname}+':'"></span><span class="div2" th:text="${soncomment.content}"></span></li><br>
                     </div>
                 </div>
             </div>

@@ -3,6 +3,7 @@ package com.example.jilijili.user;
 import com.example.jilijili.video.VideoService;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
@@ -104,18 +105,24 @@ public class UserController {
                                         HttpServletResponse response,
                                         @RequestParam(value = "tel",required = false) String tel,
                                         @RequestParam(value = "email",required = false) String email,
-                                        @RequestParam(value = "dob",required = false) String dob
+                                        @RequestParam(value = "dob",required = false) String dob,
+                                        @RequestParam(value="picture",required = false)MultipartFile picture
                                         ){
         if (request.getSession().getAttribute("userId") == null) {
             throw new IllegalStateException("please log in before checking");
         }
         Long id=(Long) request.getSession().getAttribute("userId");
         User user=userService.getUserById(id);
+        if(picture!=null){
+            try {
+                user.setHead(picture.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         if(tel!=null){
-            System.out.println(tel);
             user.setTel(tel);
         }
-        else System.out.println(0);
         if(email!=null){
             user.setEmail(email);
         }
