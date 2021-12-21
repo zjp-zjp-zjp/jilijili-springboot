@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>查询结果</title>
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/css/style-starter.css">
+    <!-- Template CSS -->
+    <link href="http://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap"
+          rel="stylesheet">
+    <!-- Template CSS -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<!-- header -->
+<header id="site-header" class="w3l-header fixed-top">
+    <!--/nav-->
+    <nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
+        <div class="container">
+            <h1><a class="navbar-brand" href="index.html" th:href="@{/home}"><span class="fa fa-play icon-log"
+                                                                                   aria-hidden="true"></span>
+                ProShowz </a></h1>
+            <!-- if logo is image enable this
+                    <a class="navbar-brand" href="#index.html">
+                        <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+                    </a> -->
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <!-- <span class="navbar-toggler-icon"></span> -->
+                <span class="fa icon-expand fa-bars"></span>
+                <span class="fa icon-close fa-times"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/video/upload">上传视频</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/genre">精简</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact" th:href="${session.userType == 1} ? @{/contact/messages} : @{/contact}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/LiveTelecast" >直播</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/account/accountInfo">我的</a>
+                    </li>
+                </ul>
+
+                <!--/search-right-->
+                <!--/search-right-->
+                <div class="search-right">
+                    <a href="#search" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="search">Search <span
+                            class="fa fa-search ml-3" aria-hidden="true"></span></a>
+                    <!-- search popup -->
+                    <div id="search" class="pop-overlay">
+                        <div class="popup">
+                            <form th:action="@{/search}" method="post" class="search-box">
+                                <input type="search" placeholder="请输入您需要搜索的内容" name="search"
+                                       required="required" autofocus="">
+                                <button type="submit" class="btn"><span class="fa fa-search"
+                                                                        aria-hidden="true"></span></button>
+                            </form>
+                            <div class="browse-items">
+                                <h3 class="hny-title two mt-md-5 mt-4">Browse all:</h3>
+                                <ul class="search-items">
+                                    <li><a href="genre.html" th:href="@{/genre}">Action</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Drama</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Family</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Thriller</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Commedy</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Romantic</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Tv-Series</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Horror</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Action</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Drama</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Family</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Thriller</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Commedy</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Romantic</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Tv-Series</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Horror</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a class="close" href="#close">×</a>
+                    </div>
+                    <!-- /search popup -->
+                    <!--/search-right-->
+                </div>
+
+
+            </div>
+            <!-- toggle switch for light and dark theme -->
+            <div class="mobile-position">
+                <nav class="navigation">
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox">
+                            <div class="mode-container">
+                                <i class="gg-sun"></i>
+                                <i class="gg-moon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </nav>
+            </div>
+            <!-- //toggle switch for light and dark theme -->
+        </div>
+    </nav>
+    <!--//nav-->
+</header>
+<!-- //header -->
+
+<br>
+<section class="w3l-albums py-5">
+    <div align="center">
+    <div th:if="${videos != null}">
+        <div th:each="video:${videos}">
+            <div class="card" style="width: 36rem;">
+                <h5 class="card-title"><td>视频</td></h5>
+                <div class="card-body">
+                    <h6 class="card-text"><td th:text="${video.name}"></td></h6>
+                    <p class="card-text"><td th:text="${video.description}"></td></p>
+                </div>
+            </div>
+            <br>
+        </div>
+
+    </div>
+    <div th:if="${comments != null}">
+        <div th:each="comment:${comments}">
+            <div class="card" style="width: 36rem;">
+                <h5 class="card-title"><td>评论</td></h5>
+                <div class="card-body">
+                    <p class="card-text"><td th:text="${comment.content}"></td></p>
+                </div>
+            </div>
+            <br>
+        </div>
+
+    </div>
+    <div th:if="${users != null}">
+        <div th:each="user:${users}">
+            <div class="card" style="width: 36rem;">
+                <h5 class="card-title"><td>用户</td></h5>
+                <div class="card-body">
+                    <h6 class="card-text"><td th:text="${user.nickname}"></td></h6>
+                    <p class="card-text"><td th:text="${user.id}"></td></p>
+                </div>
+            </div>
+            <br>
+        </div>
+
+    </div>
+    </div>
+</section>
+
+
+
+
+
+<!--/theme-change-->
+<script src="/js/theme-change.js"></script>
+<!-- //theme-change-->
+<script src="/js/owl.carousel.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
