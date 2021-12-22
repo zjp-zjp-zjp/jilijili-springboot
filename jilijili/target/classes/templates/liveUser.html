@@ -14,7 +14,8 @@
     <link href="/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/style-starter.css">
     <script src="/js/jquery-3.3.1.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
 
 </head>
@@ -27,8 +28,8 @@
     <!--/nav-->
     <nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
         <div class="container">
-            <h1><a class="navbar-brand" href="index.html"><span class="fa fa-play icon-log"
-                                                                aria-hidden="true"></span>
+            <h1><a class="navbar-brand" href="index.html" th:href="@{/home}"><span class="fa fa-play icon-log"
+                                                                                   aria-hidden="true"></span>
                 ProShowz </a></h1>
             <!-- if logo is image enable this
                     <a class="navbar-brand" href="#index.html">
@@ -45,16 +46,17 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" href="index.html" th:href="@{/home}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/video/upload">上传视频</a>
+                        <a class="nav-link" href="/video/upload" th:href="@{/video/upload}">上传视频</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/genre">精简</a>
+                        <a class="nav-link" href="/genre" th:href="@{/genre}">精简</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/contact" th:href="${session.userType == 1}">Contact</a>
+                        <a class="nav-link" href="/contact"
+                           th:href="${session.userType == 1} ? @{/contact/messages} : @{/contact}">Contact</a>
                     </li>
                 </ul>
 
@@ -66,7 +68,7 @@
                     <!-- search popup -->
                     <div id="search" class="pop-overlay">
                         <div class="popup">
-                            <form action="#" method="post" class="search-box">
+                            <form action="#" method="post" class="search-box" th:action="@{/search}">
                                 <input type="search" placeholder="Search your Keyword" name="search"
                                        required="required" autofocus="">
                                 <button type="submit" class="btn"><span class="fa fa-search"
@@ -75,22 +77,22 @@
                             <div class="browse-items">
                                 <h3 class="hny-title two mt-md-5 mt-4">Browse all:</h3>
                                 <ul class="search-items">
-                                    <li><a href="genre.html">Action</a></li>
-                                    <li><a href="genre.html">Drama</a></li>
-                                    <li><a href="genre.html">Family</a></li>
-                                    <li><a href="genre.html">Thriller</a></li>
-                                    <li><a href="genre.html">Commedy</a></li>
-                                    <li><a href="genre.html">Romantic</a></li>
-                                    <li><a href="genre.html">Tv-Series</a></li>
-                                    <li><a href="genre.html">Horror</a></li>
-                                    <li><a href="genre.html">Action</a></li>
-                                    <li><a href="genre.html">Drama</a></li>
-                                    <li><a href="genre.html">Family</a></li>
-                                    <li><a href="genre.html">Thriller</a></li>
-                                    <li><a href="genre.html">Commedy</a></li>
-                                    <li><a href="genre.html">Romantic</a></li>
-                                    <li><a href="genre.html">Tv-Series</a></li>
-                                    <li><a href="genre.html">Horror</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Action</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Drama</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Family</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Thriller</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Commedy</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Romantic</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Tv-Series</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Horror</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Action</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Drama</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Family</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Thriller</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Commedy</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Romantic</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Tv-Series</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Horror</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -113,40 +115,39 @@
     Content body start
 ***********************************-->
 
- <div id="roomId" hidden th:text="${roomId}"></div>
+<div id="roomId" hidden th:text="${roomId}"></div>
 <div id="userId" hidden th:text="${userId}"></div>
 <!-- 本地直播 -->
 <div align="center">
-<div id="local"  style="width: 1200px;height: 750px;"></div>
-    <a href="/home" class="btn btn-primary" style="padding-left: 10px;">
+    <div id="local" style="width: 1200px;height: 750px;"></div>
+    <a href="/home" th:href="@{/home}" class="btn btn-primary" style="padding-left: 10px;">
         退出直播</a>
 </div>
-
 
 
 <script src="/js/lib-generate-test-usersig.min.js"></script>
 <script src="/js/trtc.js"></script>
 <script>
     //腾讯云的appid和密钥
-    const SDKAPPID= 1400609763;
-    const SECRETKEY ='8130ac7402f3d138976beab93ac673280888aa284c534c48eeadcea7d23cf724';
+    const SDKAPPID = 1400609763;
+    const SECRETKEY = '8130ac7402f3d138976beab93ac673280888aa284c534c48eeadcea7d23cf724';
 
     //随机生成用户id
     // const userId =parseInt(1000*Math.random()).toString()
-    var userId=document.getElementById("userId").innerHTML;
-    console.log("随机的用户ID",userId)
+    var userId = document.getElementById("userId").innerHTML;
+    console.log("随机的用户ID", userId)
 
     //有效时间
-    const EXPIRETIME=604800;
+    const EXPIRETIME = 604800;
 
     //获取用户的签名userSig
-    const generator=new LibGenerateTestUserSig(SDKAPPID,SECRETKEY,EXPIRETIME)
-    const userSig=generator.genTestUserSig(userId)
+    const generator = new LibGenerateTestUserSig(SDKAPPID, SECRETKEY, EXPIRETIME)
+    const userSig = generator.genTestUserSig(userId)
 
     //创建视频流客户端对象
-    const client =TRTC.createClient({
-        mode:'rtc',
-        sdkAppId:SDKAPPID,
+    const client = TRTC.createClient({
+        mode: 'rtc',
+        sdkAppId: SDKAPPID,
         userId,
         userSig
     })
@@ -154,23 +155,23 @@
     //进入房间
     let roomId = parseInt(1)
     // let roomId= Number(document.getElementById("roomId").innerHTML);
-    client.join({roomId}).catch((error)=>{
-        console.log("进入房间失败",error)
-    }).then(()=>{
+    client.join({roomId}).catch((error) => {
+        console.log("进入房间失败", error)
+    }).then(() => {
         console.log('进入房间成功');
         //开始直播
 
         //创建本地音视频流
-        const localStream=TRTC.createStream({
+        const localStream = TRTC.createStream({
             userId,
-            audio:true,//音频
-            video:true//视频
+            audio: true,//音频
+            video: true//视频
         })
 
         //初始化本地的音视频流
-        localStream.initialize().catch(()=>{
-            console.log('初始化本地流失败',error)
-        }).then(()=>{
+        localStream.initialize().catch(() => {
+            console.log('初始化本地流失败', error)
+        }).then(() => {
             console.log('初始化本地流成功')
 
             //将本地视频流渲染到页面上
@@ -178,9 +179,9 @@
             localStream.play('local')
 
             //将本地的视频流发布出去
-            client.publish(localStream).catch((error)=>{
-                console.log("音视频发布失败",error)
-            }).then(()=>{
+            client.publish(localStream).catch((error) => {
+                console.log("音视频发布失败", error)
+            }).then(() => {
                 console.log("音视频发布成功")
             })
 
@@ -189,35 +190,39 @@
     })
 
     //订阅的远端视频流
-    client.on('stream-added',(event)=>{
+    client.on('stream-added', (event) => {
         //获取远端视频流
-        const remoteStream=event.stream
-        console.log('远端视频get成功'+remoteStream.getId())
+        const remoteStream = event.stream
+        console.log('远端视频get成功' + remoteStream.getId())
 
         //订阅远端视频流
         client.subscribe(remoteStream)
     })
 
     //订阅到的远端视频流监听
-    client.on('stream-subscribed',(event)=>{
-        const remoteStream=event.stream
-        console.log('远端视频get'+remoteStream.getId())
+    client.on('stream-subscribed', (event) => {
+        const remoteStream = event.stream
+        console.log('远端视频get' + remoteStream.getId())
         remoteStream.play(remote)
     })
 
     console.log(client)
 
 </script>
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    <script src="/plugins/common/common.min.js"></script>
-    <script src="/js/custom.min.js"></script>
-    <script src="/js/settings.js"></script>
-    <script src="/js/gleek.js"></script>
-    <script src="/js/styleSwitcher.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+<!--**********************************
+    Scripts
+***********************************-->
+<script src="/plugins/common/common.min.js"></script>
+<script src="/js/custom.min.js"></script>
+<script src="/js/settings.js"></script>
+<script src="/js/gleek.js"></script>
+<script src="/js/styleSwitcher.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
+        crossorigin="anonymous"></script>
 </div>
 </body>
 
