@@ -2,24 +2,15 @@ package com.example.jilijili.search;
 
 import com.example.jilijili.comment.Comment;
 import com.example.jilijili.user.User;
-import com.example.jilijili.user.UserService;
 import com.example.jilijili.video.Video;
-import com.example.jilijili.video.VideoService;
-import com.fasterxml.jackson.databind.JsonSerializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
