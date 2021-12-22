@@ -26,7 +26,7 @@
         <div class="container">
             <h1><a class="navbar-brand" href="index.html" th:href="@{/home}"><span class="fa fa-play icon-log"
                                                                                    aria-hidden="true"></span>
-                ProShowz </a></h1>
+                Jilijili </a></h1>
             <!-- if logo is image enable this
                     <a class="navbar-brand" href="#index.html">
                         <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
@@ -42,22 +42,23 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" href="index.html" th:href="@{/home}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/video/upload">上传视频</a>
+                        <a class="nav-link" href="/video/upload" th:href="@{/video/upload}">上传视频</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/genre">精简</a>
+                        <a class="nav-link" href="/genre" th:href="@{/genre}">精简</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/contact" th:href="${session.userType == 1} ? @{/contact/messages} : @{/contact}">Contact</a>
+                        <a class="nav-link" href="/contact"
+                           th:href="${session.userType == 1} ? @{/contact/messages} : @{/contact}">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/LiveTelecast" >直播</a>
+                        <a class="nav-link" href="/LiveTelecast" th:href="@{/LiveTelecast}">直播</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/account/accountInfo">我的</a>
+                        <a class="nav-link" href="/account/accountInfo" th:href="@{/account/accountInfo}">我的</a>
                     </li>
                 </ul>
 

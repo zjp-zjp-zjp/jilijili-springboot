@@ -29,9 +29,9 @@
 
     <nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
         <div class="container">
-            <h1><a class="navbar-brand" href="index.html"><span class="fa fa-play icon-log"
+            <h1><a class="navbar-brand" href="index.html" th:href="@{/home}"><span class="fa fa-play icon-log"
                                                                 aria-hidden="true"></span>
-                ProShowz </a></h1>
+                Jilijili </a></h1>
             <!-- if logo is image enable this
                     <a class="navbar-brand" href="#index.html">
                         <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
@@ -47,13 +47,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" href="index.html" th:href="@{/home}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/video/upload">上传视频</a>
+                        <a class="nav-link" href="/video/upload" th:href="@{/video/upload}">上传视频</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/genre">精简</a>
+                        <a class="nav-link" href="/genre" th:href="@{/genre}">精简</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/contact"
@@ -69,7 +69,7 @@
                     <!-- search popup -->
                     <div id="search" class="pop-overlay">
                         <div class="popup">
-                            <form action="#" method="post" class="search-box">
+                            <form action="#" method="post" class="search-box" th:action="@{/search}">
                                 <input type="search" placeholder="Search your Keyword" name="search"
                                        required="required" autofocus="">
                                 <button type="submit" class="btn"><span class="fa fa-search"
@@ -78,22 +78,22 @@
                             <div class="browse-items">
                                 <h3 class="hny-title two mt-md-5 mt-4">Browse all:</h3>
                                 <ul class="search-items">
-                                    <li><a href="genre.html">Action</a></li>
-                                    <li><a href="genre.html">Drama</a></li>
-                                    <li><a href="genre.html">Family</a></li>
-                                    <li><a href="genre.html">Thriller</a></li>
-                                    <li><a href="genre.html">Commedy</a></li>
-                                    <li><a href="genre.html">Romantic</a></li>
-                                    <li><a href="genre.html">Tv-Series</a></li>
-                                    <li><a href="genre.html">Horror</a></li>
-                                    <li><a href="genre.html">Action</a></li>
-                                    <li><a href="genre.html">Drama</a></li>
-                                    <li><a href="genre.html">Family</a></li>
-                                    <li><a href="genre.html">Thriller</a></li>
-                                    <li><a href="genre.html">Commedy</a></li>
-                                    <li><a href="genre.html">Romantic</a></li>
-                                    <li><a href="genre.html">Tv-Series</a></li>
-                                    <li><a href="genre.html">Horror</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Action</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Drama</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Family</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Thriller</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Commedy</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Romantic</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Tv-Series</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Horror</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Action</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Drama</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Family</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Thriller</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Commedy</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Romantic</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Tv-Series</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Horror</a></li>
                                 </ul>
                             </div>
                         </div>

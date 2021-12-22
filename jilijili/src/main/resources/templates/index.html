@@ -24,7 +24,7 @@
 		<div class="container">
 			<h1><a class="navbar-brand" href="index.html" th:href="@{/home}"><span class="fa fa-play icon-log"
 																aria-hidden="true"></span>
-				ProShowz </a></h1>
+				Jilijili </a></h1>
 			<!-- if logo is image enable this
                     <a class="navbar-brand" href="#index.html">
                         <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
@@ -67,7 +67,7 @@
 					<!-- search popup -->
 					<div id="search" class="pop-overlay">
 						<div class="popup">
-							<form action="#" method="post" class="search-box">
+							<form action="#" method="post" class="search-box" th:action="@{/search}">
 								<input type="search" placeholder="Search your Keyword" name="search"
 									   required="required" autofocus="">
 								<button type="submit" class="btn"><span class="fa fa-search"
