@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.*;
 import java.io.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table
@@ -40,7 +41,9 @@ public class User {
         this.registerDate = LocalDate.now();
         this.gender = 1;
         this.type = 0;
-        File picture = new File("D:\\jilijili-springboot\\jilijili\\src\\main\\resources\\pictures\\head.png");
+        String path = Objects.requireNonNull(User.class.getClassLoader().getResource("")).getPath() + "pictures/head.png";
+//        String path = "D:\\JavaEE\\jilijili-springboot\\jilijili\\target\\classes\\pictures\\head.png";
+        File picture = new File(path);
         try {
             this.head = getByte(picture);
         } catch (Exception e) {
