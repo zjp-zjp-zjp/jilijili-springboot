@@ -32,24 +32,21 @@ public class UserService {
     public boolean userLogin(String nickname, String password) {
         Optional<User> thisUser=userRepository.findUserByNickname(nickname);
         BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
-        if(!thisUser.isPresent()){
+        if(thisUser.isEmpty()){
             throw new IllegalStateException("no user named "+nickname);
         }
-        if(encoder.matches(password,thisUser.get().getPassword())){
-            return true;
-        }
-        return false;
+        return encoder.matches(password, thisUser.get().getPassword());
     }
     public Long getIdByNickname(String nickname){
         Optional<User> thisUser=userRepository.findUserByNickname(nickname);
-        if(!thisUser.isPresent()){
+        if(thisUser.isEmpty()){
             throw new IllegalStateException("no user named "+nickname);
         }
         return thisUser.get().getId();
     }
     public User getUserById(Long id){
         Optional<User> thisUser= userRepository.findById(id);
-        if(!thisUser.isPresent()){
+        if(thisUser.isEmpty()){
             throw new IllegalStateException("no user with id "+id);
         }
         return thisUser.get();

@@ -2,9 +2,11 @@ package com.example.jilijili.user;
 
 import com.example.jilijili.video.VideoService;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 import javax.annotation.Resource;
@@ -17,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 
 @RequestMapping(path = "account")
-@RestController
+@Controller
 public class UserController {
     @Resource
     private final UserService userService;
@@ -30,26 +32,26 @@ public class UserController {
     }
 
     //    注册模块
+    @ResponseBody
     @GetMapping(path = "register")
     public ModelAndView account_register_page() {
         return new ModelAndView("register");
     }
 
     @PostMapping(path = "register")
-    public void account_register_post(@RequestParam String nickname,
-                                      @RequestParam String email,
-                                      @RequestParam String password,
-                                      HttpServletResponse response) {
+    public String account_register_post(@RequestParam String nickname,
+                                        @RequestParam String email,
+                                        @RequestParam String password,
+                                        HttpServletResponse response,
+                                        RedirectAttributes attributes) {
         System.out.println(nickname);
         userService.addUser(new User(nickname, email, password));
-        try {
-            response.sendRedirect("/account/login");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        attributes.addFlashAttribute("message", "Register successfully!");
+        return "redirect:/account/login";
     }
 
     //登录模块
+    @ResponseBody
     @GetMapping(path = "login")
     public ModelAndView account_login_page() {
         return new ModelAndView("login");
@@ -80,59 +82,63 @@ public class UserController {
     }
 
     public static String getImageString(byte[] data) throws IOException {
-        Base64.Encoder encoder=Base64.getEncoder();
+        Base64.Encoder encoder = Base64.getEncoder();
         return data != null ? encoder.encodeToString(data) : "";
     }
+
     //查看当前用户信息
+    @ResponseBody
     @GetMapping(path = "accountInfo")
     public ModelAndView account_accountInfo_page(HttpServletRequest request) {
         if (request.getSession().getAttribute("userId") == null) {
             throw new IllegalStateException("please log in before checking");
         }
-        ModelAndView modelAndView=new ModelAndView("personalInfo");
-        modelAndView.addObject("userInfo",userService.getUserById((Long)request.getSession().getAttribute("userId")));
+        ModelAndView modelAndView = new ModelAndView("personalInfo");
+        modelAndView.addObject("userInfo", userService.getUserById((Long) request.getSession().getAttribute("userId")));
         try {
-            modelAndView.addObject("head",getImageString(userService.getUserById((Long)request.getSession().getAttribute("userId")).getHead()));
+            modelAndView.addObject("head", getImageString(userService.getUserById((Long) request.getSession().getAttribute("userId")).getHead()));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        modelAndView.addObject("videoList",videoService.getVideoByAuthorId((Long) request.getSession().getAttribute("userId")));
-        modelAndView.addObject("listLength",videoService.getVideoByAuthorId((Long) request.getSession().getAttribute("userId")).size());
+        modelAndView.addObject("videoList", videoService.getVideoByAuthorId((Long) request.getSession().getAttribute("userId")));
+        modelAndView.addObject("listLength", videoService.getVideoByAuthorId((Long) request.getSession().getAttribute("userId")).size());
         return modelAndView;
     }
+
     @PostMapping(path = "accountInfo")
     public void account_accountInfo_put(HttpServletRequest request,
                                         HttpServletResponse response,
-                                        @RequestParam(value = "tel",required = false) String tel,
-                                        @RequestParam(value = "email",required = false) String email,
-                                        @RequestParam(value = "dob",required = false) String dob,
-                                        @RequestParam(value="picture",required = false)MultipartFile picture
-                                        ){
+                                        @RequestParam(value = "tel", required = false) String tel,
+                                        @RequestParam(value = "email", required = false) String email,
+                                        @RequestParam(value = "dob", required = false) String dob,
+                                        @RequestParam(value = "picture", required = false) MultipartFile picture
+    ) {
         if (request.getSession().getAttribute("userId") == null) {
             throw new IllegalStateException("please log in before checking");
         }
-        Long id=(Long) request.getSession().getAttribute("userId");
-        User user=userService.getUserById(id);
-        if(picture!=null){
+        Long id = (Long) request.getSession().getAttribute("userId");
+        User user = userService.getUserById(id);
+        if (picture != null) {
             try {
                 user.setHead(picture.getBytes());
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        if(tel!=null){
+        if (tel != null) {
             user.setTel(tel);
         }
-        if(email!=null){
+        if (email != null) {
             user.setEmail(email);
         }
-        if(dob!=null){
+        if (dob != null) {
             user.setDob(LocalDate.parse(dob, DateTimeFormatter.ofPattern("yyyy-M-d")));
         }
         userService.updateUser(user);
     }
-    @PostMapping(value="logout")
-    public void account_logout_delete(HttpServletRequest request,HttpServletResponse response){
+
+    @PostMapping(value = "logout")
+    public void account_logout_delete(HttpServletRequest request, HttpServletResponse response) {
         request.getSession().removeAttribute("userId");
         try {
             response.sendRedirect("/account/login");
@@ -143,7 +149,7 @@ public class UserController {
 //        return modelAndView;
     }
 
-//    //查看当前用户vieolist
+    //    //查看当前用户vieolist
 //    @GetMapping(path = "videoList")
 //    public List<Video> account_videoList_page(HttpServletRequest request) {
 //        if (request.getSession().getAttribute("userId") == null) {
@@ -153,17 +159,18 @@ public class UserController {
 //    }
 //
 //    //查看某个用户信息
+    @ResponseBody
     @GetMapping(path = "accountInfo/{hisId}")
     public ModelAndView account_accountInfo_his_page(HttpServletRequest request, @PathVariable("hisId") Long hisId) {
-        ModelAndView modelAndView=new ModelAndView("personalInfoStatic");
-        modelAndView.addObject("userInfo",userService.getUserById(hisId));
+        ModelAndView modelAndView = new ModelAndView("personalInfoStatic");
+        modelAndView.addObject("userInfo", userService.getUserById(hisId));
         try {
-            modelAndView.addObject("head",getImageString(userService.getUserById(hisId).getHead()));
+            modelAndView.addObject("head", getImageString(userService.getUserById(hisId).getHead()));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        modelAndView.addObject("videoList",videoService.getVideoByAuthorId(hisId));
-        modelAndView.addObject("listLength",videoService.getVideoByAuthorId(hisId).size());
+        modelAndView.addObject("videoList", videoService.getVideoByAuthorId(hisId));
+        modelAndView.addObject("listLength", videoService.getVideoByAuthorId(hisId).size());
         return modelAndView;
     }
 //
