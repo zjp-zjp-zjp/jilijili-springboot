@@ -18,9 +18,9 @@ public class User {
     private String password;
     private String email;
     private String tel;
-    @JsonFormat(pattern="yyyy-M-d")
+    @JsonFormat(pattern = "yyyy-M-d")
     private LocalDate dob;
-    @JsonFormat(pattern="yyyy-M-d")
+    @JsonFormat(pattern = "yyyy-M-d")
     private LocalDate registerDate;
     private Integer gender;
     private Integer type;
@@ -30,20 +30,19 @@ public class User {
 
     }
 
-    public User(String nickname, String email,String password) {
+    public User(String nickname, String email, String password) {
         this.nickname = nickname;
-        BCryptPasswordEncoder encoder=new BCryptPasswordEncoder(10);
-        String _password=encoder.encode(password);
-        this.password = _password;
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
+        this.password = encoder.encode(password);
         this.email = email;
-        this.dob=LocalDate.now();
-        this.tel="empty";
-        this.registerDate= LocalDate.now();
-        this.gender=1;
-        this.type=1;
-        File picture=new File("D:\\jilijili-springboot\\jilijili\\src\\main\\resources\\pictures\\head.png");
+        this.dob = LocalDate.now();
+        this.tel = "empty";
+        this.registerDate = LocalDate.now();
+        this.gender = 1;
+        this.type = 0;
+        File picture = new File("D:\\jilijili-springboot\\jilijili\\src\\main\\resources\\pictures\\head.png");
         try {
-            this.head=getByte(picture);
+            this.head = getByte(picture);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -154,28 +153,20 @@ public class User {
                 ", type=" + type +
                 '}';
     }
-    public static byte[] getByte(File file) throws Exception
-    {
+
+    public static byte[] getByte(File file) throws Exception {
         byte[] bytes = null;
-        if(file!=null)
-        {
+        if (file != null) {
             InputStream is = new FileInputStream(file);
             int length = (int) file.length();
-            if(length>Integer.MAX_VALUE)   //当文件的长度超过了int的最大值
-            {
-                System.out.println("this file is max ");
-                return null;
-            }
             bytes = new byte[length];
             int offset = 0;
-            int numRead = 0;
-            while(offset<bytes.length&&(numRead=is.read(bytes,offset,bytes.length-offset))>=0)
-            {
-                offset+=numRead;
+            int numRead;
+            while (offset < bytes.length && (numRead = is.read(bytes, offset, bytes.length - offset)) >= 0) {
+                offset += numRead;
             }
             //如果得到的字节长度和file实际的长度不一致就可能出错了
-            if(offset<bytes.length)
-            {
+            if (offset < bytes.length) {
                 System.out.println("file length is error");
                 return null;
             }
