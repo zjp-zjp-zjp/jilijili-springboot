@@ -40,35 +40,35 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active">
-						<a class="nav-link" href="index.html">Home</a>
+						<a class="nav-link" href="index.html">[[#{message.index}]]</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/video/upload">上传视频</a>
+						<a class="nav-link" href="/video/upload"> [[#{message.upload}]]</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/genre">精简</a>
+						<a class="nav-link" href="/genre">[[#{message.genere}]]</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/contact" th:href="${session.userType == 1} ? @{/contact/messages} : @{/contact}">Contact</a>
+						<a class="nav-link" href="/contact" th:href="${session.userType == 1} ? @{/contact/messages} : @{/contact}">[[#{message.contact}]]</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/LiveTelecast" >直播</a>
+						<a class="nav-link" href="/LiveTelecast" >[[#{message.live}]]</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="/account/accountInfo">我的</a>
+						<a class="nav-link" href="/account/accountInfo">[[#{message.myProfile}]]</a>
 					</li>
 				</ul>
 
 				<!--/search-right-->
 				<!--/search-right-->
 				<div class="search-right">
-					<a href="#search" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="search">Search <span
+					<a href="#search" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="search">[[#{message.search}]] <span
 							class="fa fa-search ml-3" aria-hidden="true"></span></a>
 					<!-- search popup -->
 					<div id="search" class="pop-overlay">
 						<div class="popup">
 							<form action="#" method="post" class="search-box" th:action="@{/search}">
-								<input type="search" placeholder="Search your Keyword" name="search"
+								<input type="search" th:placeholder="#{message.searchKey}" name="search"
 									   required="required" autofocus="">
 								<button type="submit" class="btn"><span class="fa fa-search"
 																		aria-hidden="true"></span></button>
@@ -116,6 +116,10 @@
 						</label>
 					</div>
 				</nav>
+			</div>
+			<div class="row">
+				<a class="btn btn-sm " th:href="@{/home(l='zh_CN')}"><strong>中文</strong></a>
+				<a class="btn btn-sm " th:href="@{/home(l='en_US')}"><strong>English</strong></a>
 			</div>
 			<!-- //toggle switch for light and dark theme -->
 		</div>

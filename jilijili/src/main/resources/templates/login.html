@@ -44,17 +44,22 @@
                             <form th:action="@{/account/login}" class="mt-5 mb-5 login-input" method="post">
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="nickname" name="nickname"
-                                           placeholder="Nickname">
+                                           th:placeholder="#{message.username}">
                                 </div>
                                 <div class="form-group">
                                     <input type="password" class="form-control" id="password" name="password"
-                                           placeholder="Password">
+                                           th:placeholder="#{message.password}">
                                 </div>
-                                <button class="btn login-form__btn submit w-100" type="submit">Log in</button>
+                                <button class="btn login-form__btn submit w-100" type="submit">[[#{message.login}]]</button>
                             </form>
-                            <p class="mt-5 login-form__footer">Don't have account? <a th:href="@{/account/register}"
-                                                                                      class="text-primary">Sign Up</a>
-                                now</p>
+                            <p class="mt-5 login-form__footer">[[#{message.loginmessage1}]]<a th:href="@{/account/register}"
+                                                                                      class="text-primary">[[#{message.loginmessage2}]]</a>
+                                [[#{message.loginmessage3}]]</p>
+                            <br>
+                            <div class="row">
+                                <a class="btn btn-sm " th:href="@{/account/login(l='zh_CN')}">中文</a>
+                                <a class="btn btn-sm " th:href="@{/account/login(l='en_US')}">English</a>
+                            </div>
                         </div>
                     </div>
                 </div>
