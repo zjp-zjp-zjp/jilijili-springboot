@@ -8,11 +8,21 @@
     <title>Home</title>
     <!-- Template CSS -->
     <link rel="stylesheet" href="/css/style-starter.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link href="/css/style.css" rel="stylesheet">
     <!-- Template CSS -->
     <link href="http://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap"
           rel="stylesheet">
     <!-- Template CSS -->
+    <style>
+        .div2 {
+            font-family: show;
+        }
+        .loc {
+            padding-left: 100px;
+            padding-right: 100px;
+        }
+    </style>
 </head>
 
 <body onload="hide()">
@@ -26,11 +36,11 @@
 </script>
 <!--/nav-->
 <header id="site-header" class="w3l-header fixed-top">
-
+    <!--/nav-->
     <nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
         <div class="container">
-            <h1><a class="navbar-brand" href="index.html" th:href="@{/home}"><span class="fa fa-play icon-log"
-                                                                aria-hidden="true"></span>
+            <h1><a class="navbar-brand" href="/home" th:href="@{/home}"><span class="fa fa-play icon-log"
+                                                                              aria-hidden="true"></span>
                 Jilijili </a></h1>
             <!-- if logo is image enable this
                     <a class="navbar-brand" href="#index.html">
@@ -46,18 +56,23 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/video/upload">上传视频</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/genre">精简</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact" th:href="${session.userType == 1} ? @{/contact/messages} : @{/contact}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/LiveTelecast" >直播</a>
+                    </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="index.html" th:href="@{/home}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/video/upload" th:href="@{/video/upload}">上传视频</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/genre" th:href="@{/genre}">精简</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/contact"
-                           th:href="${session.userType == 1} ? @{/contact/messages} : @{/contact}">Contact</a>
+                        <a class="nav-link" href="/account/accountInfo">我的</a>
                     </li>
                 </ul>
 
@@ -99,153 +114,250 @@
                         </div>
                         <a class="close" href="#close">×</a>
                     </div>
+                    <!-- /search popup -->
+                    <!--/search-right-->
                 </div>
+
+
             </div>
+            <!-- toggle switch for light and dark theme -->
+            <div class="mobile-position">
+                <nav class="navigation">
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox">
+                            <div class="mode-container">
+                                <i class="gg-sun"></i>
+                                <i class="gg-moon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </nav>
+            </div>
+            <!-- //toggle switch for light and dark theme -->
         </div>
     </nav>
+    <!--//nav-->
 </header>
-<br>
-<section class="w3l-main-slider position-relative">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-4 col-xl-12">
-                <div class="card">
-                    <div class="card-body">
-                        <form class="form-signin" id="pictureform" th:action="@{/account/accountInfo}" method="post"
-                              enctype="multipart/form-data">
-                            <input class="btn btn-primary px-3 ml-4" type="file" name="picture" placeholder="选择头像"/>
-                            <button class="btn btn-primary px-3 ml-4" type="submit">上传</button>
-                        </form>
-                        <div class="media align-items-center mb-30">
-                            <img id="head" onclick="showPictureForm()" th:src="'data:image/gif;base64,'+${head}"
-                                 class="mr-3" width="80" height="80" alt="Base64 encoded image">
-                            <div class="media-body">
-                                <h3 class="mb-0" th:text="${userInfo.Nickname}"></h3>
-                            </div>
-                        </div>
-
-                        <h4>About Me</h4>
-                        <ul class="card-profile__info">
-                            <li><strong class="text-dark mr-4">TEL</strong> <span onclick="showTel()"
-                                                                                  th:text="${userInfo.Tel}"></span>
-                                <form id="tel" th:action="@{/account/accountInfo}" method="post">
-                                    <input type="text" name="tel" placeholder="your tel:">
-                                    <button class="btn btn-transparent p-0 mr-3" type="submit"><i
-                                            class="fa fa-paper-plane"></i></button>
-                                </form>
-                            </li>
-                            <li><strong class="text-dark mr-4">Email</strong> <span onclick="showEmail()"
-                                                                                    th:text="${userInfo.Email}"></span>
-                                <form id="email" th:action="@{/account/accountInfo}" method="post">
-                                    <input type="text" name="email" placeholder="your email:">
-                                    <button class="btn btn-transparent p-0 mr-3" type="submit"><i
-                                            class="fa fa-paper-plane"></i></button>
-                                </form>
-                            </li>
-                            <li><strong class="text-dark mr-4">Birthday</strong> <span onclick="showBirthday()"
-                                                                                       th:text="${userInfo.Dob}"></span>
-                                <form id="dob" th:action="@{/account/accountInfo}" method="post">
-                                    <input type="text" name="dob" placeholder="your dob:">
-                                    <button class="btn btn-transparent p-0 mr-3" type="submit"><i
-                                            class="fa fa-paper-plane"></i></button>
-                                </form>
-                            </li>
-                            <li><strong class="text-dark mr-4">Regist Date</strong> <span
-                                    th:text="${userInfo.RegisterDate}"></span>
-                            </li>
-                            <li>
-                                <button onclick="logout()" class="btn btn-primary px-3 ml-4">登出</button>
-                            </li>
-                            <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-                            <script>
-                                function showTel() {
-                                    var ele = document.getElementById("tel");
-                                    if (ele.style.display == "none") {
-                                        ele.style.display = "";
-                                    } else {
-                                        ele.style.display = "none";
-                                    }
-                                }
-
-                                function showEmail() {
-                                    var ele = document.getElementById("email");
-                                    if (ele.style.display == "none") {
-                                        ele.style.display = "";
-                                    } else {
-                                        ele.style.display = "none";
-                                    }
-                                }
-
-                                function showBirthday() {
-                                    var ele = document.getElementById("dob");
-                                    if (ele.style.display == "none") {
-                                        ele.style.display = "";
-                                    } else {
-                                        ele.style.display = "none";
-                                    }
-                                }
-
-                                function logout() {
-                                    var val = {
-                                        "op": 0
-                                    };
-                                    $.ajax({
-                                        url: "/account/logout",
-                                        type: "POST",
-                                        contentType: 'application/json;charset=UTF-8',
-                                        data: JSON.stringify(val),
-                                        success: function (msg) {
-                                            console.log(msg)
-                                            window.location = '/account/login'
-                                        }
-                                    });
-                                }
-
-                                function showPictureForm() {
-                                    var ele = document.getElementById("pictureform");
-                                    if (ele.style.display == "none") {
-                                        ele.style.display = "";
-                                    } else {
-                                        ele.style.display = "none";
-                                    }
-                                }
-                            </script>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+<div class="w3l-breadcrumbs">
+    <nav id="breadcrumbs" class="breadcrumbs">
+        <div class="container page-wrapper">
+            <a href="index.html" th:href="@{/home}">Home</a> » <span class="breadcrumb_last" aria-current="page">我的</span>
         </div>
+    </nav>
+</div>
+<!--<section class="w3l-main-slider position-relative">-->
+    <div class="loc">
         <div class="container-fluid">
-            <div class="col-lg-8 col-xl-12">
-                <div class="card">
-                    <div class="card-body">
-                        <tr th:each="video:${videoList}">
-                            <div class="media media-reply" th:onclick="jumpTo([[${video.id}]])">
+            <div class="row">
+                <div class="col-lg-4 col-xl-12">
+                    <div class="card border-info mb-3" style="max-width: 110rem;">
+                        <div class="card-body">
+                            <form class="input-group mb-3" style="max-width: 20rem" id="pictureform" th:action="@{/account/accountInfo}" method="post" enctype="multipart/form-data">
+                                <input type="file" class="form-control" name="picture" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                <button class="btn btn-primary" type="submit" >上传</button>
+                            </form>
+                            <div class="media align-items-center mb-30">
+                                <img id="head" onclick="showPictureForm()" th:src="'data:image/gif;base64,'+${head}"
+                                     class="mr-3" width="80" height="80" alt="Base64 encoded image">
                                 <div class="media-body">
-                                    <div class="d-sm-flex justify-content-between mb-30">
-                                        <h5 class="mb-sm-0" th:text="${video.Name}"></h5>
-                                        <div>
-                                            <button class="btn btn-transparent p-0 mr-3"><i class="fa fa-thumbs-up"></i>
-                                            </button>
-                                            <span th:text="${video.supportNum}"></span>
-                                        </div>
+                                    <div class="div2">
+                                    <h3 class="mb-0" th:text="${userInfo.Nickname}"></h3>
                                     </div>
-
-                                    <p th:text="${video.description}"></p>
-                                    <ul>
-                                        <li class="d-inline-block"><img class="rounded" width="160" height="90"
-                                                                        th:src="${video.picturePath}" alt=""></li>
-                                    </ul>
                                 </div>
                             </div>
-                            <!-- 一个评论card -->
-                        </tr>
+
+                            <h4 class="div2">关于我</h4>
+                            <ul class="card-profile__info">
+                                <li><strong class="text-dark mr-4">TEL</strong> <span onclick="showTel()"
+                                                                                      th:text="${userInfo.Tel}"></span>
+                                    <form id="tel" th:action="@{/account/accountInfo}" method="post">
+                                        <input type="text" name="tel" placeholder="your tel:">
+                                        <button class="btn btn-transparent p-0 mr-3" type="submit"><i
+                                                class="fa fa-paper-plane"></i></button>
+                                    </form>
+                                </li>
+                                <li><strong class="text-dark mr-4">Email</strong> <span onclick="showEmail()"
+                                                                                        th:text="${userInfo.Email}"></span>
+                                    <form id="email" th:action="@{/account/accountInfo}" method="post">
+                                        <input type="text" name="email" placeholder="your email:">
+                                        <button class="btn btn-transparent p-0 mr-3" type="submit"><i
+                                                class="fa fa-paper-plane"></i></button>
+                                    </form>
+                                </li>
+                                <li><strong class="text-dark mr-4">Birthday</strong> <span onclick="showBirthday()"
+                                                                                           th:text="${userInfo.Dob}"></span>
+                                    <form id="dob" th:action="@{/account/accountInfo}" method="post">
+                                        <input type="text" name="dob" placeholder="your dob:">
+                                        <button class="btn btn-transparent p-0 mr-3" type="submit"><i
+                                                class="fa fa-paper-plane"></i></button>
+                                    </form>
+                                </li>
+                                <li><strong class="text-dark mr-4">Regist Date</strong> <span
+                                        th:text="${userInfo.RegisterDate}"></span>
+                                </li>
+                                <li>
+                                    <button onclick="logout()" class="btn btn-primary px-3 ml-4">登出</button>
+                                </li>
+                                <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+                                <script>
+                                    function showTel() {
+                                        var ele = document.getElementById("tel");
+                                        if (ele.style.display == "none") {
+                                            ele.style.display = "";
+                                        } else {
+                                            ele.style.display = "none";
+                                        }
+                                    }
+
+                                    function showEmail() {
+                                        var ele = document.getElementById("email");
+                                        if (ele.style.display == "none") {
+                                            ele.style.display = "";
+                                        } else {
+                                            ele.style.display = "none";
+                                        }
+                                    }
+
+                                    function showBirthday() {
+                                        var ele = document.getElementById("dob");
+                                        if (ele.style.display == "none") {
+                                            ele.style.display = "";
+                                        } else {
+                                            ele.style.display = "none";
+                                        }
+                                    }
+
+                                    function logout() {
+                                        var val = {
+                                            "op": 0
+                                        };
+                                        $.ajax({
+                                            url: "/account/logout",
+                                            type: "POST",
+                                            contentType: 'application/json;charset=UTF-8',
+                                            data: JSON.stringify(val),
+                                            success: function (msg) {
+                                                console.log(msg)
+                                                window.location = '/account/login'
+                                            }
+                                        });
+                                    }
+
+                                    function showPictureForm() {
+                                        var ele = document.getElementById("pictureform");
+                                        if (ele.style.display == "none") {
+                                            ele.style.display = "";
+                                        } else {
+                                            ele.style.display = "none";
+                                        }
+                                    }
+                                </script>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!--            <div class="container-fluid">-->
+<!--                <div class="col-lg-8 col-xl-12">-->
+                    <div class="card border-info mb-3" style="max-width: 110rem;">
+                        <div class="card-body">
+                            <tr th:each="video:${videoList}">
+                                <div class="media media-reply" th:onclick="jumpTo([[${video.id}]])">
+                                    <div class="media-body">
+                                        <div class="d-sm-flex justify-content-between mb-30">
+                                            <h5 class="mb-sm-0" th:text="${video.Name}"></h5>
+                                            <div>
+                                                <button class="btn btn-transparent p-0 mr-3"><i
+                                                        class="fa fa-thumbs-up"></i>
+                                                </button>
+                                                <span th:text="${video.supportNum}"></span>
+                                            </div>
+                                        </div>
+
+                                        <p th:text="${video.description}"></p>
+                                        <ul>
+                                            <li class="d-inline-block"><img class="rounded" width="160" height="90"
+                                                                            th:src="${video.picturePath}" alt=""></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- 一个评论card -->
+                            </tr>
+                        </div>
+                    </div>
+<!--                </div>-->
+<!--            </div>-->
+        </div>
+    </div>
+<footer class="w3l-footer">
+    <section class="footer-inner-main">
+        <div class="footer-hny-grids py-5">
+            <div class="container py-lg-4">
+                <div class="text-txt">
+                    <div class="right-side">
+                        <div class="row footer-about">
+                            <div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
+                                <a href="articles.html"><img class="img-fluid" src="/images/banner1.jpg"
+                                                             alt=""></a>
+                            </div>
+                            <div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
+                                <a href="articles.html"><img class="img-fluid" src="/images/banner2.jpg"
+                                                             alt=""></a>
+                            </div>
+                            <div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
+                                <a href="articles.html"><img class="img-fluid" src="/images/banner3.jpg"
+                                                             alt=""></a>
+                            </div>
+                            <div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
+                                <a href="articles.html"><img class="img-fluid" src="/images/banner4.jpg"
+                                                             alt=""></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+        </div>
+        <div class="below-section">
+            <div class="container">
+                <div class="copyright-footer">
+                    <div class="columns text-lg-left">
+                        <p>Copyright &copy; 2020.Company name All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- copyright -->
+        <!-- move top -->
+        <button onclick="topFunction()" id="movetop" title="Go to top">
+            <span class="fa fa-arrow-up" aria-hidden="true"></span>
+        </button>
+        <script>
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function () {
+                scrollFunction()
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("movetop").style.display = "block";
+                } else {
+                    document.getElementById("movetop").style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+        </script>
+        <!-- /move top -->
+
+    </section>
+</footer>
+<!--</section>-->
 </body>
 <script>
     function jumpTo(videoId) {
