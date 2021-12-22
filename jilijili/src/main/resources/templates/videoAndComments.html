@@ -151,7 +151,7 @@
         <div id="dplayer-container" class="dplayer-container"></div>
         <h3 id="close-dialog" class="close-dialog">
             <img th:onclick="jumptouser([[${data.video.authorId}]])" th:src="'data:image/gif;base64,'+${avator}" style="width: 40px;height: 40px;float: left">
-            <h1 th:text="${data.video.name}" style="height: 40px;float: left">
+            <h1 th:text="${data.video.name}" style="height: 40px;float: left" class="div2">
             </h1>
             <br>
             <br>
@@ -173,28 +173,28 @@
                 <div class="div1" id="dplayer"></div>
             </div>
             <div class="col-md-3 col-md-pull-9">
-                <h1 style="color:#9ae0ff">推荐视频</h1>
+                <h1 style="color:#9ae0ff"><div class="div2">推荐视频</div></h1>
                 <HR align=center width=300 color=#987cb9 SIZE=1>
                 <p>
                     <img src="/images/bg.jpg" height="150px" width="300px">
-                <h6>name</h6>
+                <h6><div class="div2">name</div></h6>
                 </p>
                 <HR align=center width=300 color=#987cb9 SIZE=1>
                 <p>
                     <img src="/images/bg.jpg" height="150px" width="300px">
-                <h6>name</h6>
+                <h6><div class="div2">name</div></h6>
                 </p>
                 <HR align=center width=300 color=#987cb9 SIZE=1>
                 <p>
                     <img src="/images/bg.jpg" height="150px" width="300px">
-                <h6>name</h6>
+                <h6><div class="div2">name</div></h6>
                 </p>
                 <HR align=center width=300 color=#987cb9 SIZE=1>
             </div>
             <div>
                 <button onclick="altcommentzone()" class="btn mb-1 btn-outline-primary btn-sm"><i class="fa fa-paper-plane"></i></button>
                 <button th:onclick="sendsupport(0,[[${data.video.id}]])"class="btn mb-1 btn-outline-primary btn-sm"><i class="fa fa-thumbs-up"></i></button>
-                <span th:text="${data.video.supportNum}"></span>
+                <span th:text="${data.video.supportNum}" th:id="'videosupport'+${data.video.id}"></span>
             </div>
         </div>
     </div>
@@ -260,7 +260,7 @@
                                     <br>
                                     <button id="sendvideocomment" class="btn btn-success btn-sm alert-1 div2"
                                             style="padding-left: 10px;">
-                                        提交评论
+                                        <div class="div2">提交评论</div>
                                     </button>
                                 </form>
                             </div>
@@ -331,7 +331,7 @@
             <div class="card border-info mb-3 w-75">
                 <div class="card-header">
                     <div class="general-mask-left">
-                        <img th:src="'data:image/gif;base64,'+${comment.head64}" height="40" width="40" alt=""
+                        <img th:src="'data:image/gif;base64,'+${comment.head64}" th:onclick="jumptouser([[${comment.authorId}]])"height="40" width="40" alt=""
                              style="float: left;">
                         <h5 style="float: left">
                             <div id="authorId">
@@ -346,20 +346,19 @@
                         <td class="div2" th:text="${comment.content}"></td>
                     </li>
                     <div class="general-button">
-                        <div style="text-align: left"><span th:text="${comment.releaseTime}"
-                                                            class="div2"></span><br><span class="div2">点赞数：<td
-                                class="div2" th:text="${comment.supportNum}"></td></span>
+                        <div style="text-align: left"><span th:text="${comment.releaseTime}" class="div2"></span><br>
+                            <div class="div2">点赞数：<span class="div2" th:id="'commentsupport'+${comment.id}" th:text="${comment.supportNum}"></span></div>
                         </div>
                         <button th:onclick="sendsupport(1,[[${comment.id}]])" class="btn mb-1 btn-outline-primary btn-sm">
-                            <i class="bi bi-hand-thumbs-up"></i>赞</a></button>
-                        <a href="#" class="btn mb-1 btn-outline-primary btn-sm div2">踩</a>
+                            <i class="bi bi-hand-thumbs-up"></i><span class="div2">赞</span></a></button>
+                        <a href="#" class="btn mb-1 btn-outline-primary btn-sm"><div class="div2">踩</div></a>
                         <button type="button" th:onclick="showcommentbox([[${comment.id}]])"
-                                class="btn mb-1 btn-outline-primary btn-sm div2">
-                            回复
+                                class="btn mb-1 btn-outline-primary btn-sm">
+                            <div class="div2">回复</div>
                         </button>
                         <button type="button" th:onclick="showsubcomment([[${comment.id}]])"
                                 class="btn mb-1 btn-outline-primary btn-sm div2">
-                            查看回复
+                            <div class="div2">查看回复</div>
                         </button>
                     </div>
                     <div th:id="'commentbox'+${comment.id}" name="commentbox">
@@ -367,14 +366,14 @@
                             <input type="text" th:id="'commenttocomment'+${comment.id}" class="form-control"
                                    style="padding-left: 10px;" placeholder="说点什么：">
                             <button type="button" th:onclick="sendComment(1,'-1',[[${comment.id}]])"
-                                    class="btn mb-1 btn-outline-primary btn-sm div2">提交
+                                    class="btn mb-1 btn-outline-primary btn-sm"><div class="div2">提交</div>
                             </button>
                         </form>
                     </div>
                 </ul>
                 <div th:id="'commentId'+${comment.id}" name="subcomment">
                     <div th:each="soncomment:${comment.itComment}">
-                        <img style="float: left;" th:src="'data:image/gif;base64,'+${soncomment.head64}" height="40"
+                        <img style="float: left;" th:onclick="jumptouser([[${soncomment.authorId}]])" th:src="'data:image/gif;base64,'+${soncomment.head64}" height="40"
                              width="40">
                         <li style="text-align: left"><span class="div2"
                                                            th:text="${soncomment.authorNickname}+':'"></span><span
@@ -504,7 +503,11 @@
         document.getElementById("commentZone").style.display="none";
     }
     function sendsupport(type,id){
-        console.log(id);
+        var _type="";
+        if(type==0)_type="videosupport";
+        else _type="commentsupport"
+        var supportnum__=parseInt(document.getElementById(_type+id.toString()).innerHTML)+1;
+        document.getElementById(_type+id.toString()).innerHTML=supportnum__.toString();
         var val = {
             "typeOfSupport": type,
             "targetId": id
@@ -517,7 +520,6 @@
             data: JSON.stringify(val),
             success: function (msg) {
                 console.log(msg);
-                window.location = "/video/" + document.getElementById("videoId").innerHTML;
             }
         });
     }
