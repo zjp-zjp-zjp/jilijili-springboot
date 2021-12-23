@@ -496,7 +496,7 @@
 
     function sendsupport(type, id) {
         var _type = "";
-        if (type === 0) _type = "videosupport";
+        if (type == 0) _type = "videosupport";
         else _type = "commentsupport"
         var supportnum__ = parseInt(document.getElementById(_type + id.toString()).innerHTML) + 1;
         document.getElementById(_type + id.toString()).innerHTML = supportnum__.toString();
