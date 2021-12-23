@@ -60,19 +60,19 @@
                         <a class="nav-link" href="/home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/video/upload">上传视频</a>
+                        <a class="nav-link" href="/video/upload">Upload</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/genre">精简</a>
+                        <a class="nav-link" href="/genre">Genre</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/contact" th:href="${session.userType == 1} ? @{/contact/messages} : @{/contact}">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/LiveTelecast" >直播</a>
+                        <a class="nav-link" href="/LiveTelecast" >Live</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/account/accountInfo">我的</a>
+                        <a class="nav-link" href="/account/accountInfo">Profile</a>
                     </li>
                 </ul>
 
@@ -142,7 +142,7 @@
 <div class="w3l-breadcrumbs">
     <nav id="breadcrumbs" class="breadcrumbs">
         <div class="container page-wrapper">
-            <a href="index.html" th:href="@{/home}">Home</a> » <span class="breadcrumb_last" aria-current="page">我的</span>
+            <a href="index.html" th:href="@{/home}">Home</a> » <span class="breadcrumb_last" aria-current="page">Profile</span>
         </div>
     </nav>
 </div>
@@ -321,11 +321,9 @@
         </div>
         <div class="below-section">
             <div class="container">
-                <div class="copyright-footer">
-                    <div class="columns text-lg-left">
-                        <p>Copyright &copy; 2020.Company name All rights reserved.</p>
+                    <div class="columns text-lg-center">
+                        <p>Copyright &copy; 2021 Jilijili. All rights reserved.</p>
                     </div>
-                </div>
             </div>
         </div>
         <!-- copyright -->

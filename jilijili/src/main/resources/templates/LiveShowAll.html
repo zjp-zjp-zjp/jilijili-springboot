@@ -47,19 +47,20 @@
                         <a class="nav-link" href="/home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/video/upload">上传视频</a>
+                        <a class="nav-link" href="/video/upload">Upload</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/genre">精简</a>
+                        <a class="nav-link" href="/genre">Genre</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/contact" th:href="${session.userType == 1} ? @{/contact/messages} : @{/contact}">Contact</a>
+                        <a class="nav-link" href="/contact"
+                           th:href="${session.userType == 1} ? @{/contact/messages} : @{/contact}">Contact</a>
                     </li>
                     <li class="nav-item  active">
-                        <a class="nav-link" href="/LiveTelecast" >直播</a>
+                        <a class="nav-link" href="/LiveTelecast">Live</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/account/accountInfo">我的</a>
+                        <a class="nav-link" href="/account/accountInfo">Profile</a>
                     </li>
                 </ul>
 
@@ -136,7 +137,7 @@
 ***********************************-->
 
 <div class="container-fluid">
-<!--    row start-->
+    <!--    row start-->
     <div class="row">
         <div class="col-12 m-b-30">
             <h4 class="d-inline">JIliJiLI</h4>
@@ -156,7 +157,8 @@
                         </div>
                         <div class="card-footer">
                             <p class="card-text d-inline"><small class="text-muted">观看人数？</small>
-                            </p><a href="/LiveTelecast/1" th:href="@{/LiveTelecast/1}" class="card-link float-right"><small>点击加入</small></a>
+                            </p><a href="/LiveTelecast/1" th:href="@{/LiveTelecast/1}"
+                                   class="card-link float-right"><small>Click to join</small></a>
                         </div>
                     </div>
                 </div>
@@ -169,11 +171,12 @@
                         </div>
                         <img class="img-fluid" src="images/a2-horiz.jpg" alt="">
                         <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text and below as a natural lead-in to the additional content. This content is a little bit longer.</p>
+                            <p class="card-text">This is a wider card with supporting text and below as a natural
+                                lead-in to the additional content. This content is a little bit longer.</p>
                         </div>
                         <div class="card-footer">
                             <p class="card-text d-inline"><small class="text-muted">Last updated 3 mins ago</small>
-                            </p><a href="#" class="card-link float-right"><small>点击加入</small></a>
+                            </p><a href="#" class="card-link float-right"><small>Click to join</small></a>
                         </div>
                     </div>
                 </div>
@@ -186,11 +189,12 @@
                         </div>
                         <img class="img-fluid" src="images/a3-horiz.jpg" alt="">
                         <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text and below as a natural lead-in to the additional content. This content is a little bit longer.</p>
+                            <p class="card-text">This is a wider card with supporting text and below as a natural
+                                lead-in to the additional content. This content is a little bit longer.</p>
                         </div>
                         <div class="card-footer">
                             <p class="card-text d-inline"><small class="text-muted">Last updated 3 mins ago</small>
-                            </p><a href="#" class="card-link float-right"><small>点击加入</small></a>
+                            </p><a href="#" class="card-link float-right"><small>Click to join</small></a>
                         </div>
                     </div>
                 </div>
@@ -203,18 +207,19 @@
                         </div>
                         <img class="img-fluid" src="images/a4-horiz.jpg" alt="">
                         <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text and below as a natural lead-in to the additional content. This content is a little bit longer.</p>
+                            <p class="card-text">This is a wider card with supporting text and below as a natural
+                                lead-in to the additional content. This content is a little bit longer.</p>
                         </div>
                         <div class="card-footer">
                             <p class="card-text d-inline"><small class="text-muted">Last updated 3 mins ago</small>
-                            </p><a href="#" class="card-link float-right"><small>点击加入</small></a>
+                            </p><a href="#" class="card-link float-right"><small>Click to join</small></a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-<!--end row -->
+    <!--end row -->
 
     <!--    row start-->
     <div class="row">
@@ -236,7 +241,7 @@
                         </div>
                         <div class="card-footer">
                             <p class="card-text d-inline"><small class="text-muted">观看人数？</small>
-                            </p><a href="#" class="card-link float-right"><small>点击加入</small></a>
+                            </p><a href="#" class="card-link float-right"><small>Click to join</small></a>
                         </div>
                     </div>
                 </div>
@@ -249,11 +254,12 @@
                         </div>
                         <img class="img-fluid" src="images/team1-horiz.jpg" alt="">
                         <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text and below as a natural lead-in to the additional content. This content is a little bit longer.</p>
+                            <p class="card-text">This is a wider card with supporting text and below as a natural
+                                lead-in to the additional content. This content is a little bit longer.</p>
                         </div>
                         <div class="card-footer">
                             <p class="card-text d-inline"><small class="text-muted">Last updated 3 mins ago</small>
-                            </p><a href="#" class="card-link float-right"><small>点击加入</small></a>
+                            </p><a href="#" class="card-link float-right"><small>Click to join</small></a>
                         </div>
                     </div>
                 </div>
@@ -266,11 +272,12 @@
                         </div>
                         <img class="img-fluid" src="images/team2-horiz.jpg" alt="">
                         <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text and below as a natural lead-in to the additional content. This content is a little bit longer.</p>
+                            <p class="card-text">This is a wider card with supporting text and below as a natural
+                                lead-in to the additional content. This content is a little bit longer.</p>
                         </div>
                         <div class="card-footer">
                             <p class="card-text d-inline"><small class="text-muted">Last updated 3 mins ago</small>
-                            </p><a href="#" class="card-link float-right"><small>点击加入</small></a>
+                            </p><a href="#" class="card-link float-right"><small>Click to join</small></a>
                         </div>
                     </div>
                 </div>
@@ -283,11 +290,12 @@
                         </div>
                         <img class="img-fluid" src="images/team3-horiz.jpg" alt="">
                         <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text and below as a natural lead-in to the additional content. This content is a little bit longer.</p>
+                            <p class="card-text">This is a wider card with supporting text and below as a natural
+                                lead-in to the additional content. This content is a little bit longer.</p>
                         </div>
                         <div class="card-footer">
                             <p class="card-text d-inline"><small class="text-muted">Last updated 3 mins ago</small>
-                            </p><a href="#" class="card-link float-right"><small>点击加入</small></a>
+                            </p><a href="#" class="card-link float-right"><small>Click to join</small></a>
                         </div>
                     </div>
                 </div>
@@ -322,13 +330,13 @@
                     </div>
                 </div>
             </div>
+        </section>
+    </footer>
 </div>
 <div class="below-section">
     <div class="container">
-        <div class="copyright-footer">
-            <div class="columns text-lg-left">
-                <p>Copyright &copy; 2020.Company name All rights reserved.</p>
-            </div>
+        <div class="columns text-lg-center">
+            <p>Copyright &copy; 2021 Jilijili. All rights reserved.</p>
         </div>
     </div>
 </div>
@@ -361,16 +369,16 @@
 
 </section>
 </footer>
-    <!--end row -->
+<!--end row -->
 
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    <script src="plugins/common/common.min.js"></script>
-    <script src="js/custom.min.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/gleek.js"></script>
-    <script src="js/styleSwitcher.js"></script>
+<!--**********************************
+    Scripts
+***********************************-->
+<script src="plugins/common/common.min.js"></script>
+<script src="js/custom.min.js"></script>
+<script src="js/settings.js"></script>
+<script src="js/gleek.js"></script>
+<script src="js/styleSwitcher.js"></script>
 
 </body>
 

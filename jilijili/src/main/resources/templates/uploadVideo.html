@@ -22,7 +22,7 @@
     <nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
         <div class="container">
             <h1><a class="navbar-brand" href="/home" th:href="@{/home}"><span class="fa fa-play icon-log"
-                                                                                   aria-hidden="true"></span>
+                                                                              aria-hidden="true"></span>
                 Jilijili </a></h1>
             <!-- if logo is image enable this
                     <a class="navbar-brand" href="#index.html">
@@ -42,19 +42,20 @@
                         <a class="nav-link" href="/home">Home</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/video/upload">上传视频</a>
+                        <a class="nav-link" href="/video/upload">Upload</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/genre">精简</a>
+                        <a class="nav-link" href="/genre">Genre</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/contact" th:href="${session.userType == 1} ? @{/contact/messages} : @{/contact}">Contact</a>
+                        <a class="nav-link" href="/contact"
+                           th:href="${session.userType == 1} ? @{/contact/messages} : @{/contact}">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/LiveTelecast" >直播</a>
+                        <a class="nav-link" href="/LiveTelecast">Live</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/account/accountInfo">我的</a>
+                        <a class="nav-link" href="/account/accountInfo">Profile</a>
                     </li>
                 </ul>
 
@@ -126,7 +127,8 @@
 <div class="w3l-breadcrumbs">
     <nav id="breadcrumbs" class="breadcrumbs">
         <div class="container page-wrapper">
-            <a href="index.html" th:href="@{/home}">Home</a> » <span class="breadcrumb_last" aria-current="page">上传视频</span>
+            <a href="index.html" th:href="@{/home}">Home</a> » <span class="breadcrumb_last"
+                                                                     aria-current="page">Upload</span>
         </div>
     </nav>
 </div>
@@ -134,7 +136,7 @@
 <!-- contact1 -->
 <section class="w3l-contact-1">
 
-    <div  th:if="${not #strings.isEmpty(message)}">
+    <div th:if="${not #strings.isEmpty(message)}">
         <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true" id="modal">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
@@ -151,39 +153,48 @@
             </div>
         </div>
         <script>
-            setTimeout( "$('#modal').modal('show')", 10 );
+            setTimeout("$('#modal').modal('show')", 10);
         </script>
-        </div>
+    </div>
 
     <div class="contacts-9 py-5">
         <div class="container py-lg-4">
             <div class="contact-view mt-lg-5 mt-4">
                 <div class="conhny-form-section">
-                    <h2>请依次加入视频名称、视频描述、视频封面、视频内容</h2>
+                    <div class="headerhny-title text-center">
+                        <h3 class="hny-title mb-0">Upload Video</h3>
+                        <p class="hny-title mb-lg-5 mb-4">We appreciate it that you could share your video. And you just
+                            need to fill in the form below.</p>
+                    </div>
                     <form th:action="@{/video/upload}" method="post" class="formhny-sec" enctype="multipart/form-data">
                         <div class="form-grids">
                             <div class="form-input">
-                                <label>
-                                    <input type="text" name="name" placeholder="视频名称 " required/>
-                                </label>
-                            </div>
-                            <div class="form-input">
-                                <label>
-                                    <input type="text" name="description" placeholder="视频描述"
+                                <label for="video-name" style="width: 100%">
+                                    <span>Video Title: </span>
+                                    <input type="text" name="name" id="video-name" placeholder="Enter the video title         "
                                            required/>
                                 </label>
                             </div>
                             <div class="form-input">
-                                <input type="file" name="picture" placeholder="视频封面"
+                                <label for="description">
+                                    <span>Video Description: </span>
+                                    <input type="text" name="description" id="description" placeholder="Enter the video description "
+                                           required/>
+                                </label>
+                            </div>
+                            <div class="form-input">
+                                <span>Video Cover: </span>
+                                <input type="file" name="picture" placeholder="Enter the video cover "
                                        required/>
                             </div>
                             <div class="form-input">
-                                <input type="file" name="file" placeholder="视频mp4文件"
+                                <span>Video File: </span>
+                                <input type="file" name="file" placeholder="Enter the video file "
                                        required/>
                             </div>
                         </div>
                         <div class="submithny text-right mt-4">
-                            <button class="btn read-button" type="submit">上传</button>
+                            <button class="btn read-button" type="submit">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -224,8 +235,8 @@
         <div class="below-section">
             <div class="container">
                 <div class="copyright-footer">
-                    <div class="columns text-lg-left">
-                        <p>JiliJili</p>
+                    <div class="columns text-lg-center">
+                        <p>Copyright &copy; 2021 Jilijili. All rights reserved.</p>
                     </div>
                 </div>
             </div>

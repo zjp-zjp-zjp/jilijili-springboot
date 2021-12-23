@@ -15,6 +15,6 @@ public class ErrorController {
         ModelAndView err=new ModelAndView();
         err.setViewName("error");
         err.addObject("message",message);
-        return  err;
+        return err;
     }
 }
