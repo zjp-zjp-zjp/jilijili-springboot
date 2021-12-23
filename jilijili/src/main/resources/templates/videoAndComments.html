@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <!--<!DOCTYPE html>-->
 <!--<html lang="en">-->
 <!--<head>-->
@@ -58,12 +59,480 @@
 <!--                    </tr>-->
 
 <!--                </table>-->
+=======
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="/css/sweetalert.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!--    <link href="/css/style.css" rel="stylesheet" >-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <title>Hello, world!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css">
+    <script src="https://cdn.jsdelivr.net/npm/flv.js/dist/flv.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js/dist/hls.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dashjs/dist/dash.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/webtorrent/latest/webtorrent.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pearplayer"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+          integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="/js/DPlayer.min.js"></script>
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <style>
+        .div1 {
+            width: 749px;
+            height: 509px;
+        }
+
+        body {
+            background-color: #d1eafa;
+        }
+
+        @font-face {
+            font-family: show;
+            src: url("/ttf/楷体.ttf");
+        }
+
+        .div2 {
+            font-family: show;
+        }
+
+        .pre {
+            white-space: pre-wrap; /*css-3*/
+            white-space: -moz-pre-wrap; /*Mozilla,since1999*/
+            white-space: -o-pre-wrap; /*Opera7*/
+
+            word-wrap: break-word; /*InternetExplorer5.5+*/
+        }
+    </style>
+    <link href="/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style-starter.css">
+    <link href="http://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap"
+          rel="stylesheet">
+</head>
+<body onload="hide()">
+<!--nav-->
+
+<!-- header -->
+<header id="site-header" class="w3l-header fixed-top">
+    <!--/nav-->
+    <nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
+        <div class="container">
+            <h1><a class="navbar-brand" href="index.html"><span class="fa fa-play icon-log"
+                                                                aria-hidden="true"></span>
+                Jilijili </a></h1>
+            <!-- if logo is image enable this
+                    <a class="navbar-brand" href="#index.html">
+                        <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+                    </a> -->
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <!-- <span class="navbar-toggler-icon"></span> -->
+                <span class="fa icon-expand fa-bars"></span>
+                <span class="fa icon-close fa-times"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html" th:href="@{/home}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/video/upload" th:href="@{/video/upload}">上传视频</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/genre" th:href="@{/genre}">精简</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact"
+                           th:href="${session.userType == 1} ? @{/contact/messages} : @{/contact}">Contact</a>
+                    </li>
+                </ul>
+
+                <!--/search-right-->
+                <!--/search-right-->
+                <div class="search-right">
+                    <a href="#search" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="search">Search <span
+                            class="fa fa-search ml-3" aria-hidden="true"></span></a>
+                    <!-- search popup -->
+                    <div id="search" class="pop-overlay">
+                        <div class="popup">
+                            <form action="#" method="post" class="search-box" th:action="@{/search}">
+                                <input type="search" placeholder="Search your Keyword" name="search"
+                                       required="required" autofocus="">
+                                <button type="submit" class="btn"><span class="fa fa-search"
+                                                                        aria-hidden="true"></span></button>
+                            </form>
+                            <div class="browse-items">
+                                <h3 class="hny-title two mt-md-5 mt-4">Browse all:</h3>
+                                <ul class="search-items">
+                                    <li><a href="genre.html" th:href="@{/genre}">Action</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Drama</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Family</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Thriller</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Commedy</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Romantic</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Tv-Series</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Horror</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Action</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Drama</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Family</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Thriller</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Commedy</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Romantic</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Tv-Series</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Horror</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a class="close" href="#close">×</a>
+                    </div>
+                    <!-- /search popup -->
+                    <!--/search-right-->
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!--//nav-->
+</header>
+<!-- //header -->
+
+<!--nav end-->
+<br>
+<br>
+<!--简要介绍-->
+<div th:${data}>
+    <div style="max-width: 72em !important;margin: auto !important;padding-top: 3em !important;padding-bottom: 3em !important;">
+        <div class="ui container">
+            <div class="ui stackable grid">
+                <div class="eleven wide column">
+                    <div id="float-dplayer" class="float-dplayer">
+                        <div id="dplayer-container" class="dplayer-container"></div>
+                        <h3 id="close-dialog" class="close-dialog">
+                            <img th:onclick="jumptouser([[${data.video.authorId}]])"
+                                 th:src="'data:image/gif;base64,'+${avator}"
+                                 style="width: 40px;height: 40px;float: left;border-radius: 50%">
+                            <h1 th:text="${data.video.name}" style="height: 40px;float: left" class="div2">
+                            </h1>
+                            <br>
+                            <br>
+                            <div class="div2">
+        <pre th:text="${data.video.description}">
+        </pre>
+                            </div>
+                            <div hidden id="test" th:text="${data.video.path}"></div>
+                            <br>
+                        </h3>
+                    </div>
+                    <!--        播放器             -->
+                    <div style="background-color: #efefff;
+         box-shadow: inset 1px -1px 1px #444,
+         inset -1px 1px 1px #444;">
+                        <div class="div1" id="dplayer"></div>
+                    </div>
+                    <div style="margin-top: 20px;margin-bottom: 10px">
+                        <button th:onclick="sendsupport(0,[[${data.video.id}]])"
+                                class="btn mb-1 btn-outline-primary btn-lg" style="border: none;font-size: 24px"><i
+                                class="fa fa-thumbs-up"></i></button>
+                        <span th:text="${data.video.supportNum}" th:id="'videosupport'+${data.video.id}"></span>
+                        <span style="padding: 10px"></span>
+                        <button onclick="altcommentzone()" class="btn mb-1 btn-outline-primary btn-lg"
+                                style="border: none;font-size: 24px"><i
+                                class="fa fa-paper-plane"></i></button>
+                    </div>
+                    <div class="content-body" style="margin: 0" id="commentZone">
+
+                        <div class="container-fluid" style="padding: 0">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="card-title">
+                                                <h1>
+                                                    <div class="div2">评论区</div>
+                                                </h1>
+                                            </h4>
+                                            <div class="card-content">
+                                                <form name="myform">
+                                                    <label for="content" class="form-label div2">分享你的想法</label>
+                                                    <input type="text" class="form-control" id="content" name="comment"
+                                                           style="width: 680px">
+                                                    <br>
+                                                    <button id="sendvideocomment"
+                                                            class="btn btn-success btn-sm alert-1 div2"
+                                                            style="padding-left: 10px;">
+                                                        <div class="div2">提交评论</div>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /# card -->
+                                </div>
+                                <br>
+
+                            </div>
+                        </div>
+                        <!-- #/ container -->
+                    </div>
+                    <script src="https://cdn.jsdelivr.net/npm/stats.js"></script>
+                    <script>
+                        //创建DPlayer对象
+                        path = document.getElementById("test");
+                        window.dp1 = new DPlayer({
+                            container: document.getElementById('dplayer'),
+                            preload: 'none',
+                            screenshot: true,//截图
+                            video: {
+                                pic: "https://i.loli.net/2021/11/30/bkrExhePa7iqTNQ.png",
+                                thumbnails: 'https://i.loli.net/2019/06/06/5cf8c5d9cec8510758.jpg',//缓存截图--长图片
+                                quality: [
+                                    {
+                                        name: '360',
+                                        url: path.innerHTML,
+                                        type: 'auto',
+                                    },
+                                    {
+                                        name: '720',
+                                        url: path.innerHTML,
+                                        type: 'normal',
+                                    },
+                                ],
+                                defaultQuality: 0,
+                            },
+                            subtitle: {
+                                // url: 'https://s-sh-17-dplayercdn.oss.dogecdn.com/hikarunara.vtt'//歌词,vtt格式
+                                url: 'https://192.168.227.1:82/1/1.vtt'//歌词,vtt格式
+                            },
+                            danmaku: {
+                                id: '2.json',
+                                api: 'https://192.168.227.1:82/1/',
+                            }
+                        });
+                    </script>
+                    <!--视频描述栏-->
+
+                    <!--视频描述 end-->
+                    <!--  发送评论给视频 form-->
+                    <div hidden id="videoId" th:text="${data.video.id}"></div>
+                    <script src="/js/sweetalert.min.js"></script>
+                    <script src="/js/sweetalert.init.js"></script>
+                    <script src="/js/buttonAlert.js"></script>
+                    <!--    <script type="text/javascript">-->
+                    <!--        function myFunction() {-->
+                    <!--            content = document.myform.comment.value;-->
+                    <!--            targetVideo = document.getElementById("videoId").innerHTML;-->
+                    <!--            var val = {-->
+                    <!--                "content": content,-->
+                    <!--                "supportNum": 0,-->
+                    <!--                "targetVideo": Number(targetVideo),-->
+                    <!--                "targetComment": -1-->
+                    <!--            };-->
+                    <!--            console.log(content);-->
+                    <!--            console.log(targetVideo);-->
+                    <!--            $.ajax({-->
+                    <!--                url: "/video/" + targetVideo,-->
+                    <!--                dataType: "JSON",-->
+                    <!--                type: "post",-->
+                    <!--                contentType: 'application/json;charset=UTF-8',-->
+                    <!--                data: JSON.stringify(val),-->
+                    <!--                success: function (msg) {-->
+                    <!--                    console.log(msg)-->
+                    <!--                }-->
+                    <!--            });-->
+                    <!--        }-->
+                    <!--    </script>-->
+
+                    <!--    发送评论结束-->
+                    <tr th:each="comment:${comments}">
+                        <script>
+                            function showsubcomment(id) {
+                                var str = "commentId" + id.toString();
+                                if (document.getElementById(str).style.display == "none") {
+                                    document.getElementById(str).style.display = "";
+                                } else {
+                                    document.getElementById(str).style.display = "none";
+                                }
+                            }
+
+                            function showcommentbox(id) {
+                                var str = "commentbox" + id.toString();
+                                if (document.getElementById(str).style.display == "none") {
+                                    document.getElementById(str).style.display = "";
+                                } else {
+                                    document.getElementById(str).style.display = "none";
+                                }
+                            }
+                        </script>
+                        <div align="center">
+                            <HR align=center width=749 color=#987cb9 SIZE=1>
+
+                            <div class="card border-info" style="border: none">
+                                <div class="card-header">
+                                    <div class="general-mask-left">
+                                        <img th:src="'data:image/gif;base64,'+${comment.head64}"
+                                             th:onclick="jumptouser([[${comment.authorId}]])" height="40" width="40"
+                                             alt=""
+                                             style="float: left;border-radius: 50%">
+                                        <h5 style="float: left;margin:8px">
+                                            <div id="authorId">
+                                                <td th:text="${comment.authorNickname}" class="div2"></td>
+                                            </div>
+                                        </h5>
+
+                                    </div>
+                                </div>
+                                <div style="text-align: left;padding:0 10px">
+                                    <span class="div2" th:text="${comment.content}" style="text-align: left"></span>
+                                    <div>
+                                        <span th:text="${comment.releaseTime}"
+                                              class="div2"></span>
+                                        <div class="general-button" style="float: right">
+                                            <button th:onclick="sendsupport(1,[[${comment.id}]])"
+                                                    class="btn mb-1 btn-outline-primary btn-sm">
+                                                <i class="bi bi-hand-thumbs-up"></i>
+                                                <span class="div2">赞</span>
+                                                <span class="div2"
+                                                      th:id="'commentsupport'+${comment.id}"
+                                                      th:text="${comment.supportNum}"></span>
+                                            </button>
+                                            <a href="#" class="btn mb-1 btn-outline-primary btn-sm">
+                                                <div class="div2">踩</div>
+                                            </a>
+                                            <button type="button" th:onclick="showcommentbox([[${comment.id}]])"
+                                                    class="btn mb-1 btn-outline-primary btn-sm">
+                                                <div class="div2">回复</div>
+                                            </button>
+                                            <button type="button" th:onclick="showsubcomment([[${comment.id}]])"
+                                                    class="btn mb-1 btn-outline-primary btn-sm div2">
+                                                <div class="div2">查看回复</div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div th:id="'commentbox'+${comment.id}" name="commentbox">
+                                    <form>
+                                        <input type="text" th:id="'commenttocomment'+${comment.id}"
+                                               class="form-control"
+                                               style="padding-left: 10px;" placeholder="说点什么：">
+                                        <button type="button" th:onclick="sendComment(1,'-1',[[${comment.id}]])"
+                                                class="btn mb-1 btn-outline-primary btn-sm">
+                                            <div class="div2">提交</div>
+                                        </button>
+                                    </form>
+                                </div>
+                                </ul>
+                                <div th:id="'commentId'+${comment.id}" name="subcomment">
+                                    <div th:each="soncomment:${comment.itComment}">
+                                        <img style="float: left;border-radius: 50%"
+                                             th:onclick="jumptouser([[${soncomment.authorId}]])"
+                                             th:src="'data:image/gif;base64,'+${soncomment.head64}" height="40"
+                                             width="40">
+                                        <li style="text-align: left"><span class="div2"
+                                                                           th:text="${soncomment.authorNickname}+':'"></span><span
+                                                class="div2" th:text="${soncomment.content}"></span></li>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="five wide column" style="padding-left:50px !important">
+                    <div style="max-width: 500px;display: inline-block;text-align:center">
+                        <h1 style="color:#9ae0ff">
+                            <div class="div2">推荐视频</div>
+                        </h1>
+                        <HR align=center width=300 color=#987cb9 SIZE=1>
+                        <p>
+                            <img src="/images/bg.jpg" height="150px" width="300px">
+                        <h6>
+                            <div class="div2">name</div>
+                        </h6>
+                        </p>
+                        <HR align=center width=300 color=#987cb9 SIZE=1>
+                        <p>
+                            <img src="/images/bg.jpg" height="150px" width="300px">
+                        <h6>
+                            <div class="div2">name</div>
+                        </h6>
+                        </p>
+                        <HR align=center width=300 color=#987cb9 SIZE=1>
+                        <p>
+                            <img src="/images/bg.jpg" height="150px" width="300px">
+                        <h6>
+                            <div class="div2">name</div>
+                        </h6>
+                        </p>
+                        <HR align=center width=300 color=#987cb9 SIZE=1>
+                        <p>
+                            <img src="/images/bg.jpg" height="150px" width="300px">
+                        <h6>
+                            <div class="div2">name</div>
+                        </h6>
+                        </p>
+                        <HR align=center width=300 color=#987cb9 SIZE=1>
+                        <p>
+                            <img src="/images/bg.jpg" height="150px" width="300px">
+                        <h6>
+                            <div class="div2">name</div>
+                        </h6>
+                        <HR align=center width=300 color=#987cb9 SIZE=1>
+                        </p>
+                        <p>
+                            <img src="/images/bg.jpg" height="150px" width="300px">
+                        <h6>
+                            <div class="div2">name</div>
+                        </h6>
+                        </p>
+                        <HR align=center width=300 color=#987cb9 SIZE=1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--    右下角弹窗开始-->
+
+
+<!--    右下角弹窗结束-->
+<!-- 回复评论弹窗 -->
+<!--<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="exampleModalLabel">回复评论</h5>-->
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                <form name="myform1">-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="comment" class="col-form-label">Message:</label>-->
+<!--                        <textarea class="form-control" id="comment" name="comment"></textarea>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--            <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>-->
+<!--                <button type="button" class="btn btn-primary">发送</button>-->
+>>>>>>> Stashed changes
 <!--            </div>-->
 <!--        </div>-->
 <!--    </div>-->
 <!--</div>-->
 
 
+<<<<<<< Updated upstream
 <!--<div class="user">-->
 <!--    <a data-usercard-mid="7339405" href="//space.bilibili.com/7339405" target="_black" class="name" style="color:#FB7299">meimeialala</a>-->
 <!--    <a class="level-link" href="//www.bilibili.com/blackboard/help.html#%E4%BC%9A%E5%91%98%E7%AD%89%E7%BA%A7%E7%9B%B8%E5%85%B3" target="_blank">-->
@@ -113,6 +582,47 @@
 <!--        <div class="photo">-->
 <!--            <div class="avatar" style="background-image: url('static/images/1.jpg')"></div>-->
 <!--        </div>-->
+=======
+    function altcommentzone() {
+        if (document.getElementById("commentZone").style.display === "none") {
+            document.getElementById("commentZone").style.display = "";
+        } else {
+            document.getElementById("commentZone").style.display = "none";
+        }
+    }
+
+    function hide() {
+        document.getElementsByName("subcomment").forEach((item, i, obj) => {
+            item.style.display = "none";
+        })
+        document.getElementsByName("commentbox").forEach((item, i, obj) => {
+            item.style.display = "none";
+        })
+        document.getElementById("commentZone").style.display = "none";
+    }
+
+    function sendsupport(type, id) {
+        var _type = "";
+        if (type === 0) _type = "videosupport";
+        else _type = "commentsupport"
+        var supportnum__ = parseInt(document.getElementById(_type + id.toString()).innerHTML) + 1;
+        document.getElementById(_type + id.toString()).innerHTML = supportnum__.toString();
+        var val = {
+            "typeOfSupport": type,
+            "targetId": id
+        };
+        $.ajax({
+            url: "/video/" + document.getElementById("videoId").innerHTML,
+            dataType: "JSON",
+            type: "put",
+            contentType: 'application/json;charset=UTF-8',
+            data: JSON.stringify(val),
+            success: function (msg) {
+                console.log(msg);
+            }
+        });
+    }
+>>>>>>> Stashed changes
 
 <!--        <div class="post">-->
 <!--            <div class="post__avatar"></div>-->

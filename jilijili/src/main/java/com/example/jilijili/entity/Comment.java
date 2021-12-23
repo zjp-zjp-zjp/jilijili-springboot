@@ -15,7 +15,7 @@ public class Comment {
     private Long authorId;
     private String authorNickname;
     private String content;
-    @JsonFormat(pattern="yyyy-M-d HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime releaseTime;
     private Long supportNum;
     private Long targetVideo;
