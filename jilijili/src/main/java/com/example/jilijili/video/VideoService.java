@@ -72,5 +72,8 @@ public class VideoService {
         commentService.removeCommentsOfVideo(videoId);
         videoRepository.deleteVideoById(videoId);
     }
+    public Long getHowManyExists(){
+        return videoRepository.count();
+    }
 }
 

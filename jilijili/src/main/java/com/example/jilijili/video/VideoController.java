@@ -41,6 +41,7 @@ public class VideoController {
             HttpServletRequest request) {
         System.out.println(name);
         System.out.println(description);
+        System.out.println(videoService.getHowManyExists());
         if(request.getSession().getAttribute("userId")==null){
             throw new IllegalStateException("please log in before updating");
         }
@@ -48,74 +49,6 @@ public class VideoController {
         if(file.isEmpty()&&picture.isEmpty()){
             model.addAttribute("message", "文件为空");
             return "uploadVideo";
-        }
-        //创建输入输出流
-        InputStream inputStream = null;
-        OutputStream outputStream = null;
-        InputStream inputStreamP = null;
-        OutputStream outputStreamP = null;
-        try {
-            //指定上传的基本位置
-            File folder = new File("E:\\static");
-            File []list = folder.listFiles();
-            int  folderCount = 0;
-            long length = 0;
-            for (File F : list){
-                if (F.isFile()){
-                    length += F.length();
-                }else {
-                    folderCount++;
-                }
-            }
-            String s=""+folderCount;
-            String path = "e:/static/"+s+"/";
-            //获取文件的输入流
-            inputStream = file.getInputStream();
-            //获取上传时的文件名
-            String fileName = file.getOriginalFilename();
-            //注意是路径+文件名
-            File targetFile = new File(path + fileName);
-            //判断文件父目录是否存在
-            if(!targetFile.getParentFile().exists()){
-                //不存在就创建一个
-                targetFile.getParentFile().mkdir();
-            }
-            //获取文件的输出流
-            outputStream = new FileOutputStream(targetFile);
-            FileCopyUtils.copy(inputStream, outputStream);
-            //获取文件的输入流
-            inputStreamP = picture.getInputStream();
-            //获取上传时的文件名
-            String FileName = picture.getOriginalFilename();
-            //注意是路径+文件名
-            File TargetFile = new File(path + FileName);
-            //获取文件的输出流
-            outputStreamP = new FileOutputStream(TargetFile);
-            FileCopyUtils.copy(inputStreamP, outputStreamP);
-            //返回上传成功的消息
-            model.addAttribute("message", "上传成功");
-            String URL="https://192.168.227.1:82/"+s+"/";
-            videoService.uploadVideo(new Video((Long)request.getSession().getAttribute("userId"),name,description,URL+fileName ,URL + FileName,0l));
-        } catch (IOException e) {
-            e.printStackTrace();
-            //返回上传失败的消息
-            model.addAttribute("message", "上传失败");
-        } finally {
-            //无论成功与否，都关闭输入输出流
-            if (inputStream != null) {
-                try {
-                    inputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (outputStream != null) {
-                try {
-                    outputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         //返回页面
         return "uploadVideo";
