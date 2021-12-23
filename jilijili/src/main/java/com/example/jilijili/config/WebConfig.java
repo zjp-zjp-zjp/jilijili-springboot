@@ -1,7 +1,7 @@
 package com.example.jilijili.config;
 
 
-import com.example.jilijili.interception.LoginInterception;
+import com.example.jilijili.tool.LoginInterception;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
