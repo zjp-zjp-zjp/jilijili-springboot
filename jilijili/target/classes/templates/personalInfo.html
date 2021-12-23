@@ -191,9 +191,10 @@
                                     class="fa fa-paper-plane"></i></button>
                         </form>
                     </li>
-                    <li style="padding: 5px 0;"><strong class="text-dark" style="margin-right: 68px;">Birthday </strong> <span
-                            onclick=" showBirthday()"
-                        th:text="${userInfo.Dob}"></span>
+                    <li style="padding: 5px 0;"><strong class="text-dark" style="margin-right: 68px;">Birthday </strong>
+                        <span
+                                onclick=" showBirthday()"
+                                th:text="${userInfo.Dob}"></span>
                         <form id="dob" th:action="@{/account/accountInfo}" method="post">
                             <input type="text" name="dob" placeholder="your dob:">
                             <button class="btn btn-transparent p-0 mr-3" type="submit"><i
@@ -264,15 +265,12 @@
                 </ul>
             </div>
             <div class="eleven wide column">
-                <div class="ui top attached segment">
-                    <div class="ui middle aligned two column grid">
-                        <div class="column">
-                            <h3 class="ui teal header">Videos</h3>
-                        </div>
-                        <div class="right aligned column">
-                            Total <h2 class="ui orange header" style="display: inline-block" th:text="${listLength}">
-                            </h2> videos
-                        </div>
+                <div class="ui top attached segment" style="border: none">
+                    <div class="ui header" style="text-align: center;font-size: 30px">Videos
+                    <div style="float: right;font-size: 18px">
+                        Total <h2 class="ui header" style="display: inline-block" th:text="${listLength}">
+                    </h2> videos
+                    </div>
                     </div>
                 </div>
                 <tr th:each="video:${videoList}">
@@ -288,7 +286,8 @@
                                 </div>
                             </div>
 
-                            <p th:text="${video.description}" style="white-space:normal;word-wrap:break-word;word-break:break-all;"></p>
+                            <p th:text="${video.description}"
+                               style="white-space:normal;word-wrap:break-word;word-break:break-all;"></p>
                             <ul>
                                 <li class="d-inline-block"><img class="rounded" width="160" height="90"
                                                                 th:src="${video.picturePath}" alt=""></li>
