@@ -11,7 +11,7 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!--    <link href="/css/style.css" rel="stylesheet" >-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
-    <title>Hello, world!</title>
+    <title>video</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css">
     <script src="https://cdn.jsdelivr.net/npm/flv.js/dist/flv.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/hls.js/dist/hls.min.js"></script>
@@ -58,13 +58,14 @@
 <body onload="hide()">
 <!--nav-->
 
+
 <!-- header -->
 <header id="site-header" class="w3l-header fixed-top">
     <!--/nav-->
     <nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
         <div class="container">
-            <h1><a class="navbar-brand" href="index.html"><span class="fa fa-play icon-log"
-                                                                aria-hidden="true"></span>
+            <h1><a class="navbar-brand" href="index.html" th:href="@{/home}"><span class="fa fa-play icon-log"
+                                                                                   aria-hidden="true"></span>
                 Jilijili </a></h1>
             <!-- if logo is image enable this
                     <a class="navbar-brand" href="#index.html">
@@ -81,30 +82,37 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="index.html" th:href="@{/home}">Home</a>
+                        <a class="nav-link" href="index.html">[[#{message.index}]]</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/video/upload" th:href="@{/video/upload}">上传视频</a>
+                        <a class="nav-link" href="/video/upload">[[#{message.upload}]]</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/genre" th:href="@{/genre}">精简</a>
+                        <a class="nav-link" href="/genre">[[#{message.genere}]]</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/contact"
-                           th:href="${session.userType == 1} ? @{/contact/messages} : @{/contact}">Contact</a>
+                           th:href="${session.userType == 1} ? @{/contact/messages} : @{/contact}">[[#{message.contact}]]</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/LiveTelecast">[[#{message.live}]]</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/account/accountInfo">[[#{message.myProfile}]]</a>
                     </li>
                 </ul>
 
                 <!--/search-right-->
                 <!--/search-right-->
                 <div class="search-right">
-                    <a href="#search" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="search">Search <span
-                            class="fa fa-search ml-3" aria-hidden="true"></span></a>
+                    <a href="#search" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="search">[[#{message.search}]]
+                        <span
+                                class="fa fa-search ml-3" aria-hidden="true"></span></a>
                     <!-- search popup -->
                     <div id="search" class="pop-overlay">
                         <div class="popup">
-                            <form action="#" method="post" class="search-box" th:action="@{/search}">
-                                <input type="search" placeholder="Search your Keyword" name="search"
+                            <form method="post" class="search-box" th:action="@{/search}">
+                                <input type="search" th:placeholder="#{message.searchKey}" name="search"
                                        required="required" autofocus="">
                                 <button type="submit" class="btn"><span class="fa fa-search"
                                                                         aria-hidden="true"></span></button>
@@ -136,13 +144,29 @@
                     <!-- /search popup -->
                     <!--/search-right-->
                 </div>
+
+
             </div>
+            <!-- toggle switch for light and dark theme -->
+            <div class="mobile-position">
+                <nav class="navigation">
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox">
+                            <div class="mode-container">
+                                <i class="gg-sun"></i>
+                                <i class="gg-moon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </nav>
+            </div>
+            <!-- //toggle switch for light and dark theme -->
         </div>
     </nav>
     <!--//nav-->
 </header>
 <!-- //header -->
-
 <!--nav end-->
 <br>
 <br>
@@ -389,7 +413,8 @@
                         </h1>
                         <HR align=center width=300 color=#987cb9 SIZE=1>
                         <p>
-                            <img src="/images/underword4-horiz.png" height="150px" width="300px">
+                            <a href="/video/102"><img src="/images/underword4-horiz.png" height="150px" width="300px">
+                            </a>
                         <h6>
                             <div class="div2">黑夜传说4</div>
                         </h6>
@@ -403,21 +428,22 @@
                         </p>
                         <HR align=center width=300 color=#987cb9 SIZE=1>
                         <p>
-                            <img src="/images/fury-horiz.png" height="150px" width="300px">
+                            <a href="/video/103"> <img src="/images/fury-horiz.png" height="150px" width="300px">
+                            </a>
                         <h6>
                             <div class="div2">狂怒</div>
                         </h6>
                         </p>
                         <HR align=center width=300 color=#987cb9 SIZE=1>
                         <p>
-                            <img src="/images/fuermos-horiz.png" height="150px" width="300px">
+                            <a href="/video/104"> <img src="/images/fuermos-horiz.png" height="150px" width="300px"></a>
                         <h6>
                             <div class="div2">大侦探福尔摩斯2</div>
                         </h6>
                         </p>
                         <HR align=center width=300 color=#987cb9 SIZE=1>
                         <p>
-                            <img src="/images/zjp1-horiz.png" height="150px" width="300px">
+                            <a href="/video/105"><img src="/images/zjp1-horiz.png" height="150px" width="300px"></a>
                         <h6>
                             <div class="div2">张纪鹏的毕业相册视频</div>
                         </h6>
@@ -515,7 +541,9 @@
             }
         });
     }
-
+function jumptouser(id) {
+    window.location="/account/accountInfo/"+id.toString();
+}
 </script>
 
 

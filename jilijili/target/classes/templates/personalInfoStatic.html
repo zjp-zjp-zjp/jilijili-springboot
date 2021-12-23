@@ -13,14 +13,17 @@
     <!-- Template CSS -->
     <link href="http://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap"
           rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
     <!-- Template CSS -->
     <style>
         .div2 {
             font-family: show;
         }
+
         .loc {
             padding-left: 100px;
             padding-right: 100px;
+            padding-top: 50px;
         }
     </style>
 </head>
@@ -60,19 +63,20 @@
                         <a class="nav-link" href="/home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/video/upload">上传视频</a>
+                        <a class="nav-link" href="/video/upload">Upload</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/genre">精简</a>
+                        <a class="nav-link" href="/genre">Genre</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/contact" th:href="${session.userType == 1} ? @{/contact/messages} : @{/contact}">Contact</a>
+                        <a class="nav-link" href="/contact"
+                           th:href="${session.userType == 1} ? @{/contact/messages} : @{/contact}">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/LiveTelecast" >直播</a>
+                        <a class="nav-link" href="/LiveTelecast">Live</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/account/accountInfo">我的</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/account/accountInfo">Profile</a>
                     </li>
                 </ul>
 
@@ -139,74 +143,163 @@
     </nav>
     <!--//nav-->
 </header>
-<br>
-<section class="w3l-main-slider position-relative">
-    <div class="loc">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-4 col-xl-12">
-                    <div class="card border-info mb-3" style="max-width: 110rem;">
-                        <div class="card-body">
-                            <div class="media align-items-center mb-30">
-                                <img id="head"th:src="'data:image/gif;base64,'+${head}"
-                                     class="mr-3" width="80" height="80" alt="Base64 encoded image">
-                                <div class="media-body">
-                                    <div class="div2">
-                                        <h3 class="mb-0" th:text="${userInfo.Nickname}"></h3>
-                                    </div>
-                                </div>
-                            </div>
+<div class="w3l-breadcrumbs">
+    <nav id="breadcrumbs" class="breadcrumbs">
+        <div class="container page-wrapper">
+            <a href="index.html" th:href="@{/home}">Home</a> » <span class="breadcrumb_last"
+                                                                     aria-current="page">Profile</span>
+        </div>
+    </nav>
+</div>
+<!--<section class="w3l-main-slider position-relative">-->
+<div class="loc">
+    <div class="ui container">
+        <div class="ui stackable grid">
+            <div class="five wide column">
+                <form class="input-group mb-3" style="max-width: 20rem" id="pictureform"
+                      th:action="@{/account/accountInfo}" method="post" enctype="multipart/form-data">
+                    <input type="file" class="form-control" name="picture" placeholder="Recipient's username"
+                           aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button class="btn btn-primary" type="submit">Upload</button>
+                </form>
+                <div class="media align-items-center mb-30">
+                    <img id="head" onclick="showPictureForm()" th:src="'data:image/gif;base64,'+${head}"
+                         class="mr-3" alt="Base64 encoded image" style="width: 300px;border-radius: 50%">
+                </div>
 
-                            <h4 class="div2">关于我</h4>
-                            <ul class="card-profile__info">
-                                <li><strong class="text-dark mr-4">TEL</strong> <span th:text="${userInfo.Tel}"></span>
-                                </li>
-                                <li><strong class="text-dark mr-4">Email</strong> <span th:text="${userInfo.Email}"></span>
-                                </li>
-                                <li><strong class="text-dark mr-4">Birthday</strong> <span th:text="${userInfo.Dob}"></span>
-                                </li>
-                                <li><strong class="text-dark mr-4">Regist Date</strong> <span
-                                        th:text="${userInfo.RegisterDate}"></span>
-                                </li>
-                                <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-                            </ul>
+                <ul class="card-profile__info">
+                    <li><strong class="text-dark" th:text="${userInfo.Nickname}" style="font-size:40px;"></strong>
+                    </li>
+                    <li style="padding: 5px 0;">
+                        <strong class="text-dark" style="margin-right: 100px;">
+                            TEL
+                        </strong>
+                        <span onclick="showTel()" th:text="${userInfo.Tel}"></span>
+                        <form id="tel" th:action="@{/account/accountInfo}" method="post">
+                            <input type="text" name="tel" placeholder="your tel:">
+                            <button class="btn btn-transparent p-0 mr-3" type="submit"><i
+                                    class="fa fa-paper-plane"></i></button>
+                        </form>
+                    </li>
+                    <li style="padding: 5px 0;"><strong class="text-dark" style="margin-right: 88px;">Email </strong>
+                        <span
+                                onclick="showEmail()"
+                                th:text="${userInfo.Email}"></span>
+                        <form id="email" th:action="@{/account/accountInfo}" method="post">
+                            <input type="text" name="email" placeholder="your email:">
+                            <button class="btn btn-transparent p-0 mr-3" type="submit"><i
+                                    class="fa fa-paper-plane"></i></button>
+                        </form>
+                    </li>
+                    <li style="padding: 5px 0;"><strong class="text-dark" style="margin-right: 68px;">Birthday </strong>
+                        <span
+                                onclick=" showBirthday()"
+                                th:text="${userInfo.Dob}"></span>
+                        <form id="dob" th:action="@{/account/accountInfo}" method="post">
+                            <input type="text" name="dob" placeholder="your dob:">
+                            <button class="btn btn-transparent p-0 mr-3" type="submit"><i
+                                    class="fa fa-paper-plane"></i></button>
+                        </form>
+                    </li>
+                    <li style="padding: 5px 0;"><strong class="text-dark" style="margin-right: 36px;">Register
+                        Date </strong>
+                        <span th:text=" ${userInfo.RegisterDate}"></span>
+                    </li>
+                    <li>
+                        <button onclick="logout()" class="btn btn-primary px-3 ml-4">Sign Out</button>
+                    </li>
+                    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+                    <script>
+                        function showTel() {
+                            var ele = document.getElementById("tel");
+                            if (ele.style.display == "none") {
+                                ele.style.display = "";
+                            } else {
+                                ele.style.display = "none";
+                            }
+                        }
+
+                        function showEmail() {
+                            var ele = document.getElementById("email");
+                            if (ele.style.display == "none") {
+                                ele.style.display = "";
+                            } else {
+                                ele.style.display = "none";
+                            }
+                        }
+
+                        function showBirthday() {
+                            var ele = document.getElementById("dob");
+                            if (ele.style.display == "none") {
+                                ele.style.display = "";
+                            } else {
+                                ele.style.display = "none";
+                            }
+                        }
+
+                        function logout() {
+                            var val = {
+                                "op": 0
+                            };
+                            $.ajax({
+                                url: "/account/logout",
+                                type: "POST",
+                                contentType: 'application/json;charset=UTF-8',
+                                data: JSON.stringify(val),
+                                success: function (msg) {
+                                    console.log(msg)
+                                    window.location = '/account/login'
+                                }
+                            });
+                        }
+
+                        function showPictureForm() {
+                            var ele = document.getElementById("pictureform");
+                            if (ele.style.display == "none") {
+                                ele.style.display = "";
+                            } else {
+                                ele.style.display = "none";
+                            }
+                        }
+                    </script>
+                </ul>
+            </div>
+            <div class="eleven wide column">
+                <div class="ui top attached segment" style="border: none">
+                    <div class="ui header" style="text-align: center;font-size: 30px">Videos
+                        <div style="float: right;font-size: 18px">
+                            Total <h2 class="ui header" style="display: inline-block" th:text="${listLength}">
+                        </h2> videos
                         </div>
                     </div>
                 </div>
-            </div>
-            <!--            <div class="container-fluid">-->
-            <!--                <div class="col-lg-8 col-xl-12">-->
-            <div class="card border-info mb-3" style="max-width: 110rem;">
-                <div class="card-body">
-                    <tr th:each="video:${videoList}">
-                        <div class="media media-reply" th:onclick="jumpTo([[${video.id}]])">
-                            <div class="media-body">
-                                <div class="d-sm-flex justify-content-between mb-30">
-                                    <h5 class="mb-sm-0" th:text="${video.Name}"></h5>
-                                    <div>
-                                        <button class="btn btn-transparent p-0 mr-3"><i
-                                                class="fa fa-thumbs-up"></i>
-                                        </button>
-                                        <span th:text="${video.supportNum}"></span>
-                                    </div>
+                <tr th:each="video:${videoList}">
+                    <div class="media media-reply" th:onclick="jumpTo([[${video.id}]])">
+                        <div class="media-body">
+                            <div class="d-sm-flex justify-content-between mb-30">
+                                <h5 class="mb-sm-0" th:text="${video.Name}"></h5>
+                                <div>
+                                    <button class="btn btn-transparent p-0 mr-3"><i
+                                            class="fa fa-thumbs-up"></i>
+                                    </button>
+                                    <span th:text="${video.supportNum}"></span>
                                 </div>
-
-                                <p th:text="${video.description}"></p>
-                                <ul>
-                                    <li class="d-inline-block"><img class="rounded" width="160" height="90"
-                                                                    th:src="${video.picturePath}" alt=""></li>
-                                </ul>
                             </div>
+
+                            <p th:text="${video.description}"
+                               style="white-space:normal;word-wrap:break-word;word-break:break-all;"></p>
+                            <ul>
+                                <li class="d-inline-block"><img class="rounded" width="160" height="90"
+                                                                th:src="${video.picturePath}" alt=""></li>
+                            </ul>
                         </div>
-                        <!-- 一个评论card -->
-                    </tr>
-                </div>
+                    </div>
+                    <!-- 一个评论card -->
+                </tr>
             </div>
-            <!--                </div>-->
-            <!--            </div>-->
         </div>
     </div>
-</section>
+</div>
 <footer class="w3l-footer">
     <section class="footer-inner-main">
         <div class="footer-hny-grids py-5">
@@ -238,10 +331,8 @@
         </div>
         <div class="below-section">
             <div class="container">
-                <div class="copyright-footer">
-                    <div class="columns text-lg-center">
-                        <p>Copyright &copy; 2021 Jilijili. All rights reserved.</p>
-                    </div>
+                <div class="columns text-lg-center">
+                    <p>Copyright &copy; 2021 Jilijili. All rights reserved.</p>
                 </div>
             </div>
         </div>
@@ -274,7 +365,9 @@
 
     </section>
 </footer>
+<!--</section>-->
 </body>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 <script>
     function jumpTo(videoId) {
         window.location = "/video/" + videoId.toString();
