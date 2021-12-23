@@ -56,99 +56,87 @@ public class VideoController {
             @RequestParam("file") MultipartFile file,
             Model model,
             HttpServletRequest request) {
-//        if (request.getSession().getAttribute("userId") == null) {
-//            throw new IllegalStateException("please log in before updating");
-//        }
-//        //判断文件是否为空
-//        if (file.isEmpty() && picture.isEmpty()) {
-//            model.addAttribute("message", "文件为空");
-//            return "uploadVideo";
-//        }
-//        Long temp = videoService.getHowManyExists();
-//        temp = temp + 1;
-//        // 1 初始化用户身份信息(secretId, secretKey)
-//        COSCredentials cred = new BasicCOSCredentials("AKIDJSN3SaT5PTGm1zf6HBoBJAk47tObYEdk", "sTosgkY5LL3UeZDZeT1JJ2VieKktlLfi");
-//        // 2 设置bucket的区域, COS地域的简称请参照 https://www.qcloud.com/document/product/436/6224
-//        ClientConfig clientConfig = new ClientConfig(new Region("ap-shanghai"));
-//        // 3 生成cos客户端
-//        COSClient cosclient = new COSClient((com.qcloud.cos.auth.COSCredentials) cred, clientConfig);
-//        // bucket名需包含appid
-//        String bucketName = "jilijili-1308757732";
-//        //获取上传时的文件名
-//        String FileName1 = file.getOriginalFilename();
-//        String FileName2 = picture.getOriginalFilename();
-//        String count=""+temp;
-//        String key = "/video/" +count+"/"+ FileName1;//video
-//        //写一个文件格式改变的函数
-//        //把MultipartFile转化为File
-//        File fileVideo = new File(file.getOriginalFilename());
-//        try {
-//            FileUtils.copyInputStreamToFile(file.getInputStream(), fileVideo);
-//        } catch (IOException e) {
-//            model.addAttribute("message", "文件转化失败");
-//        }
-//        //end
-//        PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key, fileVideo);
-//        // 限流使用的单位是bit/s, 这里测试1MB/s的上传带宽限制
-//        putObjectRequest.setTrafficLimit(8 * 1024 * 1024);
-//        // 设置存储类型, 默认是标准(Standard)
-//        putObjectRequest.setStorageClass(StorageClass.Standard);
-//        try {
-//            PutObjectResult putObjectResult = cosclient.putObject(putObjectRequest);
-//            // putobjectResult会返回文件的etag
-//            String etag = putObjectResult.getETag();
-//            String crc64 = putObjectResult.getCrc64Ecma();
-//        } catch (CosClientException e) {
-//            model.addAttribute("message", "文件上传失败，请重新上传");
-//            return "uploadVideo";
-//        }
-//        String key1 = "/video/"  +count+"/"+ FileName2;//picture
-//        //把MultipartFile转化为File
-//        File filePicture = new File(picture.getOriginalFilename());
-//        try {
-//            FileUtils.copyInputStreamToFile(picture.getInputStream(), filePicture);
-//        } catch (IOException e) {
-//            model.addAttribute("message", "文件转化失败");
-//        }
-//        //end
-//        PutObjectRequest putObjectRequest1 = new PutObjectRequest(bucketName, key1, filePicture);
-//        // 限流使用的单位是bit/s, 这里测试1MB/s的上传带宽限制
-//        putObjectRequest1.setTrafficLimit(8 * 1024 * 1024);
-//        // 设置存储类型, 默认是标准(Standard)
-//        putObjectRequest1.setStorageClass(StorageClass.Standard);
-//        try {
-//            PutObjectResult putObjectResult = cosclient.putObject(putObjectRequest1);
-//            // putobjectResult会返回文件的etag
-//            String etag = putObjectResult.getETag();
-//            String crc64 = putObjectResult.getCrc64Ecma();
-//        } catch (CosClientException e) {
-//            model.addAttribute("message", "文件上传失败，请重新上传");
-//            return "uploadVideo";
-//        }
-//        // 关闭客户端
-//        cosclient.shutdown();
-//        //返回页面
-//        model.addAttribute("message", "上传文件成功");
-//        videoService.uploadVideo(new Video((Long) request.getSession().getAttribute("userId"), name, description, key, key1, 0l, key, key, key));
-//        //删除临时文件
-//        if (fileVideo.exists()) {
-//            fileVideo.delete();
-//        }
-//        if (filePicture.exists()) {
-//            filePicture.delete();
-//        }
-
-
+        if (request.getSession().getAttribute("userId") == null) {
+            throw new IllegalStateException("please log in before updating");
+        }
+        //判断文件是否为空
+        if (file.isEmpty() && picture.isEmpty()) {
+            model.addAttribute("message", "文件为空");
+            return "uploadVideo";
+        }
         Long temp = videoService.getHowManyExists();
         temp = temp + 1;
+        // 1 初始化用户身份信息(secretId, secretKey)
+        COSCredentials cred = new BasicCOSCredentials("AKIDJSN3SaT5PTGm1zf6HBoBJAk47tObYEdk", "sTosgkY5LL3UeZDZeT1JJ2VieKktlLfi");
+        // 2 设置bucket的区域, COS地域的简称请参照 https://www.qcloud.com/document/product/436/6224
+        ClientConfig clientConfig = new ClientConfig(new Region("ap-shanghai"));
+        // 3 生成cos客户端
+        COSClient cosclient = new COSClient((com.qcloud.cos.auth.COSCredentials) cred, clientConfig);
+        // bucket名需包含appid
+        String bucketName = "jilijili-1308757732";
+        //获取上传时的文件名
+        String FileName1 = file.getOriginalFilename();
+        String FileName2 = picture.getOriginalFilename();
         String count=""+temp;
-        String FileName1=file.getOriginalFilename();
-        String key1 = "/video/"  +count+"/"+ FileName1;//video
-        String FileName2=picture.getOriginalFilename();
-        String key2 = "/video/"  +count+"/"+ FileName2;//video
-
-        videoService.uploadVideo(new Video((Long) request.getSession().getAttribute("userId"), name, description, key1, key2, 0l, "key", "key", "key"));
-
+        String key = "/video/" +count+"/"+ FileName1;//video
+        //写一个文件格式改变的函数
+        //把MultipartFile转化为File
+        File fileVideo = new File(file.getOriginalFilename());
+        try {
+            FileUtils.copyInputStreamToFile(file.getInputStream(), fileVideo);
+        } catch (IOException e) {
+            model.addAttribute("message", "文件转化失败");
+        }
+        //end
+        PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key, fileVideo);
+        // 限流使用的单位是bit/s, 这里测试1MB/s的上传带宽限制
+        putObjectRequest.setTrafficLimit(8 * 1024 * 1024);
+        // 设置存储类型, 默认是标准(Standard)
+        putObjectRequest.setStorageClass(StorageClass.Standard);
+        try {
+            PutObjectResult putObjectResult = cosclient.putObject(putObjectRequest);
+            // putobjectResult会返回文件的etag
+            String etag = putObjectResult.getETag();
+            String crc64 = putObjectResult.getCrc64Ecma();
+        } catch (CosClientException e) {
+            model.addAttribute("message", "文件上传失败，请重新上传");
+            return "uploadVideo";
+        }
+        String key1 = "/video/"  +count+"/"+ FileName2;//picture
+        //把MultipartFile转化为File
+        File filePicture = new File(picture.getOriginalFilename());
+        try {
+            FileUtils.copyInputStreamToFile(picture.getInputStream(), filePicture);
+        } catch (IOException e) {
+            model.addAttribute("message", "文件转化失败");
+        }
+        //end
+        PutObjectRequest putObjectRequest1 = new PutObjectRequest(bucketName, key1, filePicture);
+        // 限流使用的单位是bit/s, 这里测试1MB/s的上传带宽限制
+        putObjectRequest1.setTrafficLimit(8 * 1024 * 1024);
+        // 设置存储类型, 默认是标准(Standard)
+        putObjectRequest1.setStorageClass(StorageClass.Standard);
+        try {
+            PutObjectResult putObjectResult = cosclient.putObject(putObjectRequest1);
+            // putobjectResult会返回文件的etag
+            String etag = putObjectResult.getETag();
+            String crc64 = putObjectResult.getCrc64Ecma();
+        } catch (CosClientException e) {
+            model.addAttribute("message", "文件上传失败，请重新上传");
+            return "uploadVideo";
+        }
+        // 关闭客户端
+        cosclient.shutdown();
+        //返回页面
+        model.addAttribute("message", "上传文件成功");
+        videoService.uploadVideo(new Video((Long) request.getSession().getAttribute("userId"), name, description, key, key1, 0l, key, key, key));
+        //删除临时文件
+        if (fileVideo.exists()) {
+            fileVideo.delete();
+        }
+        if (filePicture.exists()) {
+            filePicture.delete();
+        }
         return "uploadVideo";
     }
 

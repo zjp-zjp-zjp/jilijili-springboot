@@ -191,6 +191,7 @@
         </pre>
                             </div>
                             <div hidden id="test" th:text="${data.video.path}"></div>
+                            <div hidden id="picture" th:text="${data.video.picturePath}"></div>
                             <br>
                         </h3>
                     </div>
@@ -249,29 +250,31 @@
                     <script>
                         //创建DPlayer对象
                         path = document.getElementById("test");
+                        let Videopath="https://jilijili-1308757732.cos.ap-shanghai.myqcloud.com"+path.innerHTML
+                        picPath = document.getElementById("picture");
+                        let Picurl="https://jilijili-1308757732.cos.ap-shanghai.myqcloud.com"+picPath.innerHTML
                         window.dp1 = new DPlayer({
                             container: document.getElementById('dplayer'),
                             preload: 'none',
                             screenshot: true,//截图
                             video: {
-                                pic: "https://i.loli.net/2021/11/30/bkrExhePa7iqTNQ.png",
+                                pic: Picurl,
                                 thumbnails: 'https://i.loli.net/2019/06/06/5cf8c5d9cec8510758.jpg',//缓存截图--长图片
                                 quality: [
                                     {
                                         name: '360',
-                                        url: path.innerHTML,
+                                        url: Videopath,
                                         type: 'auto',
                                     },
                                     {
                                         name: '720',
-                                        url: path.innerHTML,
+                                        url: Videopath,
                                         type: 'normal',
                                     },
                                 ],
                                 defaultQuality: 0,
                             },
                             subtitle: {
-                                // url: 'https://s-sh-17-dplayercdn.oss.dogecdn.com/hikarunara.vtt'//歌词,vtt格式
                                 url: 'https://192.168.227.1:82/1/1.vtt'//歌词,vtt格式
                             },
                             danmaku: {
