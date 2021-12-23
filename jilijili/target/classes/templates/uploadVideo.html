@@ -1,68 +1,3 @@
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    &lt;!&ndash; Required meta tags &ndash;&gt;-->
-<!--    <meta charset="utf-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
-<!--    &lt;!&ndash; Bootstrap CSS &ndash;&gt;-->
-<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">-->
-<!--    <title>Hello</title>-->
-<!--    <style>-->
-<!--        h1{-->
-<!--            color:white;-->
-<!--            font-size:60px;-->
-<!--        }-->
-<!--        body {-->
-<!--            background:#F4F4F4;-->
-<!--            background-image: url('/images/index.jpg');-->
-<!--            background-repeat: no-repeat;-->
-<!--            background-position: center;-->
-<!--            background-attachment: fixed;-->
-<!--            background-size: cover;-->
-<!--            -webkit-background-size: cover;-->
-<!--            -moz-background-size: cover;-->
-<!--            -o-background-size: cover;-->
-<!--        }-->
-<!--    </style>-->
-<!--</head>-->
-<!--<body>-->
-
-<!--nav-->
-<!--<nav class="navbar navbar-expand-lg navbar-dark bg-dark">-->
-<!--    <div class="container-fluid">-->
-<!--        <a class="navbar-brand" href="/home" th:href="@{/home}">返回</a>-->
-<!--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"-->
-<!--                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
-<!--            <span class="navbar-toggler-icon"></span>-->
-<!--        </button>-->
-<!--            <form class="d-flex">-->
-<!--                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
-<!--                <button class="btn btn-outline-success" type="submit">Search</button>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</nav>-->
-<!--nav end-->
-<!--message-->
-<!--<div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${not #strings.isEmpty(message)}">-->
-<!--    <strong>!</strong> <a th:text="${message}"></a>-->
-<!--    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" th:if="${not #strings.isEmpty(message)}"></button>-->
-<!--</div>-->
-<!--&lt;!&ndash;message end&ndash;&gt;-->
-<!--<h1>upload</h1>-->
-<!--<h2>请依次加入视频名称、视频描述、视频封面、视频内容</h2>-->
-<!--<form class="form-signin" th:action="@{/video/upload}" method="post" enctype="multipart/form-data">-->
-<!--            <input type="text" name="name" placeholder="视频名称"/>-->
-<!--            <input type="text" name="description" placeholder="视频描述"/>-->
-<!--        <input type="file" name="picture" placeholder="视频封面"/>-->
-<!--            <input type="file" name="file" placeholder="视频mp4文件"/>-->
-<!--            <input type="submit" value="上传"/>-->
-<!--</form>-->
-
-
-<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">-->
-<!--</script>-->
-<!--</body>-->
-<!--</html>-->
 <!doctype html>
 <html lang="zxx">
 
@@ -76,6 +11,7 @@
     <!-- Template CSS -->
     <link href="http://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap"
           rel="stylesheet">
+    <script src="/js/jquery-3.3.1.min.js"></script>
     <!-- Template CSS -->
 </head>
 
@@ -197,19 +133,45 @@
 <!--//breadcrumbs -->
 <!-- contact1 -->
 <section class="w3l-contact-1">
+
+    <div  th:if="${not #strings.isEmpty(message)}">
+        <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true" id="modal">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">结果</h5>
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" th:text="${message}" id="message"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-info" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            setTimeout( "$('#modal').modal('show')", 10 );
+        </script>
+        </div>
+
     <div class="contacts-9 py-5">
         <div class="container py-lg-4">
             <div class="contact-view mt-lg-5 mt-4">
                 <div class="conhny-form-section">
                     <h2>请依次加入视频名称、视频描述、视频封面、视频内容</h2>
-                    <form th:action="@{/video/upload}" method="post" class="formhny-sec"enctype="multipart/form-data">
+                    <form th:action="@{/video/upload}" method="post" class="formhny-sec" enctype="multipart/form-data">
                         <div class="form-grids">
                             <div class="form-input">
-                                <input type="text" name="name"placeholder="视频名称 " required/>
+                                <label>
+                                    <input type="text" name="name" placeholder="视频名称 " required/>
+                                </label>
                             </div>
                             <div class="form-input">
-                                <input type="text" name="description" placeholder="视频描述"
-                                       required/>
+                                <label>
+                                    <input type="text" name="description" placeholder="视频描述"
+                                           required/>
+                                </label>
                             </div>
                             <div class="form-input">
                                 <input type="file" name="picture" placeholder="视频封面"
@@ -259,12 +221,11 @@
                 </div>
             </div>
         </div>
-        </div>
         <div class="below-section">
             <div class="container">
                 <div class="copyright-footer">
                     <div class="columns text-lg-left">
-                        <p>Copyright &copy; 2020.Company name All rights reserved.</p>
+                        <p>JiliJili</p>
                     </div>
                 </div>
             </div>
@@ -302,11 +263,13 @@
 </body>
 
 </html>
-<script src="/js/jquery-3.3.1.min.js"></script>
+
 <!-- Template JavaScript -->
 <!--/theme-change-->
 <script src="/js/theme-change.js"></script>
 <!-- //theme-change-->
+
+
 <!-- disable body scroll which navbar is in active -->
 <script>
     $(function () {
@@ -345,3 +308,8 @@
 </script>
 <!--//MENU-JS-->
 <script src="/js/bootstrap.min.js"></script>
+<script src="/js/common.min.js"></script>
+<script src="/js/custom.min.js"></script>
+<script src="/js/settings.js"></script>
+<script src="/js/gleek.js"></script>
+<script src="/js/styleSwitcher.js"></script>
