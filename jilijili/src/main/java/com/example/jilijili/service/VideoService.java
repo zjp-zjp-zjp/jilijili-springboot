@@ -5,6 +5,8 @@ import com.example.jilijili.tool.SupportContainer;
 import com.example.jilijili.entity.Video;
 import com.example.jilijili.repository.VideoRepository;
 import com.example.jilijili.tool.Video_CommentReturn;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -25,57 +27,61 @@ public class VideoService {
         this.commentService = commentService;
     }
 
-    public void uploadVideo(Video video){
+    public void uploadVideo(Video video) {
         videoRepository.save(video);
     }
-    public Optional<Video> getVideoById(Long id){
-        Optional<Video> videoList=videoRepository.findById(id);
-        if(!videoList.isPresent()){
-            throw new IllegalStateException("no video with id "+id);
+
+    public Optional<Video> getVideoById(Long id) {
+        Optional<Video> videoList = videoRepository.findById(id);
+        if (!videoList.isPresent()) {
+            throw new IllegalStateException("no video with id " + id);
         }
         return videoList;
     }
-    public List<Video> getVideoByAuthorId(Long authorId){
-        List<Video> videoList=videoRepository.findVideoByAuthorId(authorId);
-        if(videoList==null){
-            throw new IllegalStateException("no video uploaded by user with id "+authorId);
+
+    public List<Video> getVideoByAuthorId(Long authorId) {
+        List<Video> videoList = videoRepository.findVideoByAuthorId(authorId);
+        if (videoList == null) {
+            throw new IllegalStateException("no video uploaded by user with id " + authorId);
         }
         return videoList;
     }
-    public Video_CommentReturn getVideoAndCommentById(Long videoId){
-        Video_CommentReturn ret=new Video_CommentReturn();
+
+    public Video_CommentReturn getVideoAndCommentById(Long videoId) {
+        Video_CommentReturn ret = new Video_CommentReturn();
         ret.setVideo(getVideoById(videoId).get());
         ret.setCommentList(commentService.getVideoComment(videoId));
         return ret;
     }
-    public void addaComment(Comment comment){
+
+    public void addaComment(Comment comment) {
         commentService.releaseComment(comment);
     }
-    public void addSupport(SupportContainer supportContainer){
-        if(supportContainer.getTypeOfSupport()==0){
-            Optional<Video> temp=videoRepository.findById(supportContainer.getTargetId());
-            if(!temp.isPresent()){
-                throw new IllegalStateException("no video with id "+supportContainer.getTargetId());
-            }
-            else{
-                Video video=temp.get();
-                video.setSupportNum(video.getSupportNum()+1);
+
+    public void addSupport(SupportContainer supportContainer) {
+        if (supportContainer.getTypeOfSupport() == 0) {
+            Optional<Video> temp = videoRepository.findById(supportContainer.getTargetId());
+            if (!temp.isPresent()) {
+                throw new IllegalStateException("no video with id " + supportContainer.getTargetId());
+            } else {
+                Video video = temp.get();
+                video.setSupportNum(video.getSupportNum() + 1);
                 videoRepository.save(video);
             }
-        }
-        else if(supportContainer.getTypeOfSupport()==1){
-            Comment temp=commentService.getCommentById(supportContainer.getTargetId());
-            temp.setSupportNum(temp.getSupportNum()+1);
+        } else if (supportContainer.getTypeOfSupport() == 1) {
+            Comment temp = commentService.getCommentById(supportContainer.getTargetId());
+            temp.setSupportNum(temp.getSupportNum() + 1);
             commentService.releaseComment(temp);
-        }
-        else throw new IllegalStateException("invalid request");
+        } else throw new IllegalStateException("invalid request");
     }
+
     @Transactional
-    public void deleteVideoWithId(Long videoId){
+    public void deleteVideoWithId(Long videoId) {
         commentService.removeCommentsOfVideo(videoId);
         videoRepository.deleteVideoById(videoId);
     }
-    public Long getHowManyExists(){
+
+    public Long getHowManyExists() {
         return videoRepository.count();
     }
 }

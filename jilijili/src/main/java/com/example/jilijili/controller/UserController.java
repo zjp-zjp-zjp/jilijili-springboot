@@ -1,8 +1,13 @@
 package com.example.jilijili.controller;
 
 import com.example.jilijili.entity.User;
+import com.example.jilijili.entity.Video;
 import com.example.jilijili.service.UserService;
 import com.example.jilijili.service.VideoService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,7 +20,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 
 @RequestMapping(path = "account")
 @Controller
@@ -88,7 +95,7 @@ public class UserController {
     //查看当前用户信息
     @ResponseBody
     @GetMapping(path = "accountInfo")
-    public ModelAndView account_accountInfo_page(HttpServletRequest request) {
+    public ModelAndView account_accountInfo_page(HttpServletRequest request,@PageableDefault Pageable pageable) {
         if (request.getSession().getAttribute("userId") == null) {
             throw new IllegalStateException("please log in before checking");
         }
@@ -100,6 +107,7 @@ public class UserController {
             e.printStackTrace();
         }
         modelAndView.addObject("videoList", videoService.getVideoByAuthorId((Long) request.getSession().getAttribute("userId")));
+
         modelAndView.addObject("listLength", videoService.getVideoByAuthorId((Long) request.getSession().getAttribute("userId")).size());
         return modelAndView;
     }
