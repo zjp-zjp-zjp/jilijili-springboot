@@ -168,6 +168,7 @@ public class VideoController {
             throw new IllegalStateException("please log in before commenting");
         }
         System.out.println(comment.getContent());
+        System.out.println("发布评论");
         comment.setAuthorId((Long) request.getSession().getAttribute("userId"));
         comment.setAuthorNickname(userService.getUserById((Long) request.getSession().getAttribute("userId")).getNickname());
         videoService.addaComment(comment);

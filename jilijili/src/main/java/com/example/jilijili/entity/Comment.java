@@ -10,7 +10,7 @@ import java.util.List;
 @Table
 public class Comment {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long authorId;
     private String authorNickname;

@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Table
 public class Video {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long authorId;
     private String name;

@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table
 public class LiveTelecastBean {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long roomId;
     private Long userId;

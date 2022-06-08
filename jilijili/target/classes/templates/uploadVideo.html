@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="zxx">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Contact</title>
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="/css/style-starter.css">
+    <!-- Template CSS -->
+    <link href="http://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,600&display=swap"
+          rel="stylesheet">
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <!-- Template CSS -->
+</head>
+
+<body>
+<!-- header -->
+<header id="site-header" class="w3l-header fixed-top">
+    <!--/nav-->
+    <nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
+        <div class="container">
+            <h1><a class="navbar-brand" href="/home" th:href="@{/home}"><span class="fa fa-play icon-log"
+                                                                              aria-hidden="true"></span>
+                Jilijili </a></h1>
+            <!-- if logo is image enable this
+                    <a class="navbar-brand" href="#index.html">
+                        <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+                    </a> -->
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <!-- <span class="navbar-toggler-icon"></span> -->
+                <span class="fa icon-expand fa-bars"></span>
+                <span class="fa icon-close fa-times"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home">Home</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/video/upload">Upload</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/genre">Genre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact"
+                           th:href="${session.userType == 1} ? @{/contact/messages} : @{/contact}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/LiveTelecast">Live</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/account/accountInfo">Profile</a>
+                    </li>
+                </ul>
+
+                <!--/search-right-->
+                <!--/search-right-->
+                <div class="search-right">
+                    <a href="#search" class="btn search-hny mr-lg-3 mt-lg-0 mt-4" title="search">Search <span
+                            class="fa fa-search ml-3" aria-hidden="true"></span></a>
+                    <!-- search popup -->
+                    <div id="search" class="pop-overlay">
+                        <div class="popup">
+                            <form action="#" method="post" class="search-box" th:action="@{/search}">
+                                <input type="search" placeholder="Search your Keyword" name="search"
+                                       required="required" autofocus="">
+                                <button type="submit" class="btn"><span class="fa fa-search"
+                                                                        aria-hidden="true"></span></button>
+                            </form>
+                            <div class="browse-items">
+                                <h3 class="hny-title two mt-md-5 mt-4">Browse all:</h3>
+                                <ul class="search-items">
+                                    <li><a href="genre.html" th:href="@{/genre}">Action</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Drama</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Family</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Thriller</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Commedy</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Romantic</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Tv-Series</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Horror</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Action</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Drama</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Family</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Thriller</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Commedy</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Romantic</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Tv-Series</a></li>
+                                    <li><a href="genre.html" th:href="@{/genre}">Horror</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <a class="close" href="#close">×</a>
+                    </div>
+                    <!-- /search popup -->
+                    <!--/search-right-->
+                </div>
+
+
+            </div>
+            <!-- toggle switch for light and dark theme -->
+            <div class="mobile-position">
+                <nav class="navigation">
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox">
+                            <div class="mode-container">
+                                <i class="gg-sun"></i>
+                                <i class="gg-moon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </nav>
+            </div>
+            <!-- //toggle switch for light and dark theme -->
+        </div>
+    </nav>
+    <!--//nav-->
+</header>
+<!-- //header -->
+<!--/breadcrumbs -->
+<div class="w3l-breadcrumbs">
+    <nav id="breadcrumbs" class="breadcrumbs">
+        <div class="container page-wrapper">
+            <a href="index.html" th:href="@{/home}">Home</a> » <span class="breadcrumb_last"
+                                                                     aria-current="page">Upload</span>
+        </div>
+    </nav>
+</div>
+<!--//breadcrumbs -->
+<!-- contact1 -->
+<section class="w3l-contact-1">
+
+    <div th:if="${not #strings.isEmpty(message)}">
+        <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true" id="modal">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">结果</h5>
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" th:text="${message}" id="message"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-info" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            setTimeout("$('#modal').modal('show')", 10);
+        </script>
+    </div>
+
+    <div class="contacts-9 py-5">
+        <div class="container py-lg-4">
+            <div class="contact-view mt-lg-5 mt-4">
+                <div class="conhny-form-section">
+                    <div class="headerhny-title text-center">
+                        <h3 class="hny-title mb-0">Upload Video</h3>
+                        <p class="hny-title mb-lg-5 mb-4">We appreciate it that you could share your video. And you just
+                            need to fill in the form below.</p>
+                    </div>
+                    <form th:action="@{/video/upload}" method="post" class="formhny-sec" enctype="multipart/form-data">
+                        <div class="form-grids">
+                            <div class="form-input">
+                                <label for="video-name" style="width: 100%">
+                                    <span>Video Title: </span>
+                                    <input type="text" name="name" id="video-name" placeholder="Enter the video title         "
+                                           required/>
+                                </label>
+                            </div>
+                            <div class="form-input">
+                                <label for="description">
+                                    <span>Video Description: </span>
+                                    <input type="text" name="description" id="description" placeholder="Enter the video description "
+                                           required/>
+                                </label>
+                            </div>
+                            <div class="form-input">
+                                <span>Video Cover: </span>
+                                <input type="file" name="picture" placeholder="Enter the video cover "
+                                       required/>
+                            </div>
+                            <div class="form-input">
+                                <span>Video File: </span>
+                                <input type="file" name="file" placeholder="Enter the video file "
+                                       required/>
+                            </div>
+                        </div>
+                        <div class="submithny text-right mt-4">
+                            <button class="btn read-button" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /contact1 -->
+<!-- footer-66 -->
+<footer class="w3l-footer">
+    <section class="footer-inner-main">
+        <div class="footer-hny-grids py-5">
+            <div class="container py-lg-4">
+                <div class="text-txt">
+                    <div class="right-side">
+                        <div class="row footer-about">
+                            <div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
+                                <a href="articles.html"><img class="img-fluid" src="/images/banner1.jpg"
+                                                             alt=""></a>
+                            </div>
+                            <div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
+                                <a href="articles.html"><img class="img-fluid" src="/images/banner2.jpg"
+                                                             alt=""></a>
+                            </div>
+                            <div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
+                                <a href="articles.html"><img class="img-fluid" src="/images/banner3.jpg"
+                                                             alt=""></a>
+                            </div>
+                            <div class="col-md-3 col-6 footer-img mb-lg-0 mb-4">
+                                <a href="articles.html"><img class="img-fluid" src="/images/banner4.jpg"
+                                                             alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="below-section">
+            <div class="container">
+                <div class="copyright-footer">
+                    <div class="columns text-lg-center">
+                        <p>Copyright &copy; 2021 Jilijili. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- copyright -->
+        <!-- move top -->
+        <button onclick="topFunction()" id="movetop" title="Go to top">
+            <span class="fa fa-arrow-up" aria-hidden="true"></span>
+        </button>
+        <script>
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function () {
+                scrollFunction()
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.getElementById("movetop").style.display = "block";
+                } else {
+                    document.getElementById("movetop").style.display = "none";
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+        </script>
+        <!-- /move top -->
+
+    </section>
+</footer>
+<!--//footer-66 -->
+</body>
+
+</html>
+
+<!-- Template JavaScript -->
+<!--/theme-change-->
+<script src="/js/theme-change.js"></script>
+<!-- //theme-change-->
+
+
+<!-- disable body scroll which navbar is in active -->
+<script>
+    $(function () {
+        $('.navbar-toggler').click(function () {
+            $('body').toggleClass('noscroll');
+        })
+    });
+</script>
+<!-- disable body scroll which navbar is in active -->
+<!--/MENU-JS-->
+<script>
+    $(window).on("scroll", function () {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function () {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function () {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function () {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+</script>
+<!--//MENU-JS-->
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/common.min.js"></script>
+<script src="/js/custom.min.js"></script>
+<script src="/js/settings.js"></script>
+<script src="/js/gleek.js"></script>
+<script src="/js/styleSwitcher.js"></script>
